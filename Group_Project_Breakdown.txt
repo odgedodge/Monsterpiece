@@ -1,0 +1,9 @@
+Aim: Building Frankenstein's Monster
+Character: Henry Frankenstein
+Setting: Haunted House
+Items: Body Parts, Instruction Book, Needle, Thread, Notebook, Funny Rock, Baseball Bat, Candles, Cross Necklace, Holy Water, Pizza Slice, Red Balloon, Phone.
+Body Parts: Right Arm, Left Arm, Head, Torso, Left Leg, Right Leg.
+Villans/NPCs: (Can be spoken to to convince them to give the body part or information, or fought) Freddy Fazbear, Pennywise, Dracula, Ghostface, Michael Myers, Freddy Kreuger, Chucky, Slenderman, The Grim Reaper. (Pick 6 from this list)
+Rooms: Lab, Attic, Master Bedroom, Kitchen, Theatre Room, Rooms for each chosen character.
+Hallways: Have text slowly write out to signify time passing while moving rooms.  Random chance for scary text art (jump scare)
+Combat System: Health, but it should be very difficult to get to zero, each boss fight (if youre fighting the same villain) does more damage.
