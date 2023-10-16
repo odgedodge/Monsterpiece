@@ -1,9 +1,11 @@
+from items import *
+
 character_dracula = {
     "name": "dracula",
     
     "defeated_by": "holy water",
     
-    "defending_body_part": None,
+    "defending_body_part": item_left_arm,
     
     "dialouge": []
 }
@@ -13,7 +15,7 @@ character_freddy = {
     
     "defeated_by": "baseball bat",
     
-    "defending_body_part": None,
+    "defending_body_part": item_right_leg,
     
     "dialouge": []
 }
@@ -23,7 +25,7 @@ character_grim = {
     
     "defeated_by": "making a deal",
     
-    "defending_body_part": None,
+    "defending_body_part": item_torso,
     
     "dialouge": []
 }
@@ -33,7 +35,7 @@ character_slenderman = {
     
     "defeated_by": "eight pages",
     
-    "defending_body_part": None,
+    "defending_body_part": item_head,
     
     "dialouge": []
 }
@@ -43,7 +45,7 @@ character_pennywise = {
     
     "defeated_by": "spear",
     
-    "defending_body_part": None,
+    "defending_body_part": item_left_leg,
     
     "dialouge": []
 }

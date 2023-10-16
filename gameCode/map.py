@@ -1,4 +1,5 @@
 from items import *
+from characters import *
 
 room_lab = {
     "name": "Lab",
@@ -36,7 +37,7 @@ room_bedroom = {
 
     "items": [item_needle_and_thread],
     
-    "character": None
+    "character": character_dracula
 }
 
 room_kitchen = {
@@ -62,7 +63,7 @@ room_theatre = {
 
     "items": [],
     
-    "character": None
+    "character": character_freddy
 }
 
 room_entrance = {
@@ -88,7 +89,7 @@ room_basement = {
 
     "items": [],
     
-    "character": None
+    "character": character_pennywise
 }
 
 room_garden = {
@@ -101,7 +102,7 @@ room_garden = {
 
     "items": [item_rock],
     
-    "character": None
+    "character": character_slenderman
 }
 
 room_living_room = {
@@ -114,7 +115,7 @@ room_living_room = {
 
     "items": [item_spear],
     
-    "character": None
+    "character": character_grim
 }
 
 room_library = {
