@@ -132,4 +132,14 @@ room_library = {
 
 
 rooms = {
+    "Lab": room_lab,
+    "Entrance": room_entrance,
+    "Attic": room_attic,
+    "Bedroom": room_bedroom,
+    "Kitchen": room_kitchen,
+    "Theatre": room_theatre,
+    "Basement": room_basement,
+    "Garden": room_garden,
+    "Living Room": room_living_room,
+    "Library": room_library
 }
