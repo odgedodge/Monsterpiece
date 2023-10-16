@@ -121,3 +121,63 @@ item_chucky = {
     
     "weight": 0.6
 }
+
+item_left_leg = {
+    "id": "left leg",
+    
+    "name": "the monster's left leg",
+    
+    "description": "the left leg",
+    
+    "weight": 18
+}
+
+item_right_leg = {
+    "id": "right leg",
+    
+    "name": "the monster's right leg",
+    
+    "description": "the right leg",
+    
+    "weight": 18
+}
+
+item_left_arm = {
+    "id": "left arm",
+    
+    "name": "the monster's left arm",
+    
+    "description": "the left arm",
+    
+    "weight": 5
+}
+
+item_right_arm = {
+    "id": "right arm",
+    
+    "name": "the monster's right arm",
+    
+    "description": "the right arm",
+    
+    "weight": 5
+}
+
+item_head = {
+    "id": "head",
+    
+    "name": "the monster's head",
+    
+    "description": "the head",
+    
+    "weight": 7
+}
+
+item_torso = {
+    "id": "torso",
+    
+    "name": "the monster's torso",
+    
+    "description": "the torso",
+    
+    "weight": 35
+}
