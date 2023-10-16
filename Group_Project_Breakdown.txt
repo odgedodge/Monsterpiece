@@ -1,9 +1,15 @@
 Aim: Building Frankenstein's Monster
 Character: Henry Frankenstein
 Setting: Haunted House
-Items: Body Parts, Instruction Book, Needle, Thread, Notebook, Funny Rock, Baseball Bat, Candles, Cross Necklace, Holy Water, Pizza Slice, Red Balloon, Phone, Saw, Hammer
+Items: Body Parts, Instruction Book, Needle, Thread, Notebook, Funny Rock, Baseball Bat, Candles, Cross Necklace, Holy Water, Pizza Slice, Red Balloon, Phone, Saw, Hammer.
 Body Parts: Right Arm, Left Arm, Head, Torso, Left Leg, Right Leg.
-Villans/NPCs: (Can be spoken to to convince them to give the body part or information, or fought) Freddy Fazbear, Pennywise, Dracula, The Grim Reaper, Chucky, Slenderman. (Pick 6 from this list)
-Rooms: Lab, Attic, Master Bedroom, Kitchen, Theatre Room, Rooms for each chosen character.
+Villans/NPCs: (Can be spoken to to convince them to give the body part or information, or fought) Freddy Fazbear, Pennywise, Dracula, The Grim Reaper, Chucky, Slenderman.
+Rooms: Lab, Attic, Master Bedroom, Kitchen, Theatre Room, Basement Room, Garden, Living Room, Library.
+Character Rooms and Possesions: Attic, Chucky (In box, just doll but turns out to be Chucky), Right Arm
+				Master Bedroom, Dracula, Left Arm
+				Theatre Room, Freddy Fazbear, Right Leg
+				Basement Room, Pennywise (Have to go through Pennywise to get to the lab), Left Leg
+				Garden, Slenderman, Head
+				Living Room, The Grim Reaper, Torso
 Hallways: Have text slowly write out to signify time passing while moving rooms.  Random chance for scary text art (jump scare)
-Combat System: Health, but it should be very difficult to get to zero, each boss fight (if youre fighting the same villain) does more damage. IF you use the wrong weapon they win and you take damage, if you use the right weapon you win and they die.
+Combat System: Health, but it should be very difficult to get to zero, each boss fight (if youre fighting the same villain) does more damage. If you use the wrong weapon they win and you take damage, if you use the right weapon you win and they die.
