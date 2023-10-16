@@ -7,7 +7,7 @@ room_lab = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"south": "Basement"},
 
     "items": [item_saw, item_hammer, item_soul_jar],
     
@@ -20,7 +20,7 @@ room_attic = {
     "description":
     """ """,
 
-    "exits":  {},
+    "exits":  {"west": "Bedroom"},
 
     "items": [item_chucky],
     
@@ -33,7 +33,7 @@ room_bedroom = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"down": "Entrance", "east": "Attic"},
 
     "items": [item_needle_and_thread],
     
@@ -46,7 +46,7 @@ room_kitchen = {
     "description": 
     """ """,
 
-    "exits": {},
+    "exits": {"north": "Entrance", "east": "Garden", "west": "Basement"},
 
     "items": [item_holy_water],
     
@@ -59,7 +59,7 @@ room_theatre = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"east": "Entrance"},
 
     "items": [],
     
@@ -72,7 +72,7 @@ room_entrance = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"north": "Library", "east": "Living room", "south": "Kitchen", "west": "Theatre", "up": "Bedroom"},
 
     "items": [],
     
@@ -85,7 +85,7 @@ room_basement = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"east": "Kitchen", "north": "Lab"},
 
     "items": [],
     
@@ -98,7 +98,7 @@ room_garden = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"west": "Kitchen"},
 
     "items": [item_rock],
     
@@ -111,7 +111,7 @@ room_living_room = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"west": "Entrance"},
 
     "items": [item_spear],
     
@@ -124,7 +124,7 @@ room_library = {
     "description":
     """ """,
 
-    "exits": {},
+    "exits": {"south": "Entrance"},
 
     "items": [item_instruction_book, item_eight_pages],
     
