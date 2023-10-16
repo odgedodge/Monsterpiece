@@ -1,6 +1,6 @@
 #!/usr/bin/python3
+import random
 from time import sleep
-import sys
 from map import rooms
 from player import *
 from items import *
@@ -10,8 +10,8 @@ from gameparser import *
 def typewritter_effect(text):
     #Loops for each character in the string
     for char in text:
-        #Pause for 0.1 seconds
-        sleep(0.1)
+        #Slightly differant pauses between each character
+        sleep(random.uniform(0.05 , 0.15))
         #print out the character and make next character print besides it
         print(char, end='', flush=True)
 
