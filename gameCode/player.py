@@ -1,11 +1,9 @@
 from items import *
 from map import rooms
 
-weight_limit = 3.0
+weight_limit = 8.0
 
-inventory = [item_id, item_laptop, item_money]
-
-victory_check = [item_id, item_laptop, item_money, item_biscuits, item_pen, item_handbook]
+inventory = [item_baseball_bat, item_water_bottle]
 
 # Start game at the reception
 current_room = rooms["Reception"]
