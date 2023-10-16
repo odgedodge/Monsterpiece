@@ -101,3 +101,23 @@ item_soul_jar = {
 
     "weight": 0.3
 }
+
+item_water_bottle = {
+    "id": "water bottle",
+    
+    "name": "your water bottle",
+    
+    "description": "Your water bottle",
+    
+    "weight": 0.6
+}
+
+item_chucky = {
+    "id": "chucky",
+    
+    "name": "a doll",
+    
+    "description": "a doll",
+    
+    "weight": 0.6
+}
