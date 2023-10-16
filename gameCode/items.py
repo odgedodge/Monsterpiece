@@ -1,63 +1,59 @@
 item_id = {
-    "id": "id",
+    "id": "",
 
-    "name": "id card",
+    "name": "",
 
-    "description":
-    """You new shiny student ID card. Expires 1 June 2017.
-You wonder why they have printed a suicide hotline number on it?...""",
+    "description":"",
 
-    "weight": 0.005
+    "weight": 0
 }
 
 item_laptop = {
-    "id": "laptop",
+    "id": "",
 
-    "name": "laptop",
+    "name": "",
 
-    "description":
-    "It has seen better days. At least it has a WiFi card!",
+    "description": "",
 
-    "weight": 2.5
+    "weight": 0
 }
 
 item_money = {
-    "id": "money",
+    "id": "",
 
-    "name": "money",
+    "name": "",
 
-    "description":
-    "This wad of cash is barely enough to pay your tuition fees.",
+    "description": "",
 
-    "weight": 0.005
+    "weight": 0
 }
 
 item_biscuits = {
-    "id": "biscuits",
+    "id": "",
 
-    "name": "a pack of biscuits",
+    "name": "",
 
-    "description": "A pack of biscuits.",
+    "description": "",
 
-    "weight": 0.266
+    "weight": 0
 }
 
 item_pen = {
-    "id": "pen",
+    "id": "",
     
-    "name": "a pen",
+    "name": "",
 
-    "description": "A basic ballpoint pen.",
+    "description": "",
 
-    "weight": 0.01
+    "weight": 0
 }
 
 item_handbook = {
-    "id": "handbook",
+    "id": "",
     
-    "name": "a student handbook",
+    "name": "",
 
-    "description": "This student handbook explains everything. Seriously.",
+    "description": "",
 
-    "weight": 1.4
+    "weight": 0
 }
