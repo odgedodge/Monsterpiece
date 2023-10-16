@@ -8,7 +8,9 @@ room_lab = {
 
     "exits": {},
 
-    "items": [item_biscuits, item_handbook]
+    "items": [item_saw, item_hammer, item_soul_jar],
+    
+    "character": None
 }
 
 room_attic = {
@@ -19,7 +21,9 @@ room_attic = {
 
     "exits":  {},
 
-    "items": []
+    "items": [item_chucky],
+    
+    "character": None
 }
 
 room_bedroom = {
@@ -30,7 +34,9 @@ room_bedroom = {
 
     "exits": {},
 
-    "items": []
+    "items": [item_needle_and_thread],
+    
+    "character": None
 }
 
 room_kitchen = {
@@ -41,7 +47,9 @@ room_kitchen = {
 
     "exits": {},
 
-    "items": []
+    "items": [item_holy_water],
+    
+    "character": None
 }
 
 room_theatre = {
@@ -52,9 +60,75 @@ room_theatre = {
 
     "exits": {},
 
-    "items": []
+    "items": [],
+    
+    "character": None
 }
 
+room_entrance = {
+    "name": "Entrance Hall",
+
+    "description":
+    """ """,
+
+    "exits": {},
+
+    "items": [],
+    
+    "character": None
+}
+
+room_basement = {
+    "name": "Basement",
+
+    "description":
+    """ """,
+
+    "exits": {},
+
+    "items": [],
+    
+    "character": None
+}
+
+room_garden = {
+    "name": "Garden",
+
+    "description":
+    """ """,
+
+    "exits": {},
+
+    "items": [item_rock],
+    
+    "character": None
+}
+
+room_living_room = {
+    "name": "Living Room",
+
+    "description":
+    """ """,
+
+    "exits": {},
+
+    "items": [item_spear],
+    
+    "character": None
+}
+
+room_library = {
+    "name": "Library",
+
+    "description":
+    """ """,
+
+    "exits": {},
+
+    "items": [item_instruction_book, item_eight_pages],
+    
+    "character": None
+}
 
 
 rooms = {
