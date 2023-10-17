@@ -195,14 +195,25 @@ def execute_command(command):
         else:
             print("Drop what?")
 
+    elif command[0] == "talk":
+        if len(command) > 1:
+            execute_talk(command[1])
+        else:
+            print("Talk to who?")
+        
     #If the first word entered doesn't match any command tell user
     else:
         print("This makes no sense.")
 
 #take the dialouge of the character and print it out in an iterable list, sometimes taking an input from the character
-def execute_dialouge(dialouge):
-    #dialouge list from character
-    pass
+def execute_talk(dialouge):
+    #dialouge dictionary from character
+    for sentence in dialouge["base dialouge"]:
+            typewritter_effect(sentence)
+            sleep(0.5)
+    if dialouge["multiple options"]:
+        user_input = input("> ")
+        
 
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
