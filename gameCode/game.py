@@ -218,9 +218,11 @@ def execute_command(command):
 #take the dialouge of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_talk(dialouge):
     #dialouge dictionary from character
+    #user interacts with character based on their base dialouge, however their responses are not linked to user input
     for sentence in dialouge["base dialouge"]:
             typewritter_effect_fast(sentence)
             user_input = input("> ")
+    #if there are multiple options, to fight or talk, let the player pick
     if dialouge["multiple options"]:
         user_input = ''
         while normalise_input(user_input)[0] != "talk" or normalise_input(user_input)[0] != "fight":
@@ -228,12 +230,19 @@ def execute_talk(dialouge):
             user_input = input("> ")
             if normalise_input(user_input)[0] == "talk":
                 for sentence in dialouge["dialouge one"]:
+                    #provide the talking text if the player chooses talk
                     typewritter_effect_fast(sentence)
                     user_input = input("> ")
+                    # implement being given the limb
             elif normalise_input(user_input)[0] == "fight":
+                #provide the fighting text if the player chooses to fight
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
                 # place combat here when implemented
+                # implement being given the limb
+    elif dialouge["method"] == "fight":
+        pass
+        
         
 
 def menu(exits, room_items, inv_items):
