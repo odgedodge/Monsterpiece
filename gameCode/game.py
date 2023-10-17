@@ -263,7 +263,11 @@ def execute_talk(dialouge):
                 #provide the fighting text if the player chooses to fight
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
-            execute_combat(inventory, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
+                    print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
+                    weapon = ''
+                    while ''.join(normalise_input(weapon)) not in inventory:
+                        weapon = input("> ")
+            execute_combat(weapon, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
                 # implement being given the limb
     
     elif dialouge["method"] == "fight":
