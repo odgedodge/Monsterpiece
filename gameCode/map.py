@@ -70,7 +70,7 @@ room_entrance = {
     "name": "Entrance Hall",
 
     "description":
-    """ """,
+    """A grand entrance hall covered with a thick layer of dust and cobwebs""",
 
     "exits": {"north": "Library", "east": "Living room", "south": "Kitchen", "west": "Theatre", "up": "Bedroom"},
 

@@ -7,7 +7,9 @@ character_dracula = {
     
     "defending_body_part": item_left_arm,
     
-    "dialouge": []
+    "dialouge": [],
+
+    "combat": []
 }
 
 character_freddy = {
@@ -27,7 +29,9 @@ character_grim = {
     
     "defending_body_part": item_torso,
     
-    "dialouge": []
+    "dialouge": [],
+
+    "combat": []
 }
 
 character_slenderman = {
@@ -37,7 +41,9 @@ character_slenderman = {
     
     "defending_body_part": item_head,
     
-    "dialouge": []
+    "dialouge": [],
+
+    "combat": []
 }
 
 character_pennywise = {
@@ -47,5 +53,7 @@ character_pennywise = {
     
     "defending_body_part": item_left_leg,
     
-    "dialouge": []
+    "dialouge": [],
+
+    "combat": []
 }

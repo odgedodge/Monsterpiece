@@ -7,7 +7,15 @@ from items import *
 from gameparser import *
 
 #Slowing prints out a string one character at a time
-def typewritter_effect(text):
+def typewritter_effect_fast(text):
+    #Loops for each character in the string
+    for char in text:
+        #Slightly differant pauses between each character
+        sleep(random.uniform(0.01 , 0.05))
+        #print out the character and make next character print besides it
+        print(char, end='', flush=True)
+
+def typewritter_effect_slow(text):
     #Loops for each character in the string
     for char in text:
         #Slightly differant pauses between each character
@@ -36,7 +44,7 @@ def print_room_items(room):
 
     #If the string from list isn't blank will print out each item in the room. if the string is blank returns None
     if empty_check != "":
-        typewritter_effect(("There is" , empty_check , "here." + "\n"))
+        typewritter_effect_fast(("There is" , empty_check , "here." + "\n"))
     else:
         return
 
@@ -50,7 +58,7 @@ def print_inventory_items(items):
 
     #If the string from list isn't blank will print out each item in your inventroy. if the string is blank returns None
     if empty_check != "":
-        typewritter_effect(("You have" , empty_check + ".\n"))
+        typewritter_effect_fast(("You have" , empty_check + ".\n"))
 
         #!!!!! Doc Test doesnt like it printing weight !!!!!
         #Adds together the weight value of each item in your inventory
@@ -65,12 +73,12 @@ def print_inventory_items(items):
 #Prints out all information about the room your currently in
 def print_room(room):
     #prints out the name of the room in full calpitals and description with a blank lines after each
-    typewritter_effect(("\n" + room["name"].upper() + "\n"))
-    typewritter_effect((room["description"] + "\n"))
+    typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
+    typewritter_effect_fast((room["description"] + "\n"))
 
     #checks if the print_room_items returns none. If not prints room items. 
     if print_room_items(room) != None:
-        typewritter_effect((print_room_items(room) + "\n"))
+        typewritter_effect_fast((print_room_items(room) + "\n"))
 
 #outputs the name of the exit in a given diretion
 def exit_leads_to(exits, direction):
@@ -98,11 +106,15 @@ def print_menu(exits, room_items, inv_items):
     #For every item in your inventory print out drop, its ID in caps and name
     for i in range(len(inv_items)):
         print("DROP" , inv_items[i]["id"].upper() , "to drop your" , inv_items[i]["name"])
+
+    #If there is a character in the room and the character can be spoken to print the comand to talk to them
+    if current_room["character"] != None and current_room["character"]["dialouge"] != None :
+        print ("TALk" , current_room["character"]["name"].upper() , "to talk to" ,  current_room["character"]["name"])
     
     #promt the player for an input
     print("What do you want to do?")
 
-#Chceks if an exit exists in a given direction
+#Chceks if an exit exists in a given direction 
 def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
     return chosen_exit in exits
