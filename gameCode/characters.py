@@ -4,7 +4,7 @@ from dialouge import *
 character_dracula = {
     "name": "dracula",
     
-    "defeated_by": "holy water",
+    "combat": ["holy water", 0 , "spear" , 15],
     
     "defending_body_part": item_left_arm,
     
@@ -14,7 +14,7 @@ character_dracula = {
 character_freddy = {
     "name": "freddy fazbear",
     
-    "defeated_by": "baseball bat",
+    "combat": ["baseball bat" , 0 , "water bottle" , 15],
     
     "defending_body_part": item_right_leg,
     
@@ -24,7 +24,7 @@ character_freddy = {
 character_grim = {
     "name": "the grim reaper",
     
-    "defeated_by": "making a deal",
+    "combat": None,
     
     "defending_body_part": item_torso,
     
@@ -34,7 +34,7 @@ character_grim = {
 character_slenderman = {
     "name": "slenderman",
     
-    "defeated_by": "eight pages",
+    "combat": ["eight pages" , 0 , "instruction book" , 15],
     
     "defending_body_part": item_head,
     
@@ -44,7 +44,7 @@ character_slenderman = {
 character_pennywise = {
     "name": "pennywise",
     
-    "defeated_by": "spear",
+    "combat": "talk",
     
     "defending_body_part": item_left_leg,
     
