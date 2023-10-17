@@ -3,7 +3,7 @@ dialouge_dracula = {
     
     "multiple options": True,
     
-    "base dialouge": [],
+    "base dialouge": ["Hello Henry, it is good to see you again.", "I would ask how your travels went, but since you are back... well I'm sure you learnt something.", "You're here for the monster. Again?", "Do you ever learn Henry? Don't revive dead things.", "I will not see that monster again, which is why I have hidden a leg from you. He will not be reassembled."],
     
     "dialouge one": [],
     
