@@ -206,7 +206,8 @@ def execute_command(command):
 
     elif command[0] == "talk":
         if len(command) > 1:
-            execute_talk(command[1])
+            global current_room
+            execute_talk(current_room["character"]["dialouge"])
         else:
             print("Talk to who?")
         
@@ -232,7 +233,7 @@ def execute_talk(dialouge):
             elif normalise_input(user_input)[0] == "fight":
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
-                    # place combat here when implemented
+                # place combat here when implemented
         
 
 def menu(exits, room_items, inv_items):
