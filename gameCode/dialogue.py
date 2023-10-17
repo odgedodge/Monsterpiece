@@ -10,7 +10,7 @@ dialogue_dracula = {
     "dialogue two": ["You do not want to fight me. This is a war you will not win, it is not worth it to rebuild a monster. Fighting you is a necessary evil to prevent the monster resurfacing."]
 }
 
-dialouge_pennywise = {
+dialogue_pennywise = {
     "id": "pennywise",
     
     "multiple options": False,
@@ -22,9 +22,15 @@ dialouge_pennywise = {
 dialogue_grim = {
     "id": "the grim reaper",
     
-    "multiple options": False,
+    "multiple options": True,
     
-    "base dialogue": []
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself."],
+
+    "dialogue one": ["Your time has come to an end, and nothing can prevent what is written in the book of death.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."],
+
+    "dialogue two": ["My scythe stands tall, and I am ready to take you.", "Are you prepared for what awaits? Your life is now in my hands."]
+
+
 }
 
 
@@ -36,3 +42,11 @@ dialogue_freddy = {
     "base dialogue": []
 }
 
+
+dialogue_slenderman = {
+    "id": "slenderman",
+
+    "multiple options": False,
+
+    "base dialogue": []
+}
