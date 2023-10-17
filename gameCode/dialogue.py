@@ -37,7 +37,7 @@ dialogue_freddy = {
     
     "multiple options": True,
     
-    "base dialogue": [],
+    "base dialogue": ["Hello Henry"],
 
     "dialogue one": [],
 
