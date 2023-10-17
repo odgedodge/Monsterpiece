@@ -27,7 +27,12 @@ item_rock = {
 
     "name": "a rock",
 
-    "description": "A rock.",
+    "description": """I have an inexplicable attachment to a comically funny-looking rock that defies all rational explanation. 
+    Its irregular shape, adorned with whimsical patterns, seems to evoke a perpetual grin on my face. I picked it up on a whim, 
+    and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly rare or valuable, 
+    but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down, but it exerts a magnetic pull on my hand, 
+    tugging at my curiosity and igniting my imagination with endless tales of its origin.
+""",
 
     "weight": 0.3
 }
