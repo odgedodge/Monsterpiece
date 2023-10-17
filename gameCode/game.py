@@ -244,24 +244,28 @@ def execute_talk(dialouge):
     for sentence in dialouge["base dialouge"]:
             typewritter_effect_fast(sentence)
             user_input = input("> ")
+            
     #if there are multiple options, to fight or talk, let the player pick
     if dialouge["multiple options"]:
         user_input = ''
         while normalise_input(user_input)[0] != "talk" or normalise_input(user_input)[0] != "fight":
             typewritter_effect_slow("Talk or Fight")
             user_input = input("> ")
+            
             if normalise_input(user_input)[0] == "talk":
                 for sentence in dialouge["dialouge one"]:
                     #provide the talking text if the player chooses talk
                     typewritter_effect_fast(sentence)
                     user_input = input("> ")
                     # implement being given the limb
+                    
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
-        execute_combat(inventory, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
+            execute_combat(inventory, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
                 # implement being given the limb
+    
     elif dialouge["method"] == "fight":
         pass
         
