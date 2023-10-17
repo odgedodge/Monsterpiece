@@ -170,6 +170,28 @@ def execute_drop(item_id):
             inventory.remove(inventory[i])
             #return to leave the loop
             return
+
+#Function to run combat using the charater and chosen weapon as inputs
+def execute_combat(weapon, foe):
+    #Loops through the combat list of a characer checking for the selected weapon
+    for i in len(foe["combat"]):
+        
+        if foe["combat"][i] == weapon:
+            #If the Weapon is found in the combat list deals damage based on the next value in the list
+            health = health - foe["combat"][i+1]
+            
+            #Prints a small statement based on "quality" of the combat
+            if foe["combat"][i+1] == 0:
+                print("Well done perfectly exectued")
+            else:
+                print("An ok performance")
+            return
+
+    #If the chosen weapon is not found combat is considered poor and greater damage is taken
+    health = health - 30
+    print("A poor performance indeed")
+
+
     
 #take the users input and execute a certain command based on the nomalised input
 def execute_command(command):
@@ -232,7 +254,7 @@ def execute_talk(dialouge):
             elif normalise_input(user_input)[0] == "fight":
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
-                    # place combat here when implemented
+            execute_combat(inventory, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
         
 
 def menu(exits, room_items, inv_items):
