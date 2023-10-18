@@ -1,5 +1,5 @@
 from items import *
-from dialouge import *
+from dialogue import *
 
 character_dracula = {
     "name": "dracula",
@@ -8,7 +8,7 @@ character_dracula = {
     
     "defending_body_part": item_left_arm,
     
-    "dialouge": dialouge_dracula
+    "dialogue": dialogue_dracula
 }
 
 character_freddy = {
@@ -18,7 +18,7 @@ character_freddy = {
     
     "defending_body_part": item_right_leg,
     
-    "dialouge": dialouge_freddy
+    "dialogue": dialogue_freddy
 }
 
 character_grim = {
@@ -28,7 +28,7 @@ character_grim = {
     
     "defending_body_part": item_torso,
     
-    "dialouge": dialouge_grim
+    "dialogue": dialogue_grim
 }
 
 character_slenderman = {
@@ -38,7 +38,7 @@ character_slenderman = {
     
     "defending_body_part": item_head,
     
-    "dialouge": None
+    "dialogue": None
 }
 
 character_pennywise = {
@@ -48,5 +48,5 @@ character_pennywise = {
     
     "defending_body_part": item_left_leg,
     
-    "dialouge": dialouge_pennywise
+    "dialogue": dialogue_pennywise
 }

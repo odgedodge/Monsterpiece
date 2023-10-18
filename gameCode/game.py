@@ -239,6 +239,7 @@ def execute_command(command):
 
 #take the dialouge of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_talk(dialouge):
+    global current_room #tell the compiler to use current_room as a global to avoid global errors
     #dialouge dictionary from character
     #user interacts with character based on their base dialouge, however their responses are not linked to user input
     for sentence in dialouge["base dialouge"]:
@@ -260,7 +261,8 @@ def execute_talk(dialouge):
                     #pause between each sentence for better understanding
                     sleep(0.5)
                     print()
-                    # implement being given the limb
+                #give the character the limb
+                inventory.append(current_room["character"]["defending_body_part"])
                     
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
@@ -277,8 +279,26 @@ def execute_talk(dialouge):
                 # implement being given the limb
     
     elif dialouge["method"] == "fight":
-        pass
-        
+        for sentence in dialogue["base dialouge"]:
+            typewritter_effect_fast(sentence)
+            #pause between each sentence for better understanding
+            sleep(0.5)
+            print()
+        print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
+        weapon = ''
+        while ''.join(normalise_input(weapon)) not in inventory:
+            weapon = input("> ")
+        execute_combat(weapon, current_room["character"]) 
+        # implement being given the limb
+
+    elif dialouge["method"] == "talk":
+        for sentence in dialogue["base dialouge"]:
+            typewritter_effect_fast(sentence)
+            #pause between each sentence for better understanding
+            sleep(0.5)
+            print()
+        #give the character the limb
+        inventory.append(current_room["character"]["defending_body_part"])
         
 
 def menu(exits, room_items, inv_items):
