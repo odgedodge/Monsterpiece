@@ -243,7 +243,8 @@ def execute_talk(dialouge):
     #user interacts with character based on their base dialouge, however their responses are not linked to user input
     for sentence in dialouge["base dialouge"]:
             typewritter_effect_fast(sentence)
-            user_input = input("> ")
+            sleep(.5)
+            print()
             
     #if there are multiple options, to fight or talk, let the player pick
     if dialouge["multiple options"]:
@@ -256,18 +257,23 @@ def execute_talk(dialouge):
                 for sentence in dialouge["dialouge one"]:
                     #provide the talking text if the player chooses talk
                     typewritter_effect_fast(sentence)
-                    user_input = input("> ")
+                    #pause between each sentence for better understanding
+                    sleep(0.5)
+                    print()
                     # implement being given the limb
                     
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
                 for sentence in dialouge["dialouge two"]:
                     typewritter_effect_fast(sentence)
-                    print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
-                    weapon = ''
-                    while ''.join(normalise_input(weapon)) not in inventory:
-                        weapon = input("> ")
-            execute_combat(weapon, current_room["character"]) #IMPORTANT Inventory is temporay please replace with chosen weapon when thats added
+                    #pause between each sentence for better understanding
+                    sleep(0.5)
+                    print()
+                print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
+                weapon = ''
+                while ''.join(normalise_input(weapon)) not in inventory:
+                    weapon = input("> ")
+                execute_combat(weapon, current_room["character"]) 
                 # implement being given the limb
     
     elif dialouge["method"] == "fight":
