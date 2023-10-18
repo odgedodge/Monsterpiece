@@ -1,3 +1,7 @@
+#Dialogue is executed in the execute_talk() function in game.py. Dracula has two options, to talk or to fight, the others only have one option.
+#Fighting just has the character speak and then the player is put into combat mode after
+#Talking has preset responses that are put into the text with the villains text. It reads slowly as seen in the execute_talk() function.
+
 dialogue_dracula = {
     "id": "dracula",
     
@@ -5,7 +9,7 @@ dialogue_dracula = {
     
     "base dialogue": ["Hello Henry, it is good to see you again.", "I would ask how your travels went, but since you are back... well I'm sure you learnt something.", "You're here for the monster aren't you?. Again?", "Do you ever learn Henry? Don't revive dead things.", "I will not see that monster again, which is why I have hidden a leg from you. He will not be reassembled."],
     
-     "dialogue one": ["You need to be careful Henry, life and death is not to be meddled with.", "You: I'll be careful, he is a huge scientific masterpiece.","If you're sure you will be careful, do not make the same mistakes again.", "You: Only a fool would make the same mistakes twice.","If he is rebuilt, it should be as a memento, a warning to not meddle outside the human domain. I will give you the leg to rebuild him, but you must promise me.", "You: I promise."],
+    "dialogue one": ["You need to be careful Henry, life and death is not to be meddled with.", "You: I'll be careful, he is a huge scientific masterpiece.","If you're sure you will be careful, do not make the same mistakes again.", "You: Only a fool would make the same mistakes twice.","If he is rebuilt, it should be as a memento, a warning to not meddle outside the human domain. I will give you the leg to rebuild him, but you must promise me.", "You: I promise."],
     
     "dialogue two": ["You do not want to fight me. This is a war you will not win, it is not worth it to rebuild a monster. Fighting you is a necessary evil to prevent the monster resurfacing."]
 }
@@ -32,7 +36,7 @@ dialogue_grim = {
 dialogue_freddy = {
     "id": "freddy fazbear",
     
-    "multiple options": True,
+    "multiple options": False, #Can only fight
     
     "base dialogue": ["Hello Henry..."]
 }
