@@ -24,19 +24,16 @@ dialogue_grim = {
     
     "multiple options": False, #Can only talk
     
-    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds."],
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "Mortal, you are meddling in forces you do not understand.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."]
 
-    "dialogue one": ["Your time has come to an end, and nothing can prevent what is written in the book of death.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper.", "Mortal, you are meddling in forces you do not understand."],
-
-    "dialogue two": ["My scythe stands tall, and I am ready to take you.", "Are you prepared for what awaits? Your life is now in my hands.", "There is no mercy for you, not in this world or any other. Prepare yourself, for the reaper is coming. May the fates have mercy on your soul, for I shall have none."]
 }
 
 
 dialogue_freddy = {
     "id": "freddy fazbear",
     
-    "multiple options": False, #Can only fight
+    "multiple options": True,
     
-    "base dialogue": ["Hello Henry"]
+    "base dialogue": ["Hello Henry..."]
 }
 
