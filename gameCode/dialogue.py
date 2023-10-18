@@ -45,14 +45,3 @@ dialogue_freddy = {
 }
 
 
-dialogue_slenderman = {
-    "id": "slenderman",
-
-    "multiple options": True,
-
-    "base dialogue": [],
-
-    "dialogue one": [],
-
-    "dialogue two": []
-}
