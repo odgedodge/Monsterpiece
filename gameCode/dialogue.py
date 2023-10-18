@@ -35,13 +35,9 @@ dialogue_grim = {
 dialogue_freddy = {
     "id": "freddy fazbear",
     
-    "multiple options": True,
+    "multiple options": False,
     
-    "base dialogue": ["Hello Henry"],
-
-    "dialogue one": [],
-
-    "dialogue two": []
+    "base dialogue": ["Hello Henry..."]
 }
 
 
