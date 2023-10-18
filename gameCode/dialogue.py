@@ -18,6 +18,8 @@ dialogue_pennywise = {
     "id": "pennywise",
     
     "multiple options": False, #Can only fight
+
+    "method": "fight",
     
     "base dialogue": []
     
@@ -27,6 +29,8 @@ dialogue_grim = {
     "id": "the grim reaper",
     
     "multiple options": False, #Can only talk
+
+    "method": "talk",
     
     "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "Mortal, you are meddling in forces you do not understand.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."]
 
@@ -37,6 +41,8 @@ dialogue_freddy = {
     "id": "freddy fazbear",
     
     "multiple options": False, #Can only fight
+
+    "method": "fight",
     
     "base dialogue": ["Hello Henry..."]
 }
