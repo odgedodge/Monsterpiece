@@ -189,11 +189,13 @@ def execute_combat(weapon, foe):
             #Prints a small statement based on "quality" of the combat
             if foe["combat"][i+1] == 0:
                 print("Well done perfectly executed")
-                #give the limb
+                #give the limb and remove the character: they have died
                 give_limb()
+                remove_character()
             else:
-                #give the limb
+                #give the limb and remove the character: they have died
                 give_limb()
+                remove_character()
                 print("An ok performance")
             return
 
@@ -248,7 +250,6 @@ def execute_command(command):
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_dialouge(dialogue):
     #dialogue dictionary from character
-    
             
     #if there are multiple options, to fight or talk, let the player pick
     if dialogue["multiple options"]:
@@ -282,6 +283,7 @@ def execute_fight(fight_dialogue):
         #pause between each sentence for better understanding
         sleep(0.5)
         print()
+        
         print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
         weapon = ''
         while ''.join(normalise_input(weapon)) not in inventory:
@@ -295,12 +297,15 @@ def execute_talk(talk_dialogue):
         #pause between each sentence for better understanding
         sleep(0.5)
         print()
+        
     #give the player the limb
     give_limb()
 
 def give_limb():
     inventory.append(current_room["character"]["defending_body_part"])
-     
+    
+def remove_character():
+    current_room["character"] = None
         
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
