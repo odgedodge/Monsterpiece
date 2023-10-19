@@ -1,5 +1,5 @@
 item_instruction_book = {
-    "id": "instruction book",
+    "id": "book",
 
     "name": "the instruction book",
 
