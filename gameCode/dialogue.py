@@ -19,7 +19,7 @@ dialogue_pennywise = {
     
     "multiple options": False, #Can only talk
 
-    "method": "fight",
+    "method": "talk",
     
     "base dialogue": []
     
