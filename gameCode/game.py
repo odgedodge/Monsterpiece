@@ -229,7 +229,7 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
-            execute_talk(current_room["character"]["dialouge"])
+            execute_talk(current_room["character"]["dialogue"])
         else:
             print("Talk to who?")
         
@@ -237,25 +237,25 @@ def execute_command(command):
     else:
         print("This makes no sense.")
 
-#take the dialouge of the character and print it out in an iterable list, sometimes taking an input from the character
-def execute_talk(dialouge):
+#take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
+def execute_talk(dialogue):
     global current_room #tell the compiler to use current_room as a global to avoid global errors
-    #dialouge dictionary from character
-    #user interacts with character based on their base dialouge, however their responses are not linked to user input
-    for sentence in dialouge["base dialouge"]:
+    #dialogue dictionary from character
+    #user interacts with character based on their base dialogue, however their responses are not linked to user input
+    for sentence in dialogue["base dialogue"]:
             typewritter_effect_fast(sentence)
             sleep(.5)
             print()
             
     #if there are multiple options, to fight or talk, let the player pick
-    if dialouge["multiple options"]:
+    if dialogue["multiple options"]:
         user_input = ''
         while normalise_input(user_input)[0] != "talk" or normalise_input(user_input)[0] != "fight":
             typewritter_effect_slow("Talk or Fight")
             user_input = input("> ")
             
             if normalise_input(user_input)[0] == "talk":
-                for sentence in dialouge["dialouge one"]:
+                for sentence in dialogue["dialogue one"]:
                     #provide the talking text if the player chooses talk
                     typewritter_effect_fast(sentence)
                     #pause between each sentence for better understanding
@@ -266,7 +266,7 @@ def execute_talk(dialouge):
                     
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
-                for sentence in dialouge["dialouge two"]:
+                for sentence in dialogue["dialogue two"]:
                     typewritter_effect_fast(sentence)
                     #pause between each sentence for better understanding
                     sleep(0.5)
@@ -278,8 +278,8 @@ def execute_talk(dialouge):
                 execute_combat(weapon, current_room["character"]) 
                 # implement being given the limb
     
-    elif dialouge["method"] == "fight":
-        for sentence in dialogue["base dialouge"]:
+    elif dialogue["method"] == "fight":
+        for sentence in dialogue["base dialogue"]:
             typewritter_effect_fast(sentence)
             #pause between each sentence for better understanding
             sleep(0.5)
@@ -291,8 +291,8 @@ def execute_talk(dialouge):
         execute_combat(weapon, current_room["character"]) 
         # implement being given the limb
 
-    elif dialouge["method"] == "talk":
-        for sentence in dialogue["base dialouge"]:
+    elif dialogue["method"] == "talk":
+        for sentence in dialogue["base dialogue"]:
             typewritter_effect_fast(sentence)
             #pause between each sentence for better understanding
             sleep(0.5)
