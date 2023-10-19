@@ -45,10 +45,9 @@ def print_room_items(room):
 
     #If the string from list isn't blank will print out each item in the room. if the string is blank returns None
     if empty_check != "":
-        typewritter_effect_fast(("There is" , empty_check , "here." + "\n"))
+        typewritter_effect_fast(("There is " , empty_check , " here." + "\n"))
     else:
         return
-
 
 def print_inventory_items(items):
     #Used to check if the string from list of items is blank
@@ -110,6 +109,10 @@ def print_menu(exits, room_items, inv_items):
     #For every item in your inventory print out drop, its ID in caps and name
     for i in range(len(inv_items)):
         print("DROP" , inv_items[i]["id"].upper() , "to drop your" , inv_items[i]["name"])
+        
+    #if theres a character print that
+    if current_room["character"] is not None:
+        print("TALK to", current_room["character"]["name"])
     
     #promt the player for an input
     print("What do you want to do?")
@@ -244,16 +247,16 @@ def execute_command(command):
 
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_dialouge(dialogue):
-    global current_room #tell the compiler to use current_room as a global to avoid global errors
     #dialogue dictionary from character
-    #user interacts with character based on their base dialogue, however their responses are not linked to user input
-    for sentence in dialogue["base dialogue"]:
-            typewritter_effect_fast(sentence)
-            sleep(.5)
-            print()
+    
             
     #if there are multiple options, to fight or talk, let the player pick
     if dialogue["multiple options"]:
+        #user interacts with character based on their base dialogue, however their responses are not linked to user input
+        for sentence in dialogue["base dialogue"]:
+            typewritter_effect_fast(sentence)
+            sleep(.5)
+            print()
         user_input = ''
         while normalise_input(user_input)[0] != "talk" or normalise_input(user_input)[0] != "fight":
             typewritter_effect_slow("Talk or Fight")
@@ -261,20 +264,20 @@ def execute_dialouge(dialogue):
             
             if normalise_input(user_input)[0] == "talk":
                 #print the sentences in character dialouge
-                execute_talk(dialogue)
+                execute_talk(dialogue["dialogue one"])
                     
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
-                execute_fight(dialogue)
+                execute_fight(dialogue["dialogue two"])
     
     elif dialogue["method"] == "fight":
-        execute_fight(dialogue)
+        execute_fight(dialogue["base dialogue"])
 
     elif dialogue["method"] == "talk":
-        execute_talk(dialogue)
+        execute_talk(dialogue["base dialogue"])
         
-def execute_fight(dialogue):
-    for sentence in dialogue["dialogue two"]:
+def execute_fight(fight_dialogue):
+    for sentence in fight_dialogue:
         typewritter_effect_fast(sentence)
         #pause between each sentence for better understanding
         sleep(0.5)
@@ -285,8 +288,8 @@ def execute_fight(dialogue):
             weapon = input("> ")
         execute_combat(weapon, current_room["character"]) 
 
-def execute_talk(dialogue):
-    for sentence in dialogue["dialogue one"]:
+def execute_talk(talk_dialogue):
+    for sentence in talk_dialogue:
         #provide the talking text if the player chooses talk
         typewritter_effect_fast(sentence)
         #pause between each sentence for better understanding
@@ -297,6 +300,7 @@ def execute_talk(dialogue):
 
 def give_limb():
     inventory.append(current_room["character"]["defending_body_part"])
+     
         
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
@@ -319,11 +323,9 @@ def menu(exits, room_items, inv_items):
     #returns the normalised input
     return normalised_user_input
 
-
 def move(exits, direction):
     # Next room to go to
     return rooms[exits[direction]]
-
 
 # This is the entry point of our program
 def main():
