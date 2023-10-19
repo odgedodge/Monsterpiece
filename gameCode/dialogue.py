@@ -47,3 +47,13 @@ dialogue_freddy = {
     "base dialogue": ["Hello Henry...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."]
 }
 
+#slenderman doesn't talk but there should be commentary on his behaviour and hints to the player for how to beat him
+dialogue_slenderman = {
+    "id": "slenderman",
+    
+    "multiple options": False, #Can only fight
+    
+    "method": "fight",
+    
+    "base dialogue": []
+}

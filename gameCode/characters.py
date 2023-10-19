@@ -2,7 +2,7 @@ from items import *
 from dialogue import *
 
 character_dracula = {
-    "name": "dracula",
+    "name": "Dracula",
     
     "combat": ["holy water", 0 , "spear" , 15],
     
@@ -12,7 +12,7 @@ character_dracula = {
 }
 
 character_freddy = {
-    "name": "freddy fazbear",
+    "name": "Freddy fazbear",
     
     "combat": ["baseball bat" , 0 , "water bottle" , 15],
     
@@ -22,7 +22,7 @@ character_freddy = {
 }
 
 character_grim = {
-    "name": "the grim reaper",
+    "name": "The Grim Reaper",
     
     "combat": None,
     
@@ -32,7 +32,7 @@ character_grim = {
 }
 
 character_slenderman = {
-    "name": "slenderman",
+    "name": "Slenderman",
     
     "combat": ["eight pages" , 0 , "instruction book" , 15],
     
@@ -42,7 +42,7 @@ character_slenderman = {
 }
 
 character_pennywise = {
-    "name": "pennywise",
+    "name": "Pennywise",
     
     "combat": "talk",
     
