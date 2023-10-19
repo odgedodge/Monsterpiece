@@ -17,7 +17,7 @@ dialogue_dracula = {
 dialogue_pennywise = {
     "id": "pennywise",
     
-    "multiple options": False, #Can only fight
+    "multiple options": False, #Can only talk
 
     "method": "fight",
     
