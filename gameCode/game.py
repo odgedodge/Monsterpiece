@@ -51,9 +51,6 @@ def print_room_items(room):
 
 
 def print_inventory_items(items):
-    #Initalizes weight variable
-    weight = 0
-
     #Used to check if the string from list of items is blank
     empty_check = list_of_items(items)
 
@@ -62,14 +59,20 @@ def print_inventory_items(items):
         typewritter_effect_fast(("You have " , empty_check + ".\n"))
 
         #!!!!! Doc Test doesnt like it printing weight !!!!!
-        #Adds together the weight value of each item in your inventory
-        #for i in range(len(inventory)):
-        #    weight = weight + inventory[i]["weight"]
-
-        #prints out the total weight your carrying and shows the limit
-        ##print("you are carying" , weight , "/" , weight_limit , "!")
+        print_weight()
     else:
         return
+    
+def print_weight():
+    # Initialises weight variable
+    weight = 0
+    
+    #Adds together the weight value of each item in your inventory
+    for i in range(len(inventory)):
+        weight = weight + inventory[i]["weight"]
+
+    #prints out the total weight your carrying and shows the limit
+    print("You are carying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
 #Prints out all information about the room your currently in
 def print_room(room):
@@ -182,16 +185,18 @@ def execute_combat(weapon, foe):
             
             #Prints a small statement based on "quality" of the combat
             if foe["combat"][i+1] == 0:
-                print("Well done perfectly exectued")
+                print("Well done perfectly executed")
+                #give the limb
+                give_limb()
             else:
+                #give the limb
+                give_limb()
                 print("An ok performance")
             return
 
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
     health = health - 30
     print("A poor performance indeed")
-
-
     
 #take the users input and execute a certain command based on the nomalised input
 def execute_command(command):
@@ -229,7 +234,7 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
-            execute_talk(current_room["character"]["dialogue"])
+            execute_dialouge(current_room["character"]["dialogue"])
         else:
             print("Talk to who?")
         
@@ -238,7 +243,7 @@ def execute_command(command):
         print("This makes no sense.")
 
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
-def execute_talk(dialogue):
+def execute_dialouge(dialogue):
     global current_room #tell the compiler to use current_room as a global to avoid global errors
     #dialogue dictionary from character
     #user interacts with character based on their base dialogue, however their responses are not linked to user input
@@ -255,52 +260,44 @@ def execute_talk(dialogue):
             user_input = input("> ")
             
             if normalise_input(user_input)[0] == "talk":
-                for sentence in dialogue["dialogue one"]:
-                    #provide the talking text if the player chooses talk
-                    typewritter_effect_fast(sentence)
-                    #pause between each sentence for better understanding
-                    sleep(0.5)
-                    print()
-                #give the character the limb
-                inventory.append(current_room["character"]["defending_body_part"])
+                #print the sentences in character dialouge
+                execute_talk(dialogue)
                     
             elif normalise_input(user_input)[0] == "fight":
                 #provide the fighting text if the player chooses to fight
-                for sentence in dialogue["dialogue two"]:
-                    typewritter_effect_fast(sentence)
-                    #pause between each sentence for better understanding
-                    sleep(0.5)
-                    print()
-                print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
-                weapon = ''
-                while ''.join(normalise_input(weapon)) not in inventory:
-                    weapon = input("> ")
-                execute_combat(weapon, current_room["character"]) 
-                # implement being given the limb
+                execute_fight(dialogue)
     
     elif dialogue["method"] == "fight":
-        for sentence in dialogue["base dialogue"]:
-            typewritter_effect_fast(sentence)
-            #pause between each sentence for better understanding
-            sleep(0.5)
-            print()
+        execute_fight(dialogue)
+
+    elif dialogue["method"] == "talk":
+        execute_talk(dialogue)
+        
+def execute_fight(dialogue):
+    for sentence in dialogue["dialogue two"]:
+        typewritter_effect_fast(sentence)
+        #pause between each sentence for better understanding
+        sleep(0.5)
+        print()
         print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
         weapon = ''
         while ''.join(normalise_input(weapon)) not in inventory:
             weapon = input("> ")
         execute_combat(weapon, current_room["character"]) 
-        # implement being given the limb
 
-    elif dialogue["method"] == "talk":
-        for sentence in dialogue["base dialogue"]:
-            typewritter_effect_fast(sentence)
-            #pause between each sentence for better understanding
-            sleep(0.5)
-            print()
-        #give the character the limb
-        inventory.append(current_room["character"]["defending_body_part"])
+def execute_talk(dialogue):
+    for sentence in dialogue["dialogue one"]:
+        #provide the talking text if the player chooses talk
+        typewritter_effect_fast(sentence)
+        #pause between each sentence for better understanding
+        sleep(0.5)
+        print()
+    #give the player the limb
+    give_limb()
+
+def give_limb():
+    inventory.append(current_room["character"]["defending_body_part"])
         
-
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
     of items found in the room and carried by the player, prints the menu of
