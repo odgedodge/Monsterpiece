@@ -155,11 +155,10 @@ room_library = {
     "name": "Library",
 
     "description":
-    """In the library, ancient tomes line towering, dusty shelves that stretch from floor to ceiling. Dim candle light flickers, casting enormous 
-shadows on the leather-bound volumes filled with esoteric knowledge. The air is thick with the scent of decaying paper, and the faint rustle of pages turning on their own sends shivers 
-down the spine. Curiosities like anatomical sketches and peculiar specimens are displayed in glass cases, their ghostly glow illuminating the room. A ghostly whisper seems to ride the
-breeze, carrying fragments of forbidden incantations and scientific musings. The atmosphere is one of both intellectual curiosity and lingering, unsettling dread, as if the very 
-essence of knowledge in the room is imbued with a dark, pulsating energy. """,
+    """In the library, ancient tomes line towering, dusty shelves that stretch from floor to ceiling. Dim candle light flickers, casting enormous shadows on the leather-bound volumes filled with 
+esoteric knowledge. The air is thick with the scent of decaying paper, and the faint rustle of pages turning on their own sends shivers down the spine. Curiosities like anatomical sketches 
+and peculiar specimens are displayed in glass cases, their ghostly glow illuminating the room. A ghostly whisper seems to ride the breeze, carrying fragments of forbidden incantations and 
+scientific musings. The atmosphere is one of both intellectual curiosity and lingering, unsettling dread, as if the very essence of knowledge in the room is imbued with a dark, pulsating energy. """,
 
     "exits": {"south": "Entrance"},
 
