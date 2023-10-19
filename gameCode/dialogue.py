@@ -44,6 +44,6 @@ dialogue_freddy = {
 
     "method": "fight",
     
-    "base dialogue": ["Hello Henry..."]
+    "base dialogue": ["Hello Henry...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."]
 }
 
