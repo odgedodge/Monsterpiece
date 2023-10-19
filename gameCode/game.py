@@ -10,8 +10,8 @@ from gameparser import *
 def typewritter_effect_slow(text):
     #Loops for each character in the string
     for char in text:
-        #Slightly differant pauses between each character
-        sleep(random.uniform(0.05 , 0.15))
+        #Slightly different pauses between each character
+        sleep(random.uniform(0.025 , 0.015))
         #print out the character and make next character print besides it
         print(char, end='', flush=True)
 
@@ -59,7 +59,7 @@ def print_inventory_items(items):
 
     #If the string from list isn't blank will print out each item in your inventroy. if the string is blank returns None
     if empty_check != "":
-        typewritter_effect_fast(("You have" , empty_check + ".\n"))
+        typewritter_effect_fast(("You have " , empty_check + ".\n"))
 
         #!!!!! Doc Test doesnt like it printing weight !!!!!
         #Adds together the weight value of each item in your inventory
@@ -111,7 +111,7 @@ def print_menu(exits, room_items, inv_items):
     #promt the player for an input
     print("What do you want to do?")
 
-#Chceks if an exit exists in a given direction
+#Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
     return chosen_exit in exits
