@@ -48,7 +48,7 @@ item_baseball_bat = {
 }
 
 item_holy_water = {
-    "id": "holy water",
+    "id": "water",
     
     "name": "holy water",
 
@@ -88,7 +88,7 @@ item_spear = {
 }
 
 item_eight_pages = {
-    "id": "eight pages",
+    "id": "pages",
     
     "name": "the eight pages",
 
@@ -98,7 +98,7 @@ item_eight_pages = {
 }
 
 item_soul_jar = {
-    "id": "soul jar",
+    "id": "jar",
     
     "name": "a soul jar",
 
@@ -108,7 +108,7 @@ item_soul_jar = {
 }
 
 item_water_bottle = {
-    "id": "water bottle",
+    "id": "bottle",
     
     "name": "your water bottle",
     
