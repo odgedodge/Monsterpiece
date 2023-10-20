@@ -133,6 +133,9 @@ def print_menu(exits, room_items, inv_items):
         else:
             print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
+    if len(inventory) != 0:
+        print("INSPECT" , inventory[random.randint(0 , len(inventory))] , "to veiw its description")
+
         
     #if theres a character print that
     if current_room["character"] is not None:
@@ -192,7 +195,7 @@ def execute_drop(item_id):
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    #loops through the list for every item in it
+    #loops through the list for every item in the inevntory
     for i in range(len(inventory)):
         #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == inventory[i]["id"]:
@@ -200,6 +203,13 @@ def execute_drop(item_id):
             inventory.remove(inventory[i])
             #return to leave the loop
             return
+
+def execute_inspect(item_id):
+     #loops through the list for every item in it
+    for i in range(len(inventory)):
+         #if the item entered in the command is in the players inventory add it to the room and remove from inventory
+        if item_id == inventory[i]["id"]:
+            typewritter_effect_fast(inventory[i]["description"])
 
 #Function to run combat using the charater and chosen weapon as inputs
 def execute_combat(weapon, foe):
@@ -228,6 +238,9 @@ def execute_combat(weapon, foe):
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
     health -= 30
     print("A poor performance indeed")
+    #give the limb and remove the character: they have died
+    give_limb()
+    remove_character()
     
 #take the users input and execute a certain command based on the nomalised input
 def execute_command(command):
@@ -278,6 +291,12 @@ def execute_command(command):
             print("Talk to who?")
             return False
         
+    elif command[0] == "inspect":
+        if len(command) > 1:
+            execute_inspect(command[1])
+        else:
+            print("Inspect what>")
+
     #If the first word entered doesn't match any command tell user
     else:
         print("This makes no sense.")
