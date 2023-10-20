@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import random
 from time import sleep
+import keyboard
 from map import rooms
 from player import *
 from items import *
@@ -8,34 +9,50 @@ from gameparser import *
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_slow(text):
+    # Keep track of printed text, so if skipped text can be finished
+    printed = ''
+    
     #Loops for each character in the string
     for char in text:
         #Slightly different pauses between each character
-        sleep(random.uniform(0.025 , 0.015))
+        sleep(random.uniform(0.05 , 0.1))
         #print out the character and make next character print besides it
         print(char, end='', flush=True)
+        printed = printed + char
+        
+        # Detect skip condition
+        if keyboard.is_pressed("s"):
+            print(text.replace(printed, ""))
+            break
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_fast(text):
+    # Keep track of printed text, so if skipped text can be finished
+    printed = ''
+    
     #Loops for each character in the string
     for char in text:
         #Slightly differant pauses between each character
         sleep(random.uniform(0.01 , 0.05))
         #print out the character and make next character print besides it
         print(char, end='', flush=True)
+        printed = printed + char
+        
+        # Detect skip condition
+        if keyboard.is_pressed("s"):
+            print(text.replace(printed, ""))
+            break
 
 def list_of_items(items):
     #creates new empty list
     item_list = []
 
-    #Adds the name of each item to the new list
-    for i in range(len(items)):
-        item_list.append(items[i]["name"])
-        
-    #joins all the items in the list into one string seperated by commas
-    item_names = str(", ".join(item_list))
-    #returns the list created
-    return item_names 
+        # Append the item name for each item in the list
+    for item in items:
+        item_list.append(item["name"])
+
+    # Return the list
+    return ', '.join(item_list)
 
 #Prints a list of all items in a room
 def print_room_items(room):
@@ -45,23 +62,25 @@ def print_room_items(room):
 
     #If the string from list isn't blank will print out each item in the room. if the string is blank returns None
     if empty_check != "":
-        typewritter_effect_fast(("There is " , empty_check , " here." + "\n"))
+        print("There is" , empty_check , "here." + "\n")
     else:
         return
 
 def print_inventory_items(items):
-    #Used to check if the string from list of items is blank
-    empty_check = list_of_items(items)
-
-    #If the string from list isn't blank will print out each item in your inventroy. if the string is blank returns None
-    if empty_check != "":
-        typewritter_effect_fast(("You have " , empty_check + ".\n"))
-
-        #!!!!! Doc Test doesnt like it printing weight !!!!!
-        print_weight()
-    else:
-        return
+    # Get list of item names
+    item_names = list_of_items(items)
     
+    # Announce if there are no items
+    if len(item_names) == '':
+        print("You have nothing in your inventory.")
+        return
+
+    # Print the item names
+    print("You have", item_names + ".")
+    
+    # Print blankline
+    print()
+
 def print_weight():
     # Initialises weight variable
     weight = 0
@@ -108,7 +127,7 @@ def print_menu(exits, room_items, inv_items):
     
     # Print statement for each item in the inventory
     for item in inv_items:
-        #if there us an article use that, otherwise use your
+        #if there is already an article use that, otherwise use your
         if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
             print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
         else:
@@ -149,8 +168,8 @@ def execute_take(item_id):
     weight = 0
 
     #loops through each item in the players inventory adding up their weights
-    for i in range(len(inventory)):
-            weight = weight + inventory[i]["weight"]
+    for item in inventory:
+        weight += item["weight"]
 
     #Loops through for every item in the current room
     for i in range(len(current_room["items"])):
@@ -226,29 +245,38 @@ def execute_command(command):
     if command[0] == "go":
         if len(command) > 1:
             execute_go(command[1])
+            #Returns true only if the character moves rooms (only needs to see the description if theyve just moved room)
+            return True
         else:
             print("Go where?")
+            return False
 
     #if the first word in list is take execute the take command, if only take is entered and no second word promt user to enter more
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(command[1])
+            return False
         else:
             print("Take what?")
+            return False
 
     #if the first word in list is drop execute the drop command, if only drop is entered and no second word promt user to enter more
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(command[1])
+            return False
         else:
             print("Drop what?")
+            return False
 
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
             execute_dialouge(current_room["character"]["dialogue"])
+            return False
         else:
             print("Talk to who?")
+            return False
         
     #If the first word entered doesn't match any command tell user
     else:
@@ -365,6 +393,8 @@ def move(exits, direction):
 
 # This is the entry point of our program
 def main():
+    # Tell them how to skip
+    print("Press S to skip.")
 
     # Main game loop
     while True:
@@ -372,11 +402,12 @@ def main():
         print_room(current_room)
         print_inventory_items(inventory)
 
-        # Show the menu with possible actions and ask the player
-        command = menu(current_room["exits"], current_room["items"], inventory)
-
-        # Execute the player's command
-        execute_command(command)
+        character_moved_room = False
+        while not character_moved_room:
+            # Show the menu with possible actions and ask the player
+            command = menu(current_room["exits"], current_room["items"], inventory)
+            # Execute the player's command
+            character_moved_room = execute_command(command)
 
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.
