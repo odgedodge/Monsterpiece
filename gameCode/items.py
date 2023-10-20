@@ -13,7 +13,7 @@ item_instruction_book = {
 }
 
 item_needle_and_thread= {
-    "id": "needle and thread",
+    "id": "thread",
 
     "name": "a needle and thread",
 
@@ -40,7 +40,7 @@ item_rock = {
 item_baseball_bat = {
     "id": "bat",
 
-    "name": "baseball bat",
+    "name": "a baseball bat",
 
     "description": "A baseball bat to defend yourself if necessary.",
 
@@ -110,7 +110,7 @@ item_soul_jar = {
 item_water_bottle = {
     "id": "bottle",
     
-    "name": "your water bottle",
+    "name": "a water bottle",
     
     "description": "Your water bottle",
     
