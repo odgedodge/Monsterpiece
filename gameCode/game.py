@@ -216,7 +216,7 @@ def execute_inspect(item_id):
     for item in inventory:
          #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
-            typewritter_effect_fast(inventory[i]["description"])
+            typewritter_effect_fast(item["description"])
             return
 
 #Function to run combat using the charater and chosen weapon as inputs
