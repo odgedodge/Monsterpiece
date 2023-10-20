@@ -40,7 +40,7 @@ item_rock = {
 item_baseball_bat = {
     "id": "bat",
 
-    "name": "a baseball bat",
+    "name": "baseball bat",
 
     "description": "A baseball bat to defend yourself if necessary.",
 

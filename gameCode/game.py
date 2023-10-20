@@ -102,13 +102,18 @@ def print_menu(exits, room_items, inv_items):
         # Print the exit name and where it leads to
         print_exit(direction, exit_leads_to(exits, direction))
 
-    #For every item in the current room print out take, its ID in caps and name 
-    for i in range(len(room_items)):
-        print("TAKE" , room_items[i]["id"].upper() , "to take" , room_items[i]["name"])
+    # Print statement for each available item
+    for item in room_items:
+        print("TAKE", item["id"].upper() , "to take" , item["name"] + ".")
+    
+    # Print statement for each item in the inventory
+    for item in inv_items:
+        #if there us an article use that, otherwise use your
+        if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
+            print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
+        else:
+            print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
-    #For every item in your inventory print out drop, its ID in caps and name
-    for i in range(len(inv_items)):
-        print("DROP" , inv_items[i]["id"].upper() , "to drop your" , inv_items[i]["name"])
         
     #if theres a character print that
     if current_room["character"] is not None:
@@ -122,7 +127,7 @@ def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
     return chosen_exit in exits
 
-#move the player into a new room based on the players input
+#move the player into a new room based on the players inputg
 def execute_go(direction):
     #makes sure the function is working with the global
     global current_room 
@@ -179,15 +184,17 @@ def execute_drop(item_id):
 
 #Function to run combat using the charater and chosen weapon as inputs
 def execute_combat(weapon, foe):
+    #tell the compiler to treat health as a global to prevent global errors
+    global health
     #Loops through the combat list of a characer checking for the selected weapon
-    for i in len(foe["combat"]):
+    for option in foe["combat"]:
         
-        if foe["combat"][i] == weapon:
-            #If the Weapon is found in the combat list deals damage based on the next value in the list
-            health = health - foe["combat"][i+1]
+        if option[0] == weapon:
+            #If the Weapon is found in the combat list deals damage based on the health value in the tuple
+            health -= option[1]
             
             #Prints a small statement based on "quality" of the combat
-            if foe["combat"][i+1] == 0:
+            if option[1] == 0:
                 print("Well done perfectly executed")
                 #give the limb and remove the character: they have died
                 give_limb()
@@ -200,7 +207,7 @@ def execute_combat(weapon, foe):
             return
 
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
-    health = health - 30
+    health -= 30
     print("A poor performance indeed")
     
 #take the users input and execute a certain command based on the nomalised input
@@ -297,10 +304,13 @@ def execute_fight(fight_dialogue):
         #pause between each sentence for better understanding
         sleep(0.5)
         
+        print()
         print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
-        weapon = ''
-        while ''.join(normalise_input(weapon)) not in inventory:
+        normalised_input = ''
+        #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
+        while normalised_input not in inventory and normalised_input != 'shout':
             weapon = input("> ")
+            normalised_input = ''.join(normalise_input(weapon))
         execute_combat(weapon, current_room["character"]) 
 
 #executes a player talking to one of the characters, taking a list of dialogue to print to the player

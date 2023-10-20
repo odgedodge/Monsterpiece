@@ -25,8 +25,8 @@ dialogue_pennywise = {
 
     "method": "fight",
     
-    #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting (talking) at him
-    "base dialogue": []
+    #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
+    "base dialogue": ["Blah"]
     
 }
 

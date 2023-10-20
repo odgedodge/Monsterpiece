@@ -4,7 +4,7 @@ from dialogue import *
 character_dracula = {
     "name": "Dracula",
     
-    "combat": ["holy water", 0 , "spear" , 15],
+    "combat": [("holy water", 0) , ("spear" , 15)],
     
     "defending_body_part": item_left_arm,
     
@@ -14,7 +14,7 @@ character_dracula = {
 character_freddy = {
     "name": "Freddy fazbear",
     
-    "combat": ["baseball bat" , 0 , "water bottle" , 15],
+    "combat": [("baseball bat" , 0) , ("water bottle" , 15)],
     
     "defending_body_part": item_right_leg,
     
@@ -34,17 +34,17 @@ character_grim = {
 character_slenderman = {
     "name": "Slenderman",
     
-    "combat": ["eight pages" , 0 , "instruction book" , 15],
+    "combat": [("eight pages" , 0) , ("instruction book" , 15)],
     
     "defending_body_part": item_head,
     
-    "dialogue": None
+    "dialogue": dialogue_slenderman
 }
 
 character_pennywise = {
     "name": "Pennywise",
     
-    "combat": "talk",
+    "combat": [("shout", 0)],
     
     "defending_body_part": item_left_leg,
     
