@@ -54,6 +54,13 @@ def list_of_items(items):
     # Return the list
     return ', '.join(item_list)
 
+#does the same as list of items, but returns it as a list object rather than a list
+def items_list_as_list(items):
+    list_of_items = []
+    for item in items:
+        list_of_items.append(item["name"])
+    return list_of_items
+        
 #Prints a list of all items in a room
 def print_room_items(room):
 
@@ -92,7 +99,7 @@ def print_weight():
     #prints out the total weight your carrying and shows the limit
     print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
-#Prints out all information about the room your currently in
+#Prints out all information about the room your currently ins
 def print_room(room):
     #prints out the name of the room in full calpitals and description with a blank lines after each
     typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
@@ -146,7 +153,7 @@ def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
     return chosen_exit in exits
 
-#move the player into a new room based on the players inputg
+#move the player into a new room based on the players input
 def execute_go(direction):
     #makes sure the function is working with the global
     global current_room 
@@ -193,11 +200,11 @@ def execute_drop(item_id):
     no such item in the inventory, this function prints "You cannot drop that."
     """
     #loops through the list for every item in it
-    for i in range(len(inventory)):
+    for item in inventory:
         #if the item entered in the command is in the players inventory add it to the room and remove from inventory
-        if item_id == inventory[i]["id"]:
-            current_room["items"].append(inventory[i])
-            inventory.remove(inventory[i])
+        if item_id == item["id"]:
+            current_room["items"].append(item)
+            inventory.remove(item)
             #return to leave the loop
             return
 
@@ -254,7 +261,7 @@ def execute_command(command):
     #if the first word in list is take execute the take command, if only take is entered and no second word promt user to enter more
     elif command[0] == "take":
         if len(command) > 1:
-            execute_take(command[1])
+            execute_take(' '.join(command[1:]))
             return False
         else:
             print("Take what?")
@@ -263,7 +270,7 @@ def execute_command(command):
     #if the first word in list is drop execute the drop command, if only drop is entered and no second word promt user to enter more
     elif command[0] == "drop":
         if len(command) > 1:
-            execute_drop(command[1])
+            execute_drop(' '.join(command[1:]))
             return False
         else:
             print("Drop what?")
@@ -331,12 +338,12 @@ def execute_fight(fight_dialogue):
         print()
         
     print()
-    print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
+    print("CHOOSE YOUR WEAPON")
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in inventory and normalised_input != 'shout':
+    while normalised_input not in items_list_as_list(inventory) and normalised_input != 'shout':
         weapon = input("> ")
-        normalised_input = ''.join(normalise_input(weapon))
+        normalised_input = ' '.join(normalise_input(weapon))
     execute_combat(weapon, current_room["character"]) 
 
 #executes a player talking to one of the characters, taking a list of dialogue to print to the player
