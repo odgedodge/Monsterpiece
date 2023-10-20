@@ -71,7 +71,7 @@ def print_weight():
         weight = weight + inventory[i]["weight"]
 
     #prints out the total weight your carrying and shows the limit
-    print("You are carying" , str(weight) + "/" + str(weight_limit) + "kg!")
+    print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
 #Prints out all information about the room your currently in
 def print_room(room):
@@ -265,12 +265,13 @@ def execute_dialouge(dialogue):
             typewritter_effect_fast(sentence)
             sleep(.5)
             print()
-        user_input = ''
-        while normalise_input(user_input)[0] != "talk" or normalise_input(user_input)[0] != "fight":
+        normalised_input = ''
+        while normalised_input != "talk" or normalised_input != "fight":
             typewritter_effect_slow("Talk or Fight")
             user_input = input("> ")
+            normalised_input = ''.join(normalise_input(user_input))
             
-            if normalise_input(user_input)[0] == "talk":
+            if normalised_input == "talk":
                 if check_interacted():
                     #print the repeat dialogue
                     execute_talk(dialogue["repeat dialogue"])
@@ -280,7 +281,7 @@ def execute_dialouge(dialogue):
                     #give the player the limb
                     give_limb()
                     
-            elif normalise_input(user_input)[0] == "fight":
+            elif normalised_input == "fight":
                 #provide the fighting text if the player chooses to fight
                 execute_fight(dialogue["dialogue two"])
     
