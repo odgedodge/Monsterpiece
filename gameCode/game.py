@@ -285,6 +285,9 @@ def execute_command(command):
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_dialouge(dialogue):
     #dialogue dictionary from character
+    if check_interacted() and dialogue["method"] == "talk":
+        execute_talk(dialogue["repeat dialogue"])
+        return
             
     #if there are multiple options, to fight or talk, let the player pick
     if dialogue["multiple options"]:
@@ -294,37 +297,30 @@ def execute_dialouge(dialogue):
             sleep(.5)
             print()
         normalised_input = ''
-        while normalised_input != "talk" or normalised_input != "fight":
-            typewritter_effect_slow("Talk or Fight")
+        while normalised_input != 'talk' and normalised_input != 'fight':
+            typewritter_effect_slow("TALK or FIGHT:")
+            print()
             user_input = input("> ")
             normalised_input = ''.join(normalise_input(user_input))
             
-            if normalised_input == "talk":
-                if check_interacted():
-                    #print the repeat dialogue
-                    execute_talk(dialogue["repeat dialogue"])
-                else:
-                    #print the sentences in character interaction
-                    execute_talk(dialogue["dialogue one"])
-                    #give the player the limb
-                    give_limb()
-                    
-            elif normalised_input == "fight":
-                #provide the fighting text if the player chooses to fight
-                execute_fight(dialogue["dialogue two"])
+        if normalised_input == 'talk':
+            #print the sentences in character interaction
+            execute_talk(dialogue["dialogue one"])
+            #give the player the limb
+            give_limb()
+                
+        elif normalised_input == 'fight':
+            #provide the fighting text if the player chooses to fight
+            execute_fight(dialogue["dialogue two"])
     
     elif dialogue["method"] == "fight":
         execute_fight(dialogue["base dialogue"])
 
     elif dialogue["method"] == "talk":
-        if check_interacted():
-            #print the repeat dialogue
-            execute_talk(dialogue["repeat dialogue"])
-        else:
-            #print the sentences in character interaction
-            execute_talk(dialogue["base dialogue"])
-            #give the player the limb
-            give_limb()
+        #print the sentences in character interaction
+        execute_talk(dialogue["base dialogue"])
+        #give the player the limb
+        give_limb()
         
 #executes a player fighting one of the characters, taking a list of dialogue to print to the player
 def execute_fight(fight_dialogue):
@@ -332,15 +328,16 @@ def execute_fight(fight_dialogue):
         typewritter_effect_fast(sentence)
         #pause between each sentence for better understanding
         sleep(0.5)
-        
         print()
-        print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
-        normalised_input = ''
-        #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-        while normalised_input not in inventory and normalised_input != 'shout':
-            weapon = input("> ")
-            normalised_input = ''.join(normalise_input(weapon))
-        execute_combat(weapon, current_room["character"]) 
+        
+    print()
+    print("CHOOSE YOUR WEAPON FROM YOUR INVENTORY")
+    normalised_input = ''
+    #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
+    while normalised_input not in inventory and normalised_input != 'shout':
+        weapon = input("> ")
+        normalised_input = ''.join(normalise_input(weapon))
+    execute_combat(weapon, current_room["character"]) 
 
 #executes a player talking to one of the characters, taking a list of dialogue to print to the player
 def execute_talk(talk_dialogue):
@@ -349,6 +346,8 @@ def execute_talk(talk_dialogue):
         typewritter_effect_fast(sentence)
         #pause between each sentence for better understanding
         sleep(0.5)
+        print()
+    print()
 
 #gives the player the limb currently in the room after a successful interaction
 def give_limb():
@@ -406,6 +405,7 @@ def main():
         while not character_moved_room:
             # Show the menu with possible actions and ask the player
             command = menu(current_room["exits"], current_room["items"], inventory)
+            print()
             # Execute the player's command
             character_moved_room = execute_command(command)
 
