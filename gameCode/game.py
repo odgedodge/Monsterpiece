@@ -147,7 +147,17 @@ def print_menu(exits, room_items, inv_items):
     #if theres a character print that
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
-    
+
+    #Promt player to create monster and win game
+    victory = 0
+    if current_room["name"] == "Lab":
+        for items in victory_check:
+            if victory_check[items] in current_room["items"]:
+                victory += 1
+
+        if victory == 6 and item_needle_and_thread in inventory:
+            print("CREATE MONSTER to sew together your monster")
+
     #promt the player for an input
     print("What do you want to do?")
 
@@ -304,6 +314,13 @@ def execute_command(command):
             execute_inspect(command[1])
         else:
             print("Inspect what>")
+
+    elif command[0] == "Create":
+            if command > 1:
+                print("Fun win text")
+                exit()
+            else:
+                print("Create what?")
 
     #If the first word entered doesn't match any command tell user
     else:
