@@ -28,7 +28,7 @@ dialogue_pennywise = {
     "method": "fight",
     
     #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
-    "base dialogue": ["Blah"]
+    "base dialogue": ["Hello Henry...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Henry..."]
     
 }
 
@@ -63,5 +63,5 @@ dialogue_slenderman = {
     
     "method": "fight",
     
-    "base dialogue": []
+    "base dialogue": ["Standing against the backdrop of the verdant green foliage, the tall, slender figure of Slenderman stalks the landscape", "His long, lanky frame casts a menacing shadow on the plants below, and his emotionless face stares blankly into the distance","Behind him lays a severed head.", "You feel terrified to approach, let alone fight him.", "Maybe those pages could help..."]
 }
