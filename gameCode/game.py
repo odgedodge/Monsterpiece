@@ -411,7 +411,7 @@ def execute_fight(fight_dialogue):
     print("CHOOSE YOUR WEAPON")
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in items_list_as_list(inventory) and normalised_input != 'shout':
+    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
         weapon = input("> ")
         normalised_input = ' '.join(normalise_input(weapon))
     execute_combat(weapon, current_room["character"]) 
