@@ -13,7 +13,7 @@ item_instruction_book = {
 }
 
 item_needle_and_thread= {
-    "id": "needle and thread",
+    "id": "thread",
 
     "name": "a needle and thread",
 
@@ -23,7 +23,7 @@ item_needle_and_thread= {
 }
 
 item_rock = {
-    "id": "funny rock",
+    "id": "rock",
 
     "name": "a rock",
 
@@ -38,7 +38,7 @@ item_rock = {
 }
 
 item_baseball_bat = {
-    "id": "baseball bat",
+    "id": "bat",
 
     "name": "a baseball bat",
 
@@ -48,7 +48,7 @@ item_baseball_bat = {
 }
 
 item_holy_water = {
-    "id": "holy water",
+    "id": "water",
     
     "name": "holy water",
 
@@ -88,7 +88,7 @@ item_spear = {
 }
 
 item_eight_pages = {
-    "id": "eight pages",
+    "id": "pages",
     
     "name": "the eight pages",
 
@@ -98,7 +98,7 @@ item_eight_pages = {
 }
 
 item_soul_jar = {
-    "id": "soul jar",
+    "id": "jar",
     
     "name": "a soul jar",
 
@@ -108,7 +108,7 @@ item_soul_jar = {
 }
 
 item_water_bottle = {
-    "id": "water bottle",
+    "id": "bottle",
     
     "name": "a water bottle",
     
@@ -125,6 +125,16 @@ item_chucky = {
     "description": "a doll",
     
     "weight": 0.6
+}
+
+item_pizza = {
+    "id": "pizza",
+    
+    "name": "a slice of pizza",
+    
+    "description": "a slice of freddy fazzbears pizza, it smells amazing",
+    
+    "weight": 35
 }
 
 item_left_leg = {
