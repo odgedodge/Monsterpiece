@@ -6,6 +6,7 @@ from map import rooms
 from player import *
 from items import *
 from gameparser import *
+from text_art import *
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_slow(text):
@@ -244,7 +245,7 @@ def execute_inspect(item_id):
     for item in inventory:
          #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
-            typewritter_effect_fast(item["description"])
+            typewritter_effect_fast(item["description"] + "\n")
             return
 
 #Function to run combat using the charater and chosen weapon as inputs
@@ -472,10 +473,11 @@ def move(exits, direction):
 # This is the entry point of our program
 def main():
     # Tell them how to skip
+    print(haunted_house)
     print("Press S to skip.")
     typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
-most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of Frankenstein's monster in order to overcome the haunted 
+most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
 house and build the monster. """)
     print()
     check_chucky()
