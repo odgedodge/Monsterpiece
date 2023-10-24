@@ -329,6 +329,8 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
+            #print text art for current character
+            display_character(current_room["character"])
             execute_dialogue(current_room["character"]["dialogue"])
             return False
         else:
@@ -344,6 +346,8 @@ def execute_command(command):
     elif command[0] == "create":
             if len(command) > 1:
                 print("Fun win text")
+                #display frankenstein image
+                print(frankenstein)
                 exit()
             else:
                 print("Create what?")
@@ -508,6 +512,11 @@ house and build the monster. """)
         print_inventory_items(inventory)
         print()
         check_chucky()
+
+        #jumpscare 10% of the time the player moves srooms
+        num = random.randint(0, 100)
+        if num % 10 == 0:
+            print(jumpscare())
 
         character_moved_room = False
         while not character_moved_room:

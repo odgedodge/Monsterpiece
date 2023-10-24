@@ -1,5 +1,6 @@
 import random
 text_art = {}
+text_art_other = {}
 
 #____________________________MAIN CHARACTERS_______________________________________
 
@@ -407,8 +408,8 @@ text_art["grim"] = grim
 text_art["slenderman"] = slenderman
 text_art["pennywise"] = pennywise
 
-text_art["haunted_house"] = haunted_house
-text_art["frankenstein"] = frankenstein
+#text_art_other["haunted_house"] = haunted_house
+#text_art_other["frankenstein"] = frankenstein
 
 def jumpscare():
     num = random.randint(0,4)
