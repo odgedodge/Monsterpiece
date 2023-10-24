@@ -96,10 +96,10 @@ def print_weight():
     for i in range(len(inventory)):
         weight = weight + inventory[i]["weight"]
 
-    #prints out the total weight your carrying and shows the limit
+    #prints out the total weight you're carrying and shows the limit
     print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
-#Prints out all information about the room your currently ins
+#Prints out all information about the room you're currently ins
 def print_room(room):
     #prints out the name of the room in full calpitals and description with a blank lines after each
     typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
@@ -169,10 +169,10 @@ def print_menu(exits, room_items, inv_items):
 
 
     elif health > 40:
-        print("Your starting to feel week (" + str(health) + ")")
+        print("You're starting to feel week (" + str(health) + ")")
 
     elif health > 20:
-        print("Your fading  (" + str(health) + ")")
+        print("You're fading  (" + str(health) + ")")
 
     elif health > 0:
         print("You have one foot in the grave (" + str(health) + ")")
