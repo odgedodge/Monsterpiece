@@ -427,6 +427,23 @@ def check_interacted():
     else:
         return False
 
+def has_chucky():
+    for item in inventory:
+        if item["id"] == "doll":
+            return True
+    return False
+
+def kill_chucky():
+    pass
+
+def check_chucky():
+    if not has_chucky():
+        return
+    global health
+    health -= 10
+    typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
+unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
     of items found in the room and carried by the player, prints the menu of
@@ -456,10 +473,13 @@ def move(exits, direction):
 def main():
     # Tell them how to skip
     print("Press S to skip.")
-    print("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. 
-          Join us on an adventurous journey where you will meet suspicious individuals, some of which you might recognise from your favourite halloween productions. 
-          Along the way you will be able to talk to characters and battle some of the most famous horror villains. 
-          You are playing as Henry Frankenstein and your goal is to collect each limb of Frankenstein's monster in order to overcome the haunted house and build the monster. """)
+    typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
+individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
+most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of Frankenstein's monster in order to overcome the haunted 
+house and build the monster. """)
+    print()
+    check_chucky()
+
     # Main game loop
     while True:
         # Display game status (room description, inventory etc.)
