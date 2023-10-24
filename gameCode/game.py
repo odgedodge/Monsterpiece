@@ -376,7 +376,7 @@ def execute_command(command):
                 else:
                     print("Eat what?")
             else:
-                print("No pizza to eat")
+                print("No pizza to eat :(.")
 
     #If the first word entered doesn't match any command tell user
     else:
