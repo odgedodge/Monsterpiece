@@ -151,6 +151,9 @@ def print_menu(exits, room_items, inv_items):
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
 
+if item_pizza in inventory:
+    print("EAT PIZZA to gain some health")
+
     #Prompt player to create monster and win game
     victory = 0
     if current_room == rooms["Lab"]:
@@ -326,9 +329,7 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
-            #print text art for current character
-            text_art.display_character(current_room["character"])
-            execute_dialouge(current_room["character"]["dialogue"])
+            execute_dialogue(current_room["character"]["dialogue"])
             return False
         else:
             print("Talk to who?")
@@ -343,11 +344,16 @@ def execute_command(command):
     elif command[0] == "create":
             if len(command) > 1:
                 print("Fun win text")
-                #display frankenstein image
-                print(text_art["frankenstein"])
                 exit()
             else:
                 print("Create what?")
+
+    elif command[0] == "eat":
+            if len(command) > 1:
+                print("mmmmmm tasty pizza")
+                health = health + (random.randrange(0 , 10) * 10)
+            else:
+                print("Eat what?")
 
     #If the first word entered doesn't match any command tell user
     else:
@@ -405,7 +411,7 @@ def execute_fight(fight_dialogue):
     print("CHOOSE YOUR WEAPON")
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
+    while normalised_input not in items_list_as_list(inventory) and normalised_input != 'shout':
         weapon = input("> ")
         normalised_input = ' '.join(normalise_input(weapon))
     execute_combat(weapon, current_room["character"]) 
@@ -486,31 +492,21 @@ def move(exits, direction):
 
 # This is the entry point of our program
 def main():
-    #display house art
-    print(text_art["haunted_house"])
-
     # Tell them how to skip
     print(haunted_house)
     print("Press S to skip.")
     typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
 most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
-house and build him once again. """)
-    print()
+house and build the monster. """)
     
     # Main game loop
     while True:
-
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
         print()
         check_chucky()
-
-        #jumpscare 10% of the time the player moves srooms
-        num = random.randint(0, 100)
-        if num % 10 == 0:
-            print(text_art.jumpscare())
 
         character_moved_room = False
         while not character_moved_room:
