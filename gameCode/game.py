@@ -6,6 +6,7 @@ from map import rooms
 from player import *
 from items import *
 from gameparser import *
+import text_art
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_slow(text):
@@ -141,7 +142,7 @@ def print_menu(exits, room_items, inv_items):
             print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
     if len(inventory) != 0:
-        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to veiw its description")
+        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to view its description")
 
         
     #if theres a character print that
@@ -303,6 +304,8 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
+            #print text art for current character
+            text_art.display_character(current_room["character"])
             execute_dialouge(current_room["character"]["dialogue"])
             return False
         else:
@@ -318,6 +321,8 @@ def execute_command(command):
     elif command[0] == "Create":
             if command > 1:
                 print("Fun win text")
+                #display frankenstein image
+                print(text_art["frankenstein"])
                 exit()
             else:
                 print("Create what?")
@@ -436,14 +441,23 @@ def move(exits, direction):
 
 # This is the entry point of our program
 def main():
+    #display house art
+    print(text_art.text_art["haunted_house"])
+
     # Tell them how to skip
     print("Press S to skip.")
 
     # Main game loop
     while True:
+
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
+
+        #jumpscare 10% of the time the player moves srooms
+        num = random.randint(0, 100)
+        if num % 10 == 0:
+            print(text_art.jumpscare())
 
         character_moved_room = False
         while not character_moved_room:
