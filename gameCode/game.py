@@ -304,7 +304,7 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
-            execute_dialouge(current_room["character"]["dialogue"])
+            execute_dialogue(current_room["character"]["dialogue"])
             return False
         else:
             print("Talk to who?")
@@ -328,7 +328,7 @@ def execute_command(command):
         print("This makes no sense.")
 
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
-def execute_dialouge(dialogue):
+def execute_dialogue(dialogue):
     #dialogue dictionary from character
     if check_interacted() and dialogue["method"] == "talk":
         execute_talk(dialogue["repeat dialogue"])
