@@ -7,7 +7,7 @@ item_instruction_book = {
     You will need to collect the following body parts to your lab, as well as the correct materials.
     You need to collect a right arm, a left arm, a left leg, a right leg, as well as the torso and head of your monster.
     You need to gain a needle and thread to also properly assemble the monster. 
-    Don't forget about the foes on your way who also covett the body parts you seek, and good luck.""",
+    Don't forget about the foes on your way who also covet the body parts you seek, and good luck.""",
 
     "weight": 0.7
 }
@@ -118,7 +118,7 @@ item_water_bottle = {
 }
 
 item_chucky = {
-    "id": "chucky",
+    "id": "doll",
     
     "name": "a doll",
     

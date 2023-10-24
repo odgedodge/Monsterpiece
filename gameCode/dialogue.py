@@ -17,6 +17,7 @@ dialogue_dracula = {
     
     "dialogue two": ["You do not want to fight me. This is a war you will not win, it is not worth it to rebuild a monster. Fighting you is a necessary evil to prevent the monster resurfacing."],
     
+    #if player interacts with him after already talking/fighting
     "repeat dialogue": ["You got your limb Henry, remember to be careful."]
 }
 
@@ -28,7 +29,7 @@ dialogue_pennywise = {
     "method": "fight",
     
     #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
-    "base dialogue": ["Blah"]
+    "base dialogue": ["Hey Henry...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Henry..."]
     
 }
 
@@ -39,8 +40,9 @@ dialogue_grim = {
 
     "method": "talk",
     
-    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "Mortal, you are meddling in forces you do not understand.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."],
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."],
 
+    #if player interacts with him after already talking
     "repeat dialogue": ["You have the limb now, do not continue to bother me."]
 }
 
@@ -63,5 +65,5 @@ dialogue_slenderman = {
     
     "method": "fight",
     
-    "base dialogue": []
+    "base dialogue": ["Standing against the backdrop of the verdant green foliage, the tall, thin figure of Slenderman stalks the landscape", "His long, lanky frame casts a menacing shadow on the plants below, and his emotionless face stares blankly into the distance","Behind him lays a severed head.", "You feel terrified to approach, let alone fight him.", "Maybe those pages could help..."]
 }

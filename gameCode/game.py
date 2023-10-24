@@ -6,7 +6,7 @@ from map import rooms
 from player import *
 from items import *
 from gameparser import *
-import text_art
+from text_art import *
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_slow(text):
@@ -23,7 +23,7 @@ def typewritter_effect_slow(text):
         
         # Detect skip condition
         if keyboard.is_pressed("s"):
-            print(text.replace(printed, ""))
+            print(text.replace(printed, "", 1))
             break
 
 #Slowing prints out a string one character at a time
@@ -41,7 +41,7 @@ def typewritter_effect_fast(text):
         
         # Detect skip condition
         if keyboard.is_pressed("s"):
-            print(text.replace(printed, ""))
+            print(text.replace(printed, "", 1))
             break
 
 def list_of_items(items):
@@ -97,12 +97,12 @@ def print_weight():
     for i in range(len(inventory)):
         weight = weight + inventory[i]["weight"]
 
-    #prints out the total weight your carrying and shows the limit
+    #prints out the total weight you're carrying and shows the limit
     print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
-#Prints out all information about the room your currently ins
+#Prints out all information about the room you're currently ins
 def print_room(room):
-    #prints out the name of the room in full calpitals and description with a blank lines after each
+    #prints out the name of the room in full capitals and description with a blank line after each
     typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
     typewritter_effect_fast((room["description"] + "\n"))
 
@@ -120,7 +120,7 @@ def print_exit(direction, leads_to):
     #Prints out a given direction in caps and the exit it leads to
     print("GO " + direction.upper() + " to " + leads_to + ".")
 
-#Prints out player inventory and all avalible actions the player can take in a given room
+#Prints out player inventory and all available actions the player can take in a given room
 def print_menu(exits, room_items, inv_items):
 
     print("You can:")
@@ -135,32 +135,50 @@ def print_menu(exits, room_items, inv_items):
     
     # Print statement for each item in the inventory
     for item in inv_items:
-        #if there is already an article use that, otherwise use your
-        if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
-            print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
-        else:
-            print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
+        if item != item_chucky:
+            #if there is already an article use that, otherwise use your
+            if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
+                print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
+            else:
+                print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
-    if len(inventory) != 0:
-        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to view its description")
-
+    #Print statement for each inventory item
+    for item in inventory:
+     print("INSPECT" , item["id"].upper() , "to view its description")
+    
         
-    #if theres a character print that
+    #if there's a character print that
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
 
-    #Promt player to create monster and win game
+    #Prompt player to create monster and win game
     victory = 0
-    if current_room["name"] == "Lab":
-        for items in victory_check:
-            if victory_check[items] in current_room["items"]:
+    if current_room == rooms["Lab"]:
+        for item in victory_check:
+            if item in current_room["items"]:
                 victory += 1
 
         if victory == 6 and item_needle_and_thread in inventory:
             print("CREATE MONSTER to sew together your monster")
 
-    #promt the player for an input
-    print("What do you want to do?")
+
+    if health > 80:
+        print("You feel exceptionaly healthy (" + str(health) + ")")
+
+    elif health > 60:
+        print("You feel healthy (" + str(health) + ")")
+
+
+    elif health > 40:
+        print("You're starting to feel week (" + str(health) + ")")
+
+    elif health > 20:
+        print("You're fading  (" + str(health) + ")")
+
+    elif health > 0:
+        print("You have one foot in the grave (" + str(health) + ")")
+    
+    #prompt the player for an input    print("What do you want to do?")
 
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
@@ -178,7 +196,7 @@ def execute_go(direction):
     else:
         print("No exits" , direction)
 
-#Command used to take an item, adding it to the players inventory and remving it from the room
+#Command used to take an item, adding it to the players inventory and removing it from the room
 def execute_take(item_id):
     """This function takes an item_id as an argument and moves this item from the
     list of items in the current room to the player's inventory. However, if
@@ -196,18 +214,18 @@ def execute_take(item_id):
     for i in range(len(current_room["items"])):
         #checks if the item given in the command matches the current item in the list
         if item_id == current_room["items"][i]["id"]:
-            #if true checks that the weight wont go over the weight limit
+            #if true checks that the weight won't go over the weight limit
             if weight + current_room["items"][i]["weight"] > weight_limit:
-                #If weight excedes limit prevents the item from being added to the player inventory
-                print("cannot take" , current_room["items"][i]["name"] , "its too heavy for you. Drop a heavy item to pick this up")
+                #If weight exceeds limit prevents the item from being added to the player inventory
+                print("cannot take" , current_room["items"][i]["name"] , "it's too heavy for you. Drop a heavy item to pick this up")
                 return
-            #if weight doesn't excede the limit the item is added to the player inventory and removed from the room
+            #if weight doesn't exceed the limit the item is added to the player inventory and removed from the room
             inventory.append(current_room["items"][i])
             current_room["items"].remove(current_room["items"][i])
             #returns to break search loop to prevent an error
             return 
 
-#command to drop item from inventroy and add it to the remove
+#command to drop item from inventory and add it to the remove
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
@@ -217,17 +235,21 @@ def execute_drop(item_id):
     for item in inventory:
         #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
+            if item_id == "doll":
+                kill_chucky()
+                return
             current_room["items"].append(item)
             inventory.remove(item)
             #return to leave the loop
             return
+    print("You cannot drop that.")
 
 def execute_inspect(item_id):
      #loops through the list for every item in it
     for item in inventory:
          #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
-            typewritter_effect_fast(item["description"])
+            typewritter_effect_fast(item["description"] + "\n")
             return
 
 #Function to run combat using the charater and chosen weapon as inputs
@@ -273,17 +295,17 @@ def execute_command(command):
     if 0 == len(command):
         return
 
-    #if the first word in list is go execute the go command, if only go is entered and no second word promt user to enter more
+    #if the first word in list is go execute the go command, if only go is entered and no second word prompt user to enter more
     if command[0] == "go":
         if len(command) > 1:
             execute_go(command[1])
-            #Returns true only if the character moves rooms (only needs to see the description if theyve just moved room)
+            #Returns true only if the character moves rooms (only needs to see the description if they've just moved room)
             return True
         else:
             print("Go where?")
             return False
 
-    #if the first word in list is take execute the take command, if only take is entered and no second word promt user to enter more
+    #if the first word in list is take execute the take command, if only take is entered and no second word prompt user to enter more
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(' '.join(command[1:]))
@@ -292,7 +314,7 @@ def execute_command(command):
             print("Take what?")
             return False
 
-    #if the first word in list is drop execute the drop command, if only drop is entered and no second word promt user to enter more
+    #if the first word in list is drop execute the drop command, if only drop is entered and no second word prompt user to enter more
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(' '.join(command[1:]))
@@ -318,8 +340,8 @@ def execute_command(command):
         else:
             print("Inspect what>")
 
-    elif command[0] == "Create":
-            if command > 1:
+    elif command[0] == "create":
+            if len(command) > 1:
                 print("Fun win text")
                 #display frankenstein image
                 print(text_art["frankenstein"])
@@ -332,7 +354,7 @@ def execute_command(command):
         print("This makes no sense.")
 
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
-def execute_dialouge(dialogue):
+def execute_dialogue(dialogue):
     #dialogue dictionary from character
     if check_interacted() and dialogue["method"] == "talk":
         execute_talk(dialogue["repeat dialogue"])
@@ -414,6 +436,29 @@ def check_interacted():
     else:
         return False
 
+def has_chucky():
+    for item in inventory:
+        if item["id"] == "doll":
+            return True
+    return False
+
+def kill_chucky():
+    if current_room["name"] == "Living Room":
+        typewritter_effect_fast("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
+        for item in inventory:
+            if item["id"] == "doll":
+                inventory.remove(item)
+    else:
+        typewritter_effect_fast("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
+
+def check_chucky():
+    if not has_chucky():
+        return
+    global health
+    health -= 10
+    typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
+unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
     of items found in the room and carried by the player, prints the menu of
@@ -445,14 +490,21 @@ def main():
     print(text_art.text_art["haunted_house"])
 
     # Tell them how to skip
+    print(haunted_house)
     print("Press S to skip.")
-
+    typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
+individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
+most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
+house and build him once again. """)
+    
     # Main game loop
     while True:
 
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
+        print()
+        check_chucky()
 
         #jumpscare 10% of the time the player moves srooms
         num = random.randint(0, 100)
