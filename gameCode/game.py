@@ -444,17 +444,15 @@ def kill_chucky():
             if item["id"] == "doll":
                 inventory.remove(item)
     else:
-        print("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
+        typewritter_effect_fast("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
 
 def check_chucky():
     if not has_chucky():
         return
     global health
     health -= 10
-    print()
     typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
 unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
-    print()
 
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
@@ -497,7 +495,6 @@ house and build the monster. """)
         print_inventory_items(inventory)
         print()
         check_chucky()
-
 
         character_moved_room = False
         while not character_moved_room:
