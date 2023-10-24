@@ -101,7 +101,7 @@ def print_weight():
 
 #Prints out all information about the room you're currently ins
 def print_room(room):
-    #prints out the name of the room in full calpitals and description with a blank lines after each
+    #prints out the name of the room in full capitals and description with a blank line after each
     typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
     typewritter_effect_fast((room["description"] + "\n"))
 
@@ -119,7 +119,7 @@ def print_exit(direction, leads_to):
     #Prints out a given direction in caps and the exit it leads to
     print("GO " + direction.upper() + " to " + leads_to + ".")
 
-#Prints out player inventory and all avalible actions the player can take in a given room
+#Prints out player inventory and all available actions the player can take in a given room
 def print_menu(exits, room_items, inv_items):
 
     print("You can:")
@@ -141,16 +141,16 @@ def print_menu(exits, room_items, inv_items):
             else:
                 print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
-    #Print statemnt for each inventory item
+    #Print statement for each inventory item
     for item in inventory:
      print("INSPECT" , item["id"].upper() , "to view its description")
     
         
-    #if theres a character print that
+    #if there's a character print that
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
 
-    #Promt player to create monster and win game
+    #Prompt player to create monster and win game
     victory = 0
     if current_room == rooms["Lab"]:
         for item in victory_check:
@@ -177,7 +177,7 @@ def print_menu(exits, room_items, inv_items):
     elif health > 0:
         print("You have one foot in the grave (" + str(health) + ")")
     
-    #promt the player for an input    print("What do you want to do?")
+    #prompt the player for an input    print("What do you want to do?")
 
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
@@ -195,7 +195,7 @@ def execute_go(direction):
     else:
         print("No exits" , direction)
 
-#Command used to take an item, adding it to the players inventory and remving it from the room
+#Command used to take an item, adding it to the players inventory and removing it from the room
 def execute_take(item_id):
     """This function takes an item_id as an argument and moves this item from the
     list of items in the current room to the player's inventory. However, if
@@ -213,18 +213,18 @@ def execute_take(item_id):
     for i in range(len(current_room["items"])):
         #checks if the item given in the command matches the current item in the list
         if item_id == current_room["items"][i]["id"]:
-            #if true checks that the weight wont go over the weight limit
+            #if true checks that the weight won't go over the weight limit
             if weight + current_room["items"][i]["weight"] > weight_limit:
-                #If weight excedes limit prevents the item from being added to the player inventory
+                #If weight exceeds limit prevents the item from being added to the player inventory
                 print("cannot take" , current_room["items"][i]["name"] , "it's too heavy for you. Drop a heavy item to pick this up")
                 return
-            #if weight doesn't excede the limit the item is added to the player inventory and removed from the room
+            #if weight doesn't exceed the limit the item is added to the player inventory and removed from the room
             inventory.append(current_room["items"][i])
             current_room["items"].remove(current_room["items"][i])
             #returns to break search loop to prevent an error
             return 
 
-#command to drop item from inventroy and add it to the remove
+#command to drop item from inventory and add it to the remove
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
@@ -290,17 +290,17 @@ def execute_command(command):
     if 0 == len(command):
         return
 
-    #if the first word in list is go execute the go command, if only go is entered and no second word promt user to enter more
+    #if the first word in list is go execute the go command, if only go is entered and no second word prompt user to enter more
     if command[0] == "go":
         if len(command) > 1:
             execute_go(command[1])
-            #Returns true only if the character moves rooms (only needs to see the description if theyve just moved room)
+            #Returns true only if the character moves rooms (only needs to see the description if they've just moved room)
             return True
         else:
             print("Go where?")
             return False
 
-    #if the first word in list is take execute the take command, if only take is entered and no second word promt user to enter more
+    #if the first word in list is take execute the take command, if only take is entered and no second word prompt user to enter more
     elif command[0] == "take":
         if len(command) > 1:
             execute_take(' '.join(command[1:]))
@@ -309,7 +309,7 @@ def execute_command(command):
             print("Take what?")
             return False
 
-    #if the first word in list is drop execute the drop command, if only drop is entered and no second word promt user to enter more
+    #if the first word in list is drop execute the drop command, if only drop is entered and no second word prompt user to enter more
     elif command[0] == "drop":
         if len(command) > 1:
             execute_drop(' '.join(command[1:]))
