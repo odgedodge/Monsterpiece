@@ -151,37 +151,37 @@ def print_menu(exits, room_items, inv_items):
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
 
-if item_pizza in inventory:
-    print("EAT PIZZA to gain some health")
+    if item_pizza in inventory:
+        print("EAT PIZZA to gain some health")
 
-    #Prompt player to create monster and win game
-    victory = 0
-    if current_room == rooms["Lab"]:
-        for item in victory_check:
-            if item in current_room["items"]:
-                victory += 1
+        #Prompt player to create monster and win game
+        victory = 0
+        if current_room == rooms["Lab"]:
+            for item in victory_check:
+                if item in current_room["items"]:
+                    victory += 1
 
-        if victory == 6 and item_needle_and_thread in inventory:
-            print("CREATE MONSTER to sew together your monster")
-
-
-    if health > 80:
-        print("You feel exceptionaly healthy (" + str(health) + ")")
-
-    elif health > 60:
-        print("You feel healthy (" + str(health) + ")")
+            if victory == 6 and item_needle_and_thread in inventory:
+                print("CREATE MONSTER to sew together your monster")
 
 
-    elif health > 40:
-        print("You're starting to feel week (" + str(health) + ")")
+        if health > 80:
+            print("You feel exceptionaly healthy (" + str(health) + ")")
 
-    elif health > 20:
-        print("You're fading  (" + str(health) + ")")
+        elif health > 60:
+            print("You feel healthy (" + str(health) + ")")
 
-    elif health > 0:
-        print("You have one foot in the grave (" + str(health) + ")")
-    
-    #prompt the player for an input    print("What do you want to do?")
+
+        elif health > 40:
+            print("You're starting to feel week (" + str(health) + ")")
+
+        elif health > 20:
+            print("You're fading  (" + str(health) + ")")
+
+        elif health > 0:
+            print("You have one foot in the grave (" + str(health) + ")")
+        
+        #prompt the player for an input    print("What do you want to do?")
 
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
