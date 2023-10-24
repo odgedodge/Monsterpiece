@@ -56,10 +56,10 @@ def list_of_items(items):
     return ', '.join(item_list)
 
 #does the same as list of items, but returns it as a list object rather than a list
-def items_list_as_list(items):
+def list_of_item_ids(items):
     list_of_items = []
     for item in items:
-        list_of_items.append(item["name"])
+        list_of_items.append(item["id"])
     return list_of_items
         
 #Prints a list of all items in a room
@@ -150,6 +150,9 @@ def print_menu(exits, room_items, inv_items):
     #if there's a character print that
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
+
+if item_pizza in inventory:
+    print("EAT PIZZA to gain some health")
 
     #Prompt player to create monster and win game
     victory = 0
@@ -349,6 +352,13 @@ def execute_command(command):
             else:
                 print("Create what?")
 
+    elif command[0] == "eat":
+            if len(command) > 1:
+                print("mmmmmm tasty pizza")
+                health = health + (random.randrange(0 , 10) * 10)
+            else:
+                print("Eat what?")
+
     #If the first word entered doesn't match any command tell user
     else:
         print("This makes no sense.")
@@ -405,7 +415,7 @@ def execute_fight(fight_dialogue):
     print("CHOOSE YOUR WEAPON")
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in items_list_as_list(inventory) and normalised_input != 'shout':
+    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
         weapon = input("> ")
         normalised_input = ' '.join(normalise_input(weapon))
     execute_combat(weapon, current_room["character"]) 
@@ -492,11 +502,10 @@ def main():
     typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
 most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
-house and build him once again. """)
+house and build the monster. """)
     
     # Main game loop
     while True:
-
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
