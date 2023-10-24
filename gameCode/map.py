@@ -79,7 +79,7 @@ playbills litter the floor, hinting at performances from an era long past.""",
 
     "exits": {"east": "Entrance"},
 
-    "items": [],
+    "items": [item_pizza],
     
     "character": character_freddy
 }
