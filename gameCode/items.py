@@ -13,7 +13,7 @@ item_instruction_book = {
 }
 
 item_needle_and_thread= {
-    "id": "thread",
+    "id": "needle and thread",
 
     "name": "a needle and thread",
 
@@ -38,7 +38,7 @@ item_rock = {
 }
 
 item_baseball_bat = {
-    "id": "bat",
+    "id": "baseball bat",
 
     "name": "a baseball bat",
 
@@ -48,7 +48,7 @@ item_baseball_bat = {
 }
 
 item_holy_water = {
-    "id": "water",
+    "id": "holy water",
     
     "name": "holy water",
 
@@ -88,7 +88,7 @@ item_spear = {
 }
 
 item_eight_pages = {
-    "id": "pages",
+    "id": "eight pages",
     
     "name": "the eight pages",
 
@@ -98,7 +98,7 @@ item_eight_pages = {
 }
 
 item_soul_jar = {
-    "id": "jar",
+    "id": "soul jar",
     
     "name": "a soul jar",
 
@@ -108,7 +108,7 @@ item_soul_jar = {
 }
 
 item_water_bottle = {
-    "id": "bottle",
+    "id": "water bottle",
     
     "name": "a water bottle",
     
