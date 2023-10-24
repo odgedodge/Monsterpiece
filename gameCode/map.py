@@ -23,7 +23,7 @@ room_attic = {
 
     "description":
     """The attic stands as a foreboding chamber, heavy with the weight of forgotten experiments and the echoes of mad ambition. The room is cloaked in an eerie half-light, with 
-the weak glow of flickering candles barely penetrating the shadows that dance along the cracked, wooden floor. You see an old disused doll amoungst cobwebs that hang like veils, draping the rooms corners and ancient, 
+the weak glow of flickering candles barely penetrating the shadows that dance along the cracked, wooden floor. You see an old disused doll amongst cobwebs that hang like veils, draping the rooms corners and ancient, 
 forgotten artefacts. A weathered laboratory table occupies the centre, adorned with rusty instruments, vials of mysterious substances, and decaying parchments bearing Victor 
 Frankensteins frantic scrawl. Broken, disused machinery looms in the darkness, its once-promising potential now a testament to the hubris of scientific curiosity.""",
 
