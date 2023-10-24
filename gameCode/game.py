@@ -56,10 +56,10 @@ def list_of_items(items):
     return ', '.join(item_list)
 
 #does the same as list of items, but returns it as a list object rather than a list
-def items_list_as_list(items):
+def list_of_item_ids(items):
     list_of_items = []
     for item in items:
-        list_of_items.append(item["name"])
+        list_of_items.append(item["id"])
     return list_of_items
         
 #Prints a list of all items in a room
@@ -405,7 +405,7 @@ def execute_fight(fight_dialogue):
     print("CHOOSE YOUR WEAPON")
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in items_list_as_list(inventory) and normalised_input != 'shout':
+    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
         weapon = input("> ")
         normalised_input = ' '.join(normalise_input(weapon))
     execute_combat(weapon, current_room["character"]) 
@@ -487,7 +487,7 @@ def move(exits, direction):
 # This is the entry point of our program
 def main():
     #display house art
-    print(text_art.text_art["haunted_house"])
+    print(text_art["haunted_house"])
 
     # Tell them how to skip
     print(haunted_house)
