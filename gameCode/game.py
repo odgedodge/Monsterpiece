@@ -496,6 +496,7 @@ def main():
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
 most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
 house and build him once again. """)
+    print()
     
     # Main game loop
     while True:
