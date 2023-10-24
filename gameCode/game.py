@@ -133,8 +133,8 @@ def print_menu(exits, room_items, inv_items):
         print("TAKE", item["id"].upper() , "to take" , item["name"] + ".")
     
     # Print statement for each item in the inventory
-    if item != item_chucky:
-        for item in inv_items:
+    for item in inv_items:
+        if item != item_chucky:
             #if there is already an article use that, otherwise use your
             if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
                 print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
