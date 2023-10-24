@@ -234,10 +234,14 @@ def execute_drop(item_id):
     for item in inventory:
         #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
+            if item_id == "doll":
+                kill_chucky()
+                return
             current_room["items"].append(item)
             inventory.remove(item)
             #return to leave the loop
             return
+    print("You cannot drop that.")
 
 def execute_inspect(item_id):
      #loops through the list for every item in it
@@ -434,15 +438,23 @@ def has_chucky():
     return False
 
 def kill_chucky():
-    pass
+    if current_room["name"] == "Living Room":
+        typewritter_effect_fast("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
+        for item in inventory:
+            if item["id"] == "doll":
+                inventory.remove(item)
+    else:
+        print("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
 
 def check_chucky():
     if not has_chucky():
         return
     global health
     health -= 10
+    print()
     typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
 unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+    print()
 
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
