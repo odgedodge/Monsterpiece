@@ -142,9 +142,13 @@ def print_menu(exits, room_items, inv_items):
             else:
                 print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
+    
+    if has_chucky() == True and current_room == rooms["Living Room"]:
+        print("DROP DOLL to cast Chucky into the fireplace.")
+
     #Print statement for each inventory item
     for item in inventory:
-     print("INSPECT" , item["id"].upper() , "to view its description")
+     print("INSPECT" , item["id"].upper() , "to view its description.")
     
         
     #if there's a character print that
@@ -152,16 +156,23 @@ def print_menu(exits, room_items, inv_items):
         print("TALK to", current_room["character"]["name"])
 
     if item_pizza in inventory:
-        print("EAT PIZZA to gain some health")
+        print("EAT PIZZA to eat your pizza slice and gain some health.")
 
         #Prompt player to create monster and win game
+        #Count used to check if all 6 monster parts are in the lab
         victory = 0
+        #checks the current room is the lab
         if current_room == rooms["Lab"]:
+            #loops for every iyem in the victory check list (contains all monster parts)
             for item in victory_check:
+                #If the part is in the lab adds one to the victory counter
                 if item in current_room["items"]:
                     victory += 1
 
+            #If all parts are in the lab (counter = 6) and thread in inventory allows promts player with create command
             if victory == 6 and item_needle_and_thread in inventory:
+                global create_allowed
+                create_allowed = True
                 print("CREATE MONSTER to sew together your monster")
 
 
@@ -342,24 +353,30 @@ def execute_command(command):
         if len(command) > 1:
             execute_inspect(command[1])
         else:
-            print("Inspect what>")
+            print("Inspect what?")
 
     elif command[0] == "create":
-            if len(command) > 1:
-                print("Fun win text")
-                #display frankenstein image
-                print(frankenstein)
-                exit()
+            if create_allowed == True:
+                if len(command) > 1:
+                    print("Fun win text")
+                    #display frankenstein image
+                    print(frankenstein)
+                    exit()
+                else:
+                    print("Create what?")
             else:
-                print("Create what?")
+                print("Too fast there get the monster parts first")
 
     elif command[0] == "eat":
-            if len(command) > 1:
-                print("mmmmmm tasty pizza")
-                health = health + (random.randrange(0 , 10) * 10)
-                inventory.remove(item_pizza)
+            if item_pizza in inventory:
+                if len(command) > 1:
+                    typewritter_effect_fast("mmmmmm tasty pizza.")
+                    health = health + (random.randrange(0 , 10) * 10)
+                    inventory.remove(item_pizza)
+                else:
+                    print("Eat what?")
             else:
-                print("Eat what?")
+                print("No pizza to eat")
 
     #If the first word entered doesn't match any command tell user
     else:
@@ -415,6 +432,7 @@ def execute_fight(fight_dialogue):
         
     print()
     print("CHOOSE YOUR WEAPON")
+    print(", ".join(list_of_item_ids(inventory)))
     normalised_input = ''
     #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
     while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
