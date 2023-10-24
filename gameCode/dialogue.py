@@ -17,6 +17,7 @@ dialogue_dracula = {
     
     "dialogue two": ["You do not want to fight me. This is a war you will not win, it is not worth it to rebuild a monster. Fighting you is a necessary evil to prevent the monster resurfacing."],
     
+    #if player interacts with him after already talking/fighting
     "repeat dialogue": ["You got your limb Henry, remember to be careful."]
 }
 
@@ -41,6 +42,7 @@ dialogue_grim = {
     
     "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "Mortal, you are meddling in forces you do not understand.", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."],
 
+    #if player interacts with him after already talking
     "repeat dialogue": ["You have the limb now, do not continue to bother me."]
 }
 
