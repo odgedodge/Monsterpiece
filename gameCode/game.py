@@ -133,16 +133,18 @@ def print_menu(exits, room_items, inv_items):
         print("TAKE", item["id"].upper() , "to take" , item["name"] + ".")
     
     # Print statement for each item in the inventory
-    for item in inv_items:
-        #if there is already an article use that, otherwise use your
-        if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
-            print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
-        else:
-            print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
+    if item != item_chucky:
+        for item in inv_items:
+            #if there is already an article use that, otherwise use your
+            if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
+                print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
+            else:
+                print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
-    if len(inventory) != 0:
-        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to veiw its description")
-
+    #Print statemnt for each inventory item
+    for item in inventory:
+     print("INSPECT" , item["id"].upper() , "to veiw its description")
+    
         
     #if theres a character print that
     if current_room["character"] is not None:
@@ -150,16 +152,15 @@ def print_menu(exits, room_items, inv_items):
 
     #Promt player to create monster and win game
     victory = 0
-    if current_room["name"] == "Lab":
-        for items in victory_check:
-            if victory_check[items] in current_room["items"]:
+    if current_room == rooms["Lab"]:
+        for item in victory_check:
+            if item in current_room["items"]:
                 victory += 1
 
         if victory == 6 and item_needle_and_thread in inventory:
             print("CREATE MONSTER to sew together your monster")
 
-    #promt the player for an input
-    print("What do you want to do?")
+    #promt the player for an input    print("What do you want to do?")
 
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
@@ -315,8 +316,8 @@ def execute_command(command):
         else:
             print("Inspect what>")
 
-    elif command[0] == "Create":
-            if command > 1:
+    elif command[0] == "create":
+            if len(command) > 1:
                 print("Fun win text")
                 exit()
             else:
