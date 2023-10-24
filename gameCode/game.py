@@ -326,7 +326,9 @@ def execute_command(command):
     elif command[0] == "talk":
         if len(command) > 1:
             global current_room
-            execute_dialogue(current_room["character"]["dialogue"])
+            #print text art for current character
+            text_art.display_character(current_room["character"])
+            execute_dialouge(current_room["character"]["dialogue"])
             return False
         else:
             print("Talk to who?")
@@ -341,6 +343,8 @@ def execute_command(command):
     elif command[0] == "create":
             if len(command) > 1:
                 print("Fun win text")
+                #display frankenstein image
+                print(text_art["frankenstein"])
                 exit()
             else:
                 print("Create what?")
@@ -482,6 +486,9 @@ def move(exits, direction):
 
 # This is the entry point of our program
 def main():
+    #display house art
+    print(text_art.text_art["haunted_house"])
+
     # Tell them how to skip
     print(haunted_house)
     print("Press S to skip.")
@@ -492,11 +499,17 @@ house and build him once again. """)
     
     # Main game loop
     while True:
+
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
         print()
         check_chucky()
+
+        #jumpscare 10% of the time the player moves srooms
+        num = random.randint(0, 100)
+        if num % 10 == 0:
+            print(text_art.jumpscare())
 
         character_moved_room = False
         while not character_moved_room:
