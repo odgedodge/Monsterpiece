@@ -118,7 +118,7 @@ item_water_bottle = {
 }
 
 item_chucky = {
-    "id": "chucky",
+    "id": "doll",
     
     "name": "a doll",
     

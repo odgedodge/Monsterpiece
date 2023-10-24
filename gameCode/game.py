@@ -22,7 +22,7 @@ def typewritter_effect_slow(text):
         
         # Detect skip condition
         if keyboard.is_pressed("s"):
-            print(text.replace(printed, ""))
+            print(text.replace(printed, "", 1))
             break
 
 #Slowing prints out a string one character at a time
@@ -40,7 +40,7 @@ def typewritter_effect_fast(text):
         
         # Detect skip condition
         if keyboard.is_pressed("s"):
-            print(text.replace(printed, ""))
+            print(text.replace(printed, "", 1))
             break
 
 def list_of_items(items):
@@ -489,14 +489,15 @@ def main():
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
 most famous horror villains. You are playing as Henry Frankenstein and your goal is to collect each limb of Frankenstein's monster in order to overcome the haunted 
 house and build the monster. """)
-    print()
-    check_chucky()
-
+    
     # Main game loop
     while True:
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
+        print()
+        check_chucky()
+
 
         character_moved_room = False
         while not character_moved_room:
