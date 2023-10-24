@@ -352,6 +352,7 @@ def execute_command(command):
             if len(command) > 1:
                 print("mmmmmm tasty pizza")
                 health = health + (random.randrange(0 , 10) * 10)
+                inventory.remove(item_pizza)
             else:
                 print("Eat what?")
 
