@@ -143,7 +143,7 @@ def print_menu(exits, room_items, inv_items):
 
     #Print statemnt for each inventory item
     for item in inventory:
-     print("INSPECT" , item["id"].upper() , "to veiw its description")
+     print("INSPECT" , item["id"].upper() , "to view its description")
     
         
     #if theres a character print that
