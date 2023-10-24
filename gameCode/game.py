@@ -198,7 +198,7 @@ def execute_take(item_id):
             #if true checks that the weight wont go over the weight limit
             if weight + current_room["items"][i]["weight"] > weight_limit:
                 #If weight excedes limit prevents the item from being added to the player inventory
-                print("cannot take" , current_room["items"][i]["name"] , "its too heavy for you. Drop a heavy item to pick this up")
+                print("cannot take" , current_room["items"][i]["name"] , "it's too heavy for you. Drop a heavy item to pick this up")
                 return
             #if weight doesn't excede the limit the item is added to the player inventory and removed from the room
             inventory.append(current_room["items"][i])
