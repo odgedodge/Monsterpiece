@@ -141,7 +141,7 @@ def print_menu(exits, room_items, inv_items):
             print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
     if len(inventory) != 0:
-        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to veiw its description")
+        print("INSPECT" , inventory[random.randint(0 , len(inventory))]["name"] , "to view its description")
 
         
     #if theres a character print that
