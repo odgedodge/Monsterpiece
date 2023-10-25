@@ -11,14 +11,14 @@ dialogue_dracula = {
     
     "method": "talk",
     
-    "base dialogue": ["Hello Henry, it is good to see you again.", "I would ask how your travels went, but since you are back... well I'm sure you learnt something.", "You're here for the monster aren't you?. Again?", "Do you ever learn Henry? Don't revive dead things.", "I will not see that monster again, which is why I have hidden a leg from you. He will not be reassembled."],
+    "base dialogue": ["Hello Victor, it is good to see you again.", "I would ask how your travels went, but since you are back... well I'm sure you learnt something.", "You're here for the monster aren't you?. Again?", "Do you ever learn Victor? Don't revive dead things.", "I will not see that monster again, which is why I have hidden a leg from you. He will not be reassembled."],
     
-    "dialogue one": ["You need to be careful Henry, life and death is not to be meddled with.", "You: I'll be careful, he is a huge scientific masterpiece.","If you're sure you will be careful, do not make the same mistakes again.", "You: Only a fool would make the same mistakes twice.","If he is rebuilt, it should be as a memento, a warning to not meddle outside the human domain. I will give you the leg to rebuild him, but you must promise me.", "You: I promise."],
+    "dialogue one": ["You need to be careful Victor, life and death is not to be meddled with.", "You: I'll be careful, he is a huge scientific masterpiece.","If you're sure you will be careful, do not make the same mistakes again.", "You: Only a fool would make the same mistakes twice.","If he is rebuilt, it should be as a memento, a warning to not meddle outside the human domain. I will give you the leg to rebuild him, but you must promise me.", "You: I promise."],
     
     "dialogue two": ["You do not want to fight me. This is a war you will not win, it is not worth it to rebuild a monster. Fighting you is a necessary evil to prevent the monster resurfacing."],
     
     #if player interacts with him after already talking/fighting
-    "repeat dialogue": ["You got your limb Henry, remember to be careful."]
+    "repeat dialogue": ["You got your limb Victor, remember to be careful."]
 }
 
 dialogue_pennywise = {
@@ -29,7 +29,7 @@ dialogue_pennywise = {
     "method": "fight",
     
     #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
-    "base dialogue": ["Hey Henry...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Henry..."]
+    "base dialogue": ["Hey Victor...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Victor..."]
     
 }
 
@@ -54,7 +54,7 @@ dialogue_freddy = {
 
     "method": "fight",
     
-    "base dialogue": ["Hello Henry...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."]
+    "base dialogue": ["Hello Victor...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."]
 }
 
 #slenderman doesn't talk but there should be commentary on his behaviour and hints to the player for how to beat him
