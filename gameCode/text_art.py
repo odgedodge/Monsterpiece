@@ -417,6 +417,8 @@ def jumpscare():
     for key in text_art:
         array.append(text_art[key])
     print(array[num])
+    print()
+    print("BOO!!!")
         
 def display_character(character):
     print(character["image"])
