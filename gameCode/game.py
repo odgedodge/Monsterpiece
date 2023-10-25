@@ -351,7 +351,7 @@ def execute_command(command):
         
     elif command[0] == "inspect":
         if len(command) > 1:
-            execute_inspect(" ".command[1:])
+            execute_inspect(" ".join(command[1:]))
         else:
             print("Inspect what?")
 
