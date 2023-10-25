@@ -180,17 +180,17 @@ def print_menu(exits, room_items, inv_items):
             print("You feel exceptionally healthy (" + str(health) + ").")
 
     elif health > 60:
-            print("You feel healthy (" + str(health) + ")")
+            print("You feel healthy (" + str(health) + ").")
 
 
     elif health > 40:
-            print("You're starting to feel week (" + str(health) + ")")
+            print("You're starting to feel week (" + str(health) + ").")
 
     elif health > 20:
-            print("You're fading  (" + str(health) + ")")
+        typewritter_effect_slow("You're fading (" + str(health) + ")...")
 
     elif health > 0:    
-        print("You have one foot in the grave (" + str(health) + ")")
+        typewritter_effect_slow("You have one foot in the grave (" + str(health) + ")...")
         
     #prompt the player for an input  
     print()  
@@ -210,7 +210,7 @@ def execute_go(direction):
     if is_valid_exit(current_room["exits"], direction) == True:
         current_room = move(current_room["exits"] ,direction)
     else:
-        print("No exits" , direction)
+        print("No exits" , direction, ".")
 
 #Command used to take an item, adding it to the players inventory and removing it from the room
 def execute_take(item_id):
@@ -233,7 +233,7 @@ def execute_take(item_id):
             #if true checks that the weight won't go over the weight limit
             if weight + current_room["items"][i]["weight"] > weight_limit:
                 #If weight exceeds limit prevents the item from being added to the player inventory
-                print("cannot take" , current_room["items"][i]["name"] , "it's too heavy for you. Drop a heavy item to pick this up")
+                print("You cannot take", current_room["items"][i]["name"], ", it's too heavy for you. Drop a heavy item to pick this up.")
                 return
             #if weight doesn't exceed the limit the item is added to the player inventory and removed from the room
             inventory.append(current_room["items"][i])
@@ -290,12 +290,12 @@ def execute_combat(weapon, foe):
                 #give the limb and remove the character: they have died
                 give_limb()
                 remove_character()
-                print("An ok performance")
+                print("An ok performance.")
             return
 
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
     health -= 30
-    print("A poor performance indeed")
+    print("A poor performance indeed. You have lost 30 health.")
     #give the limb and remove the character: they have died
     give_limb()
     remove_character()
@@ -353,21 +353,22 @@ def execute_command(command):
         
     elif command[0] == "inspect":
         if len(command) > 1:
-            execute_inspect(" ".command[1:])
+            execute_inspect(" ".join(command[1:]))
         else:
             print("Inspect what?")
 
     elif command[0] == "create":
             if create_allowed == True:
                 if len(command) > 1:
-                    print("Fun win text")
+                    print("Congratulations, you win!")
+                    typewritter_effect_slow("Now get away while you still can...")
                     #display frankenstein image
                     print(frankenstein)
                     exit()
                 else:
                     print("Create what?")
             else:
-                print("Too fast there get the monster parts first")
+                print("Too fast there, get the monster parts first.")
 
     elif command[0] == "eat":
             if item_pizza in inventory:
@@ -455,7 +456,8 @@ def execute_talk(talk_dialogue):
 #gives the player the limb currently in the room after a successful interaction
 def give_limb():
     inventory.append(current_room["character"]["defending_body_part"])
-    print("You have", current_room["character"]["defending_body_part"]["id"], ".")
+    print()
+    print("You have", str(current_room["character"]["defending_body_part"]["id"]) + ".")
     current_room["character"]["defending_body_part"] = None
     
 #removes the character when it dies
