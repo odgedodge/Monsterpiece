@@ -45,6 +45,15 @@ def typewritter_effect_fast(text):
             break
 
 def list_of_items(items):
+    """This function returns a string expressing a list of item names, from a list of items given
+    
+    >>> list_of_items(room_library["items"])
+    the instruction book, the eight pages
+    >>> list_of_items(room_kitchen["items"])
+    holy water
+    >>> list_of_items(room_entrance["items"])
+    None
+    """
     #creates new empty list
     item_list = []
 
@@ -108,6 +117,7 @@ def print_room(room):
 
     #checks if the print_room_items returns none. If not prints room items. 
     if print_room_items(room) != None:
+        print()
         typewritter_effect_fast((print_room_items(room) + "\n"))
 
 #outputs the name of the exit in a given diretion
@@ -142,7 +152,7 @@ def print_menu(exits, room_items, inv_items):
             else:
                 print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
 
-    
+    # prints the instruction to kill chucky if necessary
     if has_chucky() == True and current_room == rooms["Living Room"]:
         print("DROP DOLL to cast Chucky into the fireplace.")
 
@@ -571,6 +581,7 @@ house and build the monster. """)
     while True:
         # Display game status (room description, inventory etc.)
         print_room(current_room)
+        print()
         print_inventory_items(inventory)
         check_chucky()
 
