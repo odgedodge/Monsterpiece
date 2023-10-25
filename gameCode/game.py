@@ -351,7 +351,7 @@ def execute_command(command):
         
     elif command[0] == "inspect":
         if len(command) > 1:
-            execute_inspect(command[1])
+            execute_inspect(" ".command[1:])
         else:
             print("Inspect what?")
 
@@ -536,6 +536,7 @@ house and build the monster. """)
         num = random.randint(0, 100)
         if num % 10 == 0:
             print(jumpscare())
+            sleep(1)
 
         character_moved_room = False
         while not character_moved_room:
