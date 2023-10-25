@@ -38,9 +38,15 @@ dialogue_grim = {
     
     "multiple options": False, #Can only talk
 
-    "method": "talk",
+    "method": "deal",
     
-    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "To obtain and possess a human torso is a grave sin, one that will surely bring down divine wrath. I, the grim reaper, must halt your misdeeds.", "Your time has come to an end, and nothing can prevent what is written in the book of death", "I must intervene. Do not proceed, lest you wish to face the wrath of the grim reaper."],
+    "gift": "soul jar",
+    
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "You: I'll do anything to get this, I need to build this monster again, he is a scientific masterpiece.", "You must may a price, I do not give without cause. I shall only accept something of equivalence to the creation of new life."],
+    
+    "successful dialogue": ["This is a good offering, it contains the essence of a life I sought to take long ago. A soul should never be separated from its holder. I shall give you the torso you desire."],
+    
+    "unsuccessful dialogue": ["Do not play with me mortal, for you need to offer more than that to appease me."],
 
     #if player interacts with him after already talking
     "repeat dialogue": ["You have the limb now, do not continue to bother me."]

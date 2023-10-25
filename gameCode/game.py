@@ -425,6 +425,41 @@ def execute_dialogue(dialogue):
         #give the player the limb
         give_limb()
         
+    elif dialogue["method"] == "deal":
+        #print the sentences in character interaction
+        for sentence in dialogue["base dialogue"]:
+            typewritter_effect_fast(sentence)
+            sleep(0.5)
+            print()
+        #allow the player to either choose to give the gift or to leave the interaction
+        print("Gift or Leave")
+        normalised_input = ''
+        while normalised_input != "gift" and normalised_input != "leave":
+            user_input = input('> ')
+            normalised_input = ' '.join(normalise_input(user_input))
+        #if the user gifts, they can choose which item from their inventory to give, otherwise leaving results in ending the interaction
+        if normalised_input == "gift":
+            print("CHOOSE YOUR GIFT")
+            normalised_gift = ''
+            while not normalised_gift in list_of_item_ids(inventory):
+                gift = input('> ')
+                normalised_gift = ' '.join(normalise_input(gift))
+            #if the gift is correct, give the limb to the player
+            if normalised_gift == dialogue["gift"]:
+                for sentence in dialogue["successful dialogue"]:
+                    typewritter_effect_fast(sentence)
+                    sleep(0.5)
+                    print()
+                for item in inventory:
+                    if item["id"] == normalised_gift:
+                        inventory.remove(item)
+                give_limb()
+            else:
+                for sentence in dialogue["unsuccessful dialogue"]:
+                    typewritter_effect_fast(sentence)
+                    sleep(0.5)
+                    print()
+        
 #executes a player fighting one of the characters, taking a list of dialogue to print to the player
 def execute_fight(fight_dialogue):
     for sentence in fight_dialogue:
