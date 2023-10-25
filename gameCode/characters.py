@@ -5,7 +5,7 @@ from text_art import text_art
 character_dracula = {
     "name": "Dracula",
     
-    "combat": [("water", 0) , ("spear" , 15)],
+    "combat": [(item_holy_water["id"], 0) , (item_spear["id"] , 15)],
     
     "defending_body_part": item_left_arm,
     
@@ -15,9 +15,9 @@ character_dracula = {
 }
 
 character_freddy = {
-    "name": "Freddy fazbear",
+    "name": "Freddy Fazbear",
     
-    "combat": [("bat" , 0) , ("bottle" , 15)],
+    "combat": [(item_baseball_bat["id"] , 0) , (item_water_bottle["id"] , 15)],
     
     "defending_body_part": item_right_leg,
     
@@ -41,7 +41,7 @@ character_grim = {
 character_slenderman = {
     "name": "Slenderman",
     
-    "combat": [("pages" , 0) , ("book" , 15)],
+    "combat": [(item_eight_pages["id"] , 0) , (item_instruction_book["id"] , 15)],
     
     "defending_body_part": item_head,
     
@@ -53,7 +53,7 @@ character_slenderman = {
 character_pennywise = {
     "name": "Pennywise",
     
-    "combat": [("shout", 0)],
+    "combat": [("shout", 0), (item_spear["id"], 15)],
     
     "defending_body_part": item_left_leg,
     
