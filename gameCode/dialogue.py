@@ -28,8 +28,8 @@ dialogue_pennywise = {
 
     "method": "fight",
     
-    #add something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
-    "base dialogue": ["Hey Victor...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Victor..."]
+    #added something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
+    "base dialogue": ["Hey Victor...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Victor...", "You: But don't you see, I know your weakness Pennywise, you can't handle those with solid friendships, those with a backbone willing to shout until you finally leave them alone."]
     
 }
 
