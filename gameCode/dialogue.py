@@ -65,5 +65,5 @@ dialogue_slenderman = {
     
     "method": "fight",
     
-    "base dialogue": ["Standing against the backdrop of the verdant green foliage, the tall, thin figure of Slenderman stalks the landscape", "His long, lanky frame casts a menacing shadow on the plants below, and his emotionless face stares blankly into the distance","Behind him lays a severed head.", "You feel terrified to approach, let alone fight him.", "Maybe those pages could help..."]
+    "base dialogue": ["Standing against the backdrop of the verdant green foliage, the tall, thin figure of Slenderman stalks the landscape", "His long, lanky frame casts a menacing shadow on the plants below, and his emotionless face stares blankly into the distance", "Behind him lays a severed head.", "You feel terrified to approach, let alone fight him.", "Maybe those pages could help..."]
 }
