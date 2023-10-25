@@ -105,6 +105,29 @@ def print_weight():
     #prints out the total weight you're carrying and shows the limit
     print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
 
+def weight_check(checking_item):
+    #initializes weight
+    weight = 0
+
+    #loops through each item in the players inventory adding up their weights
+    for item in inventory:
+        weight += item["weight"]    
+
+        #checks that the weight won't go over the weight limit
+        if weight + checking_item["weight"] > weight_limit:
+            #If weight exceeds limit prevents the item from being added to the player inventory
+            print("You cannot take", checking_item["name"], ",it's too heavy for you. Drop a heavy item to pick this up.")
+            return False
+    return True
+
+def health_check():
+    if health > 0:
+        return
+    else:
+        global game_over
+        game_over = True
+        typewritter_effect_slow("You collapse, health depleted, as you die you mourn the loss of your ambition, and your legacy.")
+        
 #Prints out all information about the room you're currently ins
 def print_room(room):
     #prints out the name of the room in full capitals and description with a blank line after each
@@ -128,16 +151,19 @@ def print_exit(direction, leads_to):
 
 #Prints out player inventory and all available actions the player can take in a given room
 def print_menu(exits, room_items, inv_items):
+    #Sleeps after each print statement to allow user to read
     print()
     print("You can:")
     # Iterate over available exits
     for direction in exits:
         # Print the exit name and where it leads to
         print_exit(direction, exit_leads_to(exits, direction))
+        sleep(0.2)
 
     # Print statement for each available item
     for item in room_items:
         print("TAKE", item["id"].upper() , "to take" , item["name"] + ".")
+        sleep(0.2)
     
     # Print statement for each item in the inventory
     for item in inv_items:
@@ -145,24 +171,32 @@ def print_menu(exits, room_items, inv_items):
             #if there is already an article use that, otherwise use your
             if list(item["name"])[0] == "a" or list(item["name"])[0] == "the":
                 print("DROP", item["id"].upper() , "to drop" , item["name"] + ".")
+                sleep(0.2)
             else:
                 print("DROP", item["id"].upper() , "to drop your" , item["name"] + ".")
+                sleep(0.2)
 
     # prints the instruction to kill chucky if necessary
     if has_chucky() == True and current_room == rooms["Living Room"]:
         print("DROP DOLL to cast Chucky into the fireplace.")
+        sleep(0.2)
 
     #Print statement for each inventory item
     for item in inventory:
-     print("INSPECT" , item["id"].upper() , "to view its description.")
-    
+        print("INSPECT" , item["id"].upper() , "to view its description.")
+        sleep(0.2)
         
     #if there's a character print that
     if current_room["character"] is not None:
         print("TALK to", current_room["character"]["name"])
+        sleep(0.2)
 
     if item_pizza in inventory:
         print("EAT PIZZA to eat your pizza slice and gain some health.")
+        sleep(0.2)
+        
+    print_health()
+    sleep(0.2)
 
     #Prompt player to create monster and win game
     #Count used to check if all 6 monster parts are in the lab
@@ -180,8 +214,14 @@ def print_menu(exits, room_items, inv_items):
             global create_allowed
             create_allowed = True
             print("CREATE MONSTER to sew together your monster")
+            sleep(0.2)
+        
+    #prompt the player for an input  
+    print()  
+    print("What do you want to do?")
 
-
+def print_health():
+    global health
     if health > 80:
             print("You feel exceptionally healthy (" + str(health) + ").")
 
@@ -197,11 +237,6 @@ def print_menu(exits, room_items, inv_items):
 
     elif health > 0:    
         typewritter_effect_slow("You have one foot in the grave (" + str(health) + ")...")
-        
-    #prompt the player for an input  
-    print()  
-    print("What do you want to do?")
-
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
@@ -236,21 +271,6 @@ def execute_take(item_id):
                 #returns to break search loop to prevent an error
                 return 
         
-def weight_check(checking_item):
-    #initializes weight
-    weight = 0
-
-    #loops through each item in the players inventory adding up their weights
-    for item in inventory:
-        weight += item["weight"]    
-
-        #checks that the weight won't go over the weight limit
-        if weight + checking_item["weight"] > weight_limit:
-            #If weight exceeds limit prevents the item from being added to the player inventory
-            print("You cannot take", checking_item["name"], ",it's too heavy for you. Drop a heavy item to pick this up.")
-            return False
-    return True
-
 #command to drop item from inventory and add it to the remove
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
@@ -301,11 +321,13 @@ def execute_combat(weapon, foe):
                 give_limb()
                 remove_character()
                 print("An ok performance.")
+                health_check()
             return
 
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
     health -= 30
     print("A poor performance indeed. You have lost 30 health.")
+    health_check()
     
 #take the users input and execute a certain command based on the nomalised input
 def execute_command(command):
@@ -510,6 +532,7 @@ def execute_deal(dialogue):
                     typewritter_effect_fast(sentence)
                     sleep(0.5)
                     print()
+
 #gives the player the limb currently in the room after a successful interaction
 def give_limb():
     if weight_check(current_room["character"]["defending_body_part"]):
@@ -556,6 +579,7 @@ def check_chucky():
     health -= 10
     typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
 unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+    health_check()
 
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
@@ -601,7 +625,11 @@ house and build the monster. """)
         print_room(current_room)
         print()
         print_inventory_items(inventory)
+        
+        #chucky affects health, so game-over has to be checked
         check_chucky()
+        if game_over:
+            break
 
         #jumpscare 10% of the time the player moves srooms
         num = random.randint(0, 100)
