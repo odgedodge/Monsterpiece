@@ -122,7 +122,7 @@ def print_exit(direction, leads_to):
 
 #Prints out player inventory and all available actions the player can take in a given room
 def print_menu(exits, room_items, inv_items):
-
+    print()
     print("You can:")
     # Iterate over available exits
     for direction in exits:
@@ -177,7 +177,7 @@ def print_menu(exits, room_items, inv_items):
 
 
     if health > 80:
-            print("You feel exceptionaly healthy (" + str(health) + ")")
+            print("You feel exceptionally healthy (" + str(health) + ").")
 
     elif health > 60:
             print("You feel healthy (" + str(health) + ")")
@@ -192,7 +192,8 @@ def print_menu(exits, room_items, inv_items):
     elif health > 0:    
         print("You have one foot in the grave (" + str(health) + ")")
         
-    #prompt the player for an input    
+    #prompt the player for an input  
+    print()  
     print("What do you want to do?")
 
 #Checks if an exit exists in a given direction
@@ -280,7 +281,8 @@ def execute_combat(weapon, foe):
             
             #Prints a small statement based on "quality" of the combat
             if option[1] == 0:
-                print("Well done perfectly executed")
+                print()
+                print("Well done, perfectly executed.")
                 #give the limb and remove the character: they have died
                 give_limb()
                 remove_character()
@@ -453,6 +455,7 @@ def execute_talk(talk_dialogue):
 #gives the player the limb currently in the room after a successful interaction
 def give_limb():
     inventory.append(current_room["character"]["defending_body_part"])
+    print("You have", current_room["character"]["defending_body_part"]["id"], ".")
     current_room["character"]["defending_body_part"] = None
     
 #removes the character when it dies
@@ -518,6 +521,7 @@ def move(exits, direction):
 def main():
     # Tell them how to skip
     print(haunted_house)
+    print()
     print("Press S to skip.")
     typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous journey where you will meet suspicious 
 individuals, some of which you might recognise from your favourite halloween productions. Along the way you will be able to talk to characters and battle some of the 
@@ -529,13 +533,12 @@ house and build the monster. """)
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
-        print()
         check_chucky()
 
         #jumpscare 10% of the time the player moves srooms
         num = random.randint(0, 100)
         if num % 10 == 0:
-            print(jumpscare())
+            jumpscare()
 
         character_moved_room = False
         while not character_moved_room:
