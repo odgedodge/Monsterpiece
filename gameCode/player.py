@@ -1,12 +1,13 @@
 from items import *
 from map import rooms
 
-weight_limit = 35.0
+weight_limit = 35
 health = 100
 
 inventory = [item_baseball_bat, item_water_bottle]
 
 victory_check = [item_left_leg, item_right_leg , item_left_arm , item_right_arm , item_head , item_torso]
+game_over = False
 
 create_allowed = False
 

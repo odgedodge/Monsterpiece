@@ -4,10 +4,10 @@ item_instruction_book = {
     "name": "the instruction book",
 
     "description":"""This book has instructions for how to assemble your monster.
-    You will need to collect the following body parts to your lab, as well as the correct materials.
-    You need to collect a right arm, a left arm, a left leg, a right leg, as well as the torso and head of your monster.
-    You need to gain a needle and thread to also properly assemble the monster. 
-    Don't forget about the foes on your way who also covet the body parts you seek, and good luck.""",
+You will need to collect the following body parts to your lab, as well as the correct materials.
+You need to collect a right arm, a left arm, a left leg, a right leg, as well as the torso and head of your monster.
+You need to gain a needle and thread to also properly assemble the monster. 
+Don't forget about the foes on your way who also covet the body parts you seek, and good luck.""",
 
     "weight": 0.7
 }
@@ -28,10 +28,10 @@ item_rock = {
     "name": "a rock",
 
     "description": """I have an inexplicable attachment to a comically funny-looking rock that defies all rational explanation. 
-    Its irregular shape, adorned with whimsical patterns, seems to evoke a perpetual grin on my face. I picked it up on a whim, 
-    and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly rare or valuable, 
-    but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down, but it exerts a magnetic pull on my hand, 
-    tugging at my curiosity and igniting my imagination with endless tales of its origin.
+Its irregular shape, adorned with whimsical patterns, seems to evoke a perpetual grin on my face. I picked it up on a whim, 
+and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly rare or valuable, 
+but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down, but it exerts a magnetic pull on my hand, 
+tugging at my curiosity and igniting my imagination with endless tales of its origin.
 """,
 
     "weight": 0.3
@@ -132,9 +132,9 @@ item_pizza = {
     
     "name": "a slice of pizza",
     
-    "description": "a slice of freddy fazzbears pizza, it smells amazing",
+    "description": "A slice of freddy fazzbears pizza, it smells amazing",
     
-    "weight": 35
+    "weight": .075
 }
 
 item_left_leg = {
@@ -142,7 +142,7 @@ item_left_leg = {
     
     "name": "the monster's left leg",
     
-    "description": "the left leg",
+    "description": "The left leg",
     
     "weight": 18
 }
@@ -152,7 +152,7 @@ item_right_leg = {
     
     "name": "the monster's right leg",
     
-    "description": "the right leg",
+    "description": "The right leg",
     
     "weight": 18
 }
@@ -162,7 +162,7 @@ item_left_arm = {
     
     "name": "the monster's left arm",
     
-    "description": "the left arm",
+    "description": "The left arm",
     
     "weight": 5
 }
@@ -172,7 +172,7 @@ item_right_arm = {
     
     "name": "the monster's right arm",
     
-    "description": "the right arm",
+    "description": "The right arm",
     
     "weight": 5
 }
@@ -182,7 +182,7 @@ item_head = {
     
     "name": "the monster's head",
     
-    "description": "the head",
+    "description": "The head",
     
     "weight": 7
 }
@@ -192,7 +192,7 @@ item_torso = {
     
     "name": "the monster's torso",
     
-    "description": "the torso",
+    "description": "The torso",
     
     "weight": 35
 }

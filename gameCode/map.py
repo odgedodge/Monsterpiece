@@ -31,13 +31,13 @@ decorations show a history of this house being a home, before every ounce of hop
 
     "exits":  {"west": "Bedroom"},
 
-    "items": [item_chucky],
+    "items": [item_chucky, item_right_arm],
     
     "character": None
 }
 
 room_bedroom = {
-    "name": "Master bedroom",
+    "name": "Master Bedroom",
 
     "description":
     """The bedroom exudes an aura of lingering malevolence, trapped within its timeworn walls. Moonlight seeps through moth-eaten
@@ -76,7 +76,7 @@ room_theatre = {
     "name": "Theatre",
 
     "description":
-    """ You step into the old theatre, a grand space frozen in time. The scent of aged velvet and polished wood mingles with a 
+    """You step into the old theatre, a grand space frozen in time. The scent of aged velvet and polished wood mingles with a 
 faint aroma of distant perfume. Dust dances in the dim spotlight that pierces the darkness, casting eerie shapes upon the 
 crimson velvet seats. The stage, adorned with faded curtains and ornate carvings holds memories of performances past, where
 Freddy Fazbear awaits. The air is heavy with a sense of anticipation, and the echoes of long-forgotten applause linger. A 

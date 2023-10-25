@@ -10,6 +10,7 @@ from text_art import *
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_slow(text):
+    """This function prints out text character by character in a typewritter effect slowly"""
     # Keep track of printed text, so if skipped text can be finished
     printed = ''
     
@@ -22,12 +23,13 @@ def typewritter_effect_slow(text):
         printed = printed + char
         
         # Detect skip condition
-        if keyboard.is_pressed("s"):
+        if keyboard.is_pressed("caps lock"):
             print(text.replace(printed, "", 1))
             break
 
 #Slowing prints out a string one character at a time
 def typewritter_effect_fast(text):
+    """This function prints out text character by character in a typewritter effect."""
     # Keep track of printed text, so if skipped text can be finished
     printed = ''
     
@@ -40,20 +42,12 @@ def typewritter_effect_fast(text):
         printed = printed + char
         
         # Detect skip condition
-        if keyboard.is_pressed("s"):
+        if keyboard.is_pressed("caps lock"):
             print(text.replace(printed, "", 1))
             break
 
 def list_of_items(items):
-    """This function returns a string expressing a list of item names, from a list of items given
-    
-    >>> list_of_items(room_library["items"])
-    the instruction book, the eight pages
-    >>> list_of_items(room_kitchen["items"])
-    holy water
-    >>> list_of_items(room_entrance["items"])
-    None
-    """
+    """This function returns a string expressing a list of item names, from a list of items given"""
     #creates new empty list
     item_list = []
 
@@ -66,6 +60,7 @@ def list_of_items(items):
 
 #does the same as list of items, but returns it as a list object rather than a list
 def list_of_item_ids(items):
+    """This function returns a list of item ids, from a list of items given"""
     list_of_items = []
     for item in items:
         list_of_items.append(item["id"])
@@ -94,6 +89,7 @@ def print_inventory_items(items):
 
     # Print the item names
     print("You have", item_names + ".")
+    print_weight()
     
     # Print blankline
     print()
@@ -168,22 +164,22 @@ def print_menu(exits, room_items, inv_items):
     if item_pizza in inventory:
         print("EAT PIZZA to eat your pizza slice and gain some health.")
 
-        #Prompt player to create monster and win game
-        #Count used to check if all 6 monster parts are in the lab
-        victory = 0
-        #checks the current room is the lab
-        if current_room == rooms["Lab"]:
-            #loops for every iyem in the victory check list (contains all monster parts)
-            for item in victory_check:
-                #If the part is in the lab adds one to the victory counter
-                if item in current_room["items"]:
-                    victory += 1
+    #Prompt player to create monster and win game
+    #Count used to check if all 6 monster parts are in the lab
+    victory = 0
+    #checks the current room is the lab
+    if current_room == rooms["Lab"]:
+        #loops for every iyem in the victory check list (contains all monster parts)
+        for item in victory_check:
+            #If the part is in the lab adds one to the victory counter
+            if item in current_room["items"]:
+                victory += 1
 
-            #If all parts are in the lab (counter = 6) and thread in inventory allows promts player with create command
-            if victory == 6 and item_needle_and_thread in inventory:
-                global create_allowed
-                create_allowed = True
-                print("CREATE MONSTER to sew together your monster")
+        #If all parts are in the lab (counter = 6) and thread in inventory allows promts player with create command
+        if victory == 6 and item_needle_and_thread in inventory:
+            global create_allowed
+            create_allowed = True
+            print("CREATE MONSTER to sew together your monster")
 
 
     if health > 80:
@@ -229,27 +225,31 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
+
+    for item in current_room["items"]:
+        #checks if the item given in the command matches the current item in the list
+        if item_id == item["id"]:
+            if weight_check(item):
+                #if weight doesn't exceed the limit the item is added to the player inventory and removed from the room
+                inventory.append(item)
+                current_room["items"].remove(item)
+                #returns to break search loop to prevent an error
+                return 
+        
+def weight_check(checking_item):
     #initializes weight
     weight = 0
 
     #loops through each item in the players inventory adding up their weights
     for item in inventory:
-        weight += item["weight"]
+        weight += item["weight"]    
 
-    #Loops through for every item in the current room
-    for i in range(len(current_room["items"])):
-        #checks if the item given in the command matches the current item in the list
-        if item_id == current_room["items"][i]["id"]:
-            #if true checks that the weight won't go over the weight limit
-            if weight + current_room["items"][i]["weight"] > weight_limit:
-                #If weight exceeds limit prevents the item from being added to the player inventory
-                print("You cannot take", current_room["items"][i]["name"], ", it's too heavy for you. Drop a heavy item to pick this up.")
-                return
-            #if weight doesn't exceed the limit the item is added to the player inventory and removed from the room
-            inventory.append(current_room["items"][i])
-            current_room["items"].remove(current_room["items"][i])
-            #returns to break search loop to prevent an error
-            return 
+        #checks that the weight won't go over the weight limit
+        if weight + checking_item["weight"] > weight_limit:
+            #If weight exceeds limit prevents the item from being added to the player inventory
+            print("You cannot take", checking_item["name"], ",it's too heavy for you. Drop a heavy item to pick this up.")
+            return False
+    return True
 
 #command to drop item from inventory and add it to the remove
 def execute_drop(item_id):
@@ -306,9 +306,6 @@ def execute_combat(weapon, foe):
     #If the chosen weapon is not found combat is considered poor and greater damage is taken
     health -= 30
     print("A poor performance indeed. You have lost 30 health.")
-    #give the limb and remove the character: they have died
-    give_limb()
-    remove_character()
     
 #take the users input and execute a certain command based on the nomalised input
 def execute_command(command):
@@ -374,7 +371,8 @@ def execute_command(command):
                     typewritter_effect_slow("Now get away while you still can...")
                     #display frankenstein image
                     print(frankenstein)
-                    exit()
+                    global game_over
+                    game_over = True
                 else:
                     print("Create what?")
             else:
@@ -384,6 +382,7 @@ def execute_command(command):
             if item_pizza in inventory:
                 if len(command) > 1:
                     typewritter_effect_fast("mmmmmm tasty pizza.")
+                    global health
                     health = health + (random.randrange(0 , 10) * 10)
                     inventory.remove(item_pizza)
                 else:
@@ -398,7 +397,7 @@ def execute_command(command):
 #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
 def execute_dialogue(dialogue):
     #dialogue dictionary from character
-    if check_interacted() and dialogue["method"] == "talk":
+    if check_interacted() and (dialogue["method"] == "talk" or dialogue["method"] == "deal"):
         execute_talk(dialogue["repeat dialogue"])
         return
             
@@ -436,7 +435,45 @@ def execute_dialogue(dialogue):
         give_limb()
         
     elif dialogue["method"] == "deal":
-        #print the sentences in character interaction
+        execute_deal(dialogue)
+        
+#executes a player fighting one of the characters, taking a list of dialogue to print to the player
+def execute_fight(fight_dialogue):
+    for sentence in fight_dialogue:
+        typewritter_effect_fast(sentence)
+        #pause between each sentence for better understanding
+        sleep(0.5)
+        print()
+        
+    print()
+    print("CHOOSE YOUR WEAPON")
+    print("Remember, you can always run.")
+    #Print inventory items
+    if len(inventory) != 0:
+        print("You have",", ".join(list_of_item_ids(inventory)), "available.")
+    else:
+        print("You have no items in your inventory to fight with.")
+    normalised_input = ''
+    #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
+    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout' and normalised_input != "run":
+        weapon = input("> ")
+        normalised_input = ' '.join(normalise_input(weapon))
+    if normalised_input == "run":
+        return
+    execute_combat(normalised_input, current_room["character"]) 
+
+#executes a player talking to one of the characters, taking a list of dialogue to print to the player
+def execute_talk(talk_dialogue):
+    for sentence in talk_dialogue:
+        #provide the talking text if the player chooses talk
+        typewritter_effect_fast(sentence)
+        #pause between each sentence for better understanding
+        sleep(0.5)
+        print()
+    print()
+
+def execute_deal(dialogue):
+    #print the sentences in character interaction
         for sentence in dialogue["base dialogue"]:
             typewritter_effect_fast(sentence)
             sleep(0.5)
@@ -450,6 +487,10 @@ def execute_dialogue(dialogue):
         #if the user gifts, they can choose which item from their inventory to give, otherwise leaving results in ending the interaction
         if normalised_input == "gift":
             print("CHOOSE YOUR GIFT")
+            if len(inventory) != 0:
+                print("You have",", ".join(list_of_item_ids(inventory)), "available.")
+            else:
+                print("You have no items in your inventory to fight with.")
             normalised_gift = ''
             while not normalised_gift in list_of_item_ids(inventory):
                 gift = input('> ')
@@ -469,42 +510,19 @@ def execute_dialogue(dialogue):
                     typewritter_effect_fast(sentence)
                     sleep(0.5)
                     print()
-        
-#executes a player fighting one of the characters, taking a list of dialogue to print to the player
-def execute_fight(fight_dialogue):
-    for sentence in fight_dialogue:
-        typewritter_effect_fast(sentence)
-        #pause between each sentence for better understanding
-        sleep(0.5)
-        print()
-        
-    print()
-    print("CHOOSE YOUR WEAPON")
-    print(", ".join(list_of_item_ids(inventory)))
-    normalised_input = ''
-    #allow the weapon to be shout for pennywise, but otherwise it has to be in the inventory
-    while normalised_input not in list_of_item_ids(inventory) and normalised_input != 'shout':
-        weapon = input("> ")
-        normalised_input = ' '.join(normalise_input(weapon))
-    execute_combat(weapon, current_room["character"]) 
-
-#executes a player talking to one of the characters, taking a list of dialogue to print to the player
-def execute_talk(talk_dialogue):
-    for sentence in talk_dialogue:
-        #provide the talking text if the player chooses talk
-        typewritter_effect_fast(sentence)
-        #pause between each sentence for better understanding
-        sleep(0.5)
-        print()
-    print()
-
 #gives the player the limb currently in the room after a successful interaction
 def give_limb():
-    inventory.append(current_room["character"]["defending_body_part"])
-    print()
-    print("You have", str(current_room["character"]["defending_body_part"]["id"]) + ".")
-    current_room["character"]["defending_body_part"] = None
-    
+    if weight_check(current_room["character"]["defending_body_part"]):
+        inventory.append(current_room["character"]["defending_body_part"])
+        print()
+        print("You have the", str(current_room["character"]["defending_body_part"]["id"]) + ".")
+        current_room["character"]["defending_body_part"] = None
+    else:
+        current_room["items"].append(current_room["character"]["defending_body_part"])
+        print()
+        print("The", str(current_room["character"]["defending_body_part"]["id"]) , "is too heavy to take, so it is now available to pick up from the room.")
+        current_room["character"]["defending_body_part"] = None
+        
 #removes the character when it dies
 def remove_character():
     current_room["character"] = None
@@ -569,7 +587,7 @@ def main():
     # Tell them how to skip
     print(haunted_house)
     print()
-    print("Press S to skip.")
+    print("Press CAPS LOCK to skip.")
     typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous 
 journey where you will meet suspicious individuals, some of which you might recognise from your favourite halloween 
 productions. Along the way you will be able to talk to characters and battle some of the most famous horror villains. You
@@ -578,7 +596,7 @@ house and build the monster. """)
     print()
     
     # Main game loop
-    while True:
+    while not game_over:
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print()
@@ -598,6 +616,8 @@ house and build the monster. """)
             print()
             # Execute the player's command
             character_moved_room = execute_command(command)
+            if game_over:
+                break
 
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.

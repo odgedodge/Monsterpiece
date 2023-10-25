@@ -29,7 +29,8 @@ dialogue_pennywise = {
     "method": "fight",
     
     #added something to hint to the player that the way to beat him is not with a physical weapon but by shouting at him
-    "base dialogue": ["Hey Victor...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Victor...", "You: But don't you see, I know your weakness Pennywise, you can't handle those with solid friendships, those with a backbone willing to shout until you finally leave them alone."]
+    "base dialogue": ["Hey Victor...", "Good luck getting the leg, you'll have to go through me first...", "You'll die if you try to fight me Victor...", """You: But don't you see, I know your weakness Pennywise, you can't handle those with solid friendships, those with a backbone
+willing to shout until you finally leave them alone.""", "Be careful, the weapon you need may not be what you're thinking of."]
     
 }
 
@@ -42,7 +43,7 @@ dialogue_grim = {
     
     "gift": "soul jar",
     
-    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, mortal. This creature you seek to revive is a blasphemy to life itself.", "You: I'll do anything to get this, I need to build this monster again, he is a scientific masterpiece.", "You must may a price, I do not give without cause. I shall only accept something of equivalence to the creation of new life."],
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, this creature you seek to revive is a blasphemy to life itself.", "You: I'll do anything to get this, I need to build this monster again, he is a scientific masterpiece.", "You must may a price, I do not give without cause. I shall only accept something of equivalence to the creation of new life."],
     
     "successful dialogue": ["This is a good offering, it contains the essence of a life I sought to take long ago. A soul should never be separated from its holder. I shall give you the torso you desire."],
     
