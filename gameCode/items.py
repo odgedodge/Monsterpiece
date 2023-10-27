@@ -3,11 +3,10 @@ item_instruction_book = {
 
     "name": "the instruction book",
 
-    "description":"""This book has instructions for how to assemble your monster.
-You will need to collect the following body parts to your lab, as well as the correct materials.
-You need to collect a right arm, a left arm, a left leg, a right leg, as well as the torso and head of your monster.
-You need to gain a needle and thread to also properly assemble the monster. 
-Don't forget about the foes on your way who also covet the body parts you seek, and good luck.""",
+    "description":"""This book has instructions for how to assemble your monster.You will need to collect the following body parts
+to your lab, as well as the correct materials.You need to collect a right arm, a left arm, a left leg, a right leg, as well as
+the torso and head of your monster.You need to gain a needle and thread to also properly assemble the monster. Don't forget 
+about the foes on your way who also covet the body parts you seek, and good luck.""",
 
     "weight": 0.7
 }
@@ -29,9 +28,9 @@ item_rock = {
 
     "description": """I have an inexplicable attachment to a comically funny-looking rock that defies all rational explanation. 
 Its irregular shape, adorned with whimsical patterns, seems to evoke a perpetual grin on my face. I picked it up on a whim, 
-and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly rare or valuable, 
-but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down, but it exerts a magnetic pull on my hand, 
-tugging at my curiosity and igniting my imagination with endless tales of its origin.
+and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly 
+rare or valuable, but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down,
+but it exerts a magnetic pull on my hand, tugging at my curiosity and igniting my imagination with endless tales of its origin.
 """,
 
     "weight": 0.3
