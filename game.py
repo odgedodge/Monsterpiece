@@ -7,44 +7,80 @@ from player import *
 from items import *
 from gameparser import *
 from text_art import *
+import sys
 
-#Slowing prints out a string one character at a time
-def typewritter_effect_slow(text):
-    """This function prints out text character by character in a typewritter effect slowly"""
-    # Keep track of printed text, so if skipped text can be finished
-    printed = ''
+class Game:
+    def __init__(self):
+        self.game_over = False
     
-    #Loops for each character in the string
-    for char in text:
-        #Slightly different pauses between each character
-        sleep(random.uniform(0.05 , 0.1))
-        #print out the character and make next character print besides it
-        print(char, end='', flush=True)
-        printed = printed + char
-        
-        # Detect skip condition
-        if keyboard.is_pressed("caps lock"):
-            print(text.replace(printed, "", 1))
-            break
+    def typewriter_effect(self, text):
+        character_print_time = random.uniform(0.01, 0.05)
+        pressed_s = False
 
-#Slowing prints out a string one character at a time
-def typewritter_effect_fast(text):
-    """This function prints out text character by character in a typewritter effect."""
-    # Keep track of printed text, so if skipped text can be finished
-    printed = ''
+        for character in text:
+            if keyboard.is_pressed("s"):
+                pressed_s = True
+                character_print_time = 0
+            
+            sys.stdout.write(character)
+            sys.stdout.flush()
+            sleep(character_print_time)
+
+        if pressed_s:
+            keyboard.press_and_release("backspace")
     
-    #Loops for each character in the string
-    for char in text:
-        #Slightly differant pauses between each character
-        sleep(random.uniform(0.01 , 0.05))
-        #print out the character and make next character print besides it
-        print(char, end='', flush=True)
-        printed = printed + char
+class Character(Game):
+    def __init__(self):
+        super().__init(self)
+    
+class Player(Game):
+    def __init__(self, starting_room, weight_limit):
+        super().__init(self)
+        self.__weight_limit = weight_limit
+        self.__weight = 0
+        self.__current_room = starting_room
+    
+    def weight_check(self, item):   
+        #checks that the weight won't go over the weight limit
+        if self.__weight + item.get_weight() > self.__weight_limit:
+            #If weight exceeds limit prevents the item from being added to the player inventory
+            print("You cannot take", item.get_name(), ",it's too heavy for you. Drop a heavy item to pick this up.")
+            return False
+        else:
+            return True
+    
+    def get_weight_limit(self):
+        return self.__weight_limit
         
-        # Detect skip condition
-        if keyboard.is_pressed("caps lock"):
-            print(text.replace(printed, "", 1))
-            break
+    def print_weight(self):
+        print("You are carrying" , str(self.__weight) + "/" + str(self.__weight_limit) + "kg")
+        
+    def health_check(self):
+        if health > 0:
+            return
+        else:
+            self.game_over = True
+            self.typewriter_effect("You collapse, health depleted, as you die you mourn the loss of your ambition, and your legacy.")
+    
+class Item(Game):
+    def __init__(self, weight, name, id, description):
+        super().__init(self)
+        self.__weight = weight
+        self.__name = name
+        self.__id = id
+        self.__description = description
+        
+    def get_weight(self):
+        return self.__weight
+    
+    def get_name(self):
+        return self.__name
+    
+    def get_id(self):
+        return self.__id
+    
+    def get_description(self):
+        return self.__description
 
 def list_of_items(items):
     """This function returns a string expressing a list of item names, from a list of items given"""
@@ -93,51 +129,17 @@ def print_inventory_items(items):
     
     # Print blankline
     print()
-
-def print_weight():
-    # Initialises weight variable
-    weight = 0
-    
-    #Adds together the weight value of each item in your inventory
-    for i in range(len(inventory)):
-        weight = weight + inventory[i]["weight"]
-
-    #prints out the total weight you're carrying and shows the limit
-    print("You are carrying" , str(weight) + "/" + str(weight_limit) + "kg!")
-
-def weight_check(checking_item):
-    #initializes weight
-    weight = 0
-
-    #loops through each item in the players inventory adding up their weights
-    for item in inventory:
-        weight += item["weight"]    
-
-        #checks that the weight won't go over the weight limit
-        if weight + checking_item["weight"] > weight_limit:
-            #If weight exceeds limit prevents the item from being added to the player inventory
-            print("You cannot take", checking_item["name"], ",it's too heavy for you. Drop a heavy item to pick this up.")
-            return False
-    return True
-
-def health_check():
-    if health > 0:
-        return
-    else:
-        global game_over
-        game_over = True
-        typewritter_effect_slow("You collapse, health depleted, as you die you mourn the loss of your ambition, and your legacy.")
-        
+      
 #Prints out all information about the room you're currently ins
 def print_room(room):
     #prints out the name of the room in full capitals and description with a blank line after each
-    typewritter_effect_slow(("\n" + room["name"].upper() + "\n"))
-    typewritter_effect_fast((room["description"] + "\n"))
+    typewriter_effect(("\n" + room["name"].upper() + "\n"))
+    typewriter_effect((room["description"] + "\n"))
 
     #checks if the print_room_items returns none. If not prints room items. 
     if print_room_items(room) != None:
         print()
-        typewritter_effect_fast((print_room_items(room) + "\n"))
+        typewriter_effect((print_room_items(room) + "\n"))
 
 #outputs the name of the exit in a given diretion
 def exit_leads_to(exits, direction):
@@ -233,10 +235,10 @@ def print_health():
             print("You're starting to feel week (" + str(health) + ").")
 
     elif health > 20:
-        typewritter_effect_slow("You're fading (" + str(health) + ")...")
+        typewriter_effect("You're fading (" + str(health) + ")...")
 
     elif health > 0:    
-        typewritter_effect_slow("You have one foot in the grave (" + str(health) + ")...")
+        typewriter_effect("You have one foot in the grave (" + str(health) + ")...")
 #Checks if an exit exists in a given direction
 def is_valid_exit(exits, chosen_exit):
     #returns true if the chosen direction exits a rooms exits if not return false
@@ -295,7 +297,7 @@ def execute_inspect(item_id):
     for item in inventory:
          #if the item entered in the command is in the players inventory add it to the room and remove from inventory
         if item_id == item["id"]:
-            typewritter_effect_fast(item["description"] + "\n")
+            typewriter_effect(item["description"] + "\n")
             return
 
 #Function to run combat using the charater and chosen weapon as inputs
@@ -390,7 +392,7 @@ def execute_command(command):
             if create_allowed == True:
                 if len(command) > 1:
                     print("Congratulations, you win!")
-                    typewritter_effect_slow("Now get away while you still can...")
+                    typewriter_effect("Now get away while you still can...")
                     #display frankenstein image
                     print(frankenstein)
                     global game_over
@@ -403,7 +405,7 @@ def execute_command(command):
     elif command[0] == "eat":
             if item_pizza in inventory:
                 if len(command) > 1:
-                    typewritter_effect_fast("mmmmmm tasty pizza.")
+                    typewriter_effect("mmmmmm tasty pizza.")
                     global health
                     health = health + (random.randrange(0 , 10) * 10)
                     inventory.remove(item_pizza)
@@ -427,12 +429,12 @@ def execute_dialogue(dialogue):
     if dialogue["multiple options"]:
         #user interacts with character based on their base dialogue, however their responses are not linked to user input
         for sentence in dialogue["base dialogue"]:
-            typewritter_effect_fast(sentence)
+            typewriter_effect(sentence)
             sleep(.5)
             print()
         normalised_input = ''
         while normalised_input != 'talk' and normalised_input != 'fight':
-            typewritter_effect_slow("TALK or FIGHT:")
+            typewriter_effect("TALK or FIGHT:")
             print()
             user_input = input("> ")
             normalised_input = ''.join(normalise_input(user_input))
@@ -462,7 +464,7 @@ def execute_dialogue(dialogue):
 #executes a player fighting one of the characters, taking a list of dialogue to print to the player
 def execute_fight(fight_dialogue):
     for sentence in fight_dialogue:
-        typewritter_effect_fast(sentence)
+        typewriter_effect(sentence)
         #pause between each sentence for better understanding
         sleep(0.5)
         print()
@@ -488,7 +490,7 @@ def execute_fight(fight_dialogue):
 def execute_talk(talk_dialogue):
     for sentence in talk_dialogue:
         #provide the talking text if the player chooses talk
-        typewritter_effect_fast(sentence)
+        typewriter_effect(sentence)
         #pause between each sentence for better understanding
         sleep(0.5)
         print()
@@ -497,7 +499,7 @@ def execute_talk(talk_dialogue):
 def execute_deal(dialogue):
     #print the sentences in character interaction
         for sentence in dialogue["base dialogue"]:
-            typewritter_effect_fast(sentence)
+            typewriter_effect(sentence)
             sleep(0.5)
             print()
         #allow the player to either choose to give the gift or to leave the interaction
@@ -520,7 +522,7 @@ def execute_deal(dialogue):
             #if the gift is correct, give the limb to the player
             if normalised_gift == dialogue["gift"]:
                 for sentence in dialogue["successful dialogue"]:
-                    typewritter_effect_fast(sentence)
+                    typewriter_effect(sentence)
                     sleep(0.5)
                     print()
                 for item in inventory:
@@ -529,7 +531,7 @@ def execute_deal(dialogue):
                 give_limb()
             else:
                 for sentence in dialogue["unsuccessful dialogue"]:
-                    typewritter_effect_fast(sentence)
+                    typewriter_effect(sentence)
                     sleep(0.5)
                     print()
 
@@ -565,19 +567,19 @@ def has_chucky():
 
 def kill_chucky():
     if current_room["name"] == "Living Room":
-        typewritter_effect_fast("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
+        typewriter_effect("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
         for item in inventory:
             if item["id"] == "doll":
                 inventory.remove(item)
     else:
-        typewritter_effect_fast("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
+        typewriter_effect("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
 
 def check_chucky():
     if not has_chucky():
         return
     global health
     health -= 10
-    typewritter_effect_fast("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
+    typewriter_effect("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
 unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
     health_check()
 
@@ -611,8 +613,8 @@ def main():
     # Tell them how to skip
     print(haunted_house)
     print()
-    print("Press CAPS LOCK to skip.")
-    typewritter_effect_fast("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous 
+    print("Press S to skip.")
+    typewriter_effect("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous 
 journey where you will meet suspicious individuals, some of which you might recognise from your favourite halloween 
 productions. Along the way you will be able to talk to characters and battle some of the most famous horror villains. You
 are playing as Victor Frankenstein and your goal is to collect each limb of your monster in order to overcome the haunted 
