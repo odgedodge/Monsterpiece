@@ -1,197 +1,65 @@
-item_instruction_book = {
-    "id": "instruction book",
+class Item:
+    def __init__(self, weight, name, id, description):
+        self.__weight = weight
+        self.__name = name
+        self.__id = id
+        self.__description = description
+        
+    def get_weight(self):
+        return self.__weight
+    
+    def get_name(self):
+        return self.__name
+    
+    def get_id(self):
+        return self.__id
+    
+    def get_description(self):
+        return self.__description
 
-    "name": "the instruction book",
-
-    "description":"""This book has instructions for how to assemble your monster.You will need to collect the following body parts
+item_instruction_book = Item("instruction book", "the instruction book", """This book has instructions for how to assemble your monster. You will need to collect the following body parts
 to your lab, as well as the correct materials.You need to collect a right arm, a left arm, a left leg, a right leg, as well as
 the torso and head of your monster.You need to gain a needle and thread to also properly assemble the monster. Don't forget 
-about the foes on your way who also covet the body parts you seek, and good luck.""",
+about the foes on your way who also covet the body parts you seek, and good luck.""", 0.7)
 
-    "weight": 0.7
-}
+item_needle_and_thread= Item("needle and thread", "a needle and thread", "The needle and thread needed to assemble your monster.", .05)
 
-item_needle_and_thread= {
-    "id": "needle and thread",
-
-    "name": "a needle and thread",
-
-    "description": "The needle and thread needed to assemble your monster.",
-
-    "weight": .05
-}
-
-item_rock = {
-    "id": "rock",
-
-    "name": "a rock",
-
-    "description": """I have an inexplicable attachment to a comically funny-looking rock that defies all rational explanation. 
+item_rock = Item("rock", "a rock", """I have an inexplicable attachment to a comically funny-looking rock that defies all rational explanation. 
 Its irregular shape, adorned with whimsical patterns, seems to evoke a perpetual grin on my face. I picked it up on a whim, 
 and from that moment, it's as though the universe conspired to forge an inseverable bond between us. It's not particularly 
 rare or valuable, but the sheer quirkiness of this geological oddity has ensnared my fascination. I've tried to set it down,
 but it exerts a magnetic pull on my hand, tugging at my curiosity and igniting my imagination with endless tales of its origin.
-""",
+""", 0.3)
 
-    "weight": 0.3
-}
+item_baseball_bat = Item("baseball bat", "a baseball bat", "A baseball bat to defend yourself if necessary.", 1)
 
-item_baseball_bat = {
-    "id": "baseball bat",
+item_holy_water = Item("holy water", "holy water", "Holy Water", 0.3)
 
-    "name": "a baseball bat",
+item_saw = Item("saw", "a saw", "A saw", 0.8)
 
-    "description": "A baseball bat to defend yourself if necessary.",
+item_hammer = Item("hammer", "a hammer", "A hammer", 0.9)
 
-    "weight": 1
-}
+item_spear = Item("spear", "a spear", "A spear", 1)
 
-item_holy_water = {
-    "id": "holy water",
-    
-    "name": "holy water",
+item_eight_pages = Item("eight pages", "the eight pages", "The eight pages", 0.01)
 
-    "description": "Holy Water",
+item_soul_jar = Item("soul jar", "a soul jar", "A soul jar", 0.3)
 
-    "weight": 0.3
-}
+item_water_bottle = Item("water bottle", "a water bottle", "Your water bottle", 0.6)
 
-item_saw = {
-    "id": "saw",
-    
-    "name": "a saw",
+item_chucky = Item("doll", "a doll", "a doll", 0.6)
 
-    "description": "A saw",
+item_pizza = Item("pizza", "a slice of pizza", "A slice of freddy fazzbears pizza, it smells amazing", .075)
 
-    "weight": 0.8
-}
+item_left_leg = Item("left leg", "the monster's left leg", "The left leg", 18)
 
-item_hammer = {
-    "id": "hammer",
-    
-    "name": "a hammer",
+item_right_leg = Item("right leg", "the monster's right leg", "The right leg", 18)
 
-    "description": "A hammer",
+item_left_arm = Item("left arm", "the monster's left arm", "The left arm", 5)
 
-    "weight": 0.9
-}
+item_right_arm = Item("right arm", "the monster's right arm", "The right arm", 5)
 
-item_spear = {
-    "id": "spear",
-    
-    "name": "a spear",
+item_head = Item("head", "the monster's head", "The head", 7)
 
-    "description": "A spear",
+item_torso = Item("torso", "the monster's torso", "The torso", 35)
 
-    "weight": 1
-}
-
-item_eight_pages = {
-    "id": "eight pages",
-    
-    "name": "the eight pages",
-
-    "description": "The eight pages",
-
-    "weight": 0.01
-}
-
-item_soul_jar = {
-    "id": "soul jar",
-    
-    "name": "a soul jar",
-
-    "description": "A soul jar",
-
-    "weight": 0.3
-}
-
-item_water_bottle = {
-    "id": "water bottle",
-    
-    "name": "a water bottle",
-    
-    "description": "Your water bottle",
-    
-    "weight": 0.6
-}
-
-item_chucky = {
-    "id": "doll",
-    
-    "name": "a doll",
-    
-    "description": "a doll",
-    
-    "weight": 0.6
-}
-
-item_pizza = {
-    "id": "pizza",
-    
-    "name": "a slice of pizza",
-    
-    "description": "A slice of freddy fazzbears pizza, it smells amazing",
-    
-    "weight": .075
-}
-
-item_left_leg = {
-    "id": "left leg",
-    
-    "name": "the monster's left leg",
-    
-    "description": "The left leg",
-    
-    "weight": 18
-}
-
-item_right_leg = {
-    "id": "right leg",
-    
-    "name": "the monster's right leg",
-    
-    "description": "The right leg",
-    
-    "weight": 18
-}
-
-item_left_arm = {
-    "id": "left arm",
-    
-    "name": "the monster's left arm",
-    
-    "description": "The left arm",
-    
-    "weight": 5
-}
-
-item_right_arm = {
-    "id": "right arm",
-    
-    "name": "the monster's right arm",
-    
-    "description": "The right arm",
-    
-    "weight": 5
-}
-
-item_head = {
-    "id": "head",
-    
-    "name": "the monster's head",
-    
-    "description": "The head",
-    
-    "weight": 7
-}
-
-item_torso = {
-    "id": "torso",
-    
-    "name": "the monster's torso",
-    
-    "description": "The torso",
-    
-    "weight": 35
-}
