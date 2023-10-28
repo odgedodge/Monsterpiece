@@ -1,11 +1,6 @@
 from items import *
 from map import rooms
 
-weight_limit = 35
-health = 100
-
-inventory = [item_baseball_bat, item_water_bottle]
-
 victory_check = [item_left_leg, item_right_leg , item_left_arm , item_right_arm , item_head , item_torso]
 game_over = False
 
@@ -13,3 +8,64 @@ create_allowed = False
 
 # Start game at the reception
 current_room = rooms["Entrance"]
+
+class Player:
+    def __init__(self, name, starting_room, health, weight_limit, inventory):
+        super().__init(self)
+        self.name = name
+        self.__weight_limit = weight_limit
+        self.__weight = 0
+        self.__current_room = starting_room
+        self.__health = health
+        self.__inventory = inventory
+    
+    def weight_check(self, item):   
+        #checks that the weight won't go over the weight limit
+        if self.__weight + item.get_weight() > self.__weight_limit:
+            #If weight exceeds limit prevents the item from being added to the player inventory
+            print("You cannot take", item.get_name(), ",it's too heavy for you. Drop a heavy item to pick this up.")
+            return False
+        else:
+            return True
+    
+    def get_weight_limit(self):
+        return self.__weight_limit
+        
+    def print_weight(self):
+        print("You are carrying" , str(self.__weight) + "/" + str(self.__weight_limit) + "kg")
+        
+    def health_check(self):
+        if self.__health > 0:
+            return False
+        else:
+            self.game_over = True
+            print("You collapse, health depleted, as you die you mourn the loss of your ambition, and your legacy.")
+            return True
+    
+    def print_health(self):
+        if self.__health > 80:
+            print("You feel exceptionally healthy (" + str(self.__health) + ").")
+        elif self.__health > 60:
+            print("You feel healthy (" + str(self.__health) + ").")
+        elif self.__health > 40:
+            print("You're starting to feel week (" + str(self.__health) + ").")
+        elif self.__health > 20:
+            print("You're fading (" + str(self.__health) + ")...")
+        elif self.__health > 0:    
+            print("You have one foot in the grave (" + str(self.__health) + ")...")   
+    
+    def print_inventory_items(self, items):
+        # Get list of item names
+        item_names = self.list_of_items(items)
+        
+        if len(item_names) == '':
+            print("You have nothing in your inventory.")
+            return
+        
+        print("You have", item_names + ".")
+        self.print_weight()
+        print()
+
+    def get_health(self):
+        return self.__health
+    
