@@ -2,62 +2,35 @@ from items import *
 from dialogue import *
 from text_art import text_art
 
-character_dracula = {
-    "name": "Dracula",
+class Character:
+    def __init__(self, name, combat, role, dialogue, image):
+        self.__name = name
+        self.__combat = combat
+        self.__role = role
+        self.__dialogue = dialogue
+        self.__image = image
+        
+    def get_name(self):
+        return self.__name
     
-    "combat": [(item_holy_water["id"], 0) , (item_spear["id"] , 15)],
+    def get_combat(self):
+        return self.__combat
     
-    "defending_body_part": item_left_arm,
+    def get_role(self):
+        return self.__role
     
-    "dialogue": dialogue_dracula,
+    def get_dialogue(self):
+        return self.__dialogue
+    
+    def get_image(self):
+        return self.__image
+        
+dracula = Character("Dracula", [(item_holy_water["id"], 0) , (item_spear["id"] , 15)], item_left_arm, dracula_interaction, text_art["dracula"])
 
-    "image": text_art["dracula"]
-}
+freddy = Character("Freddy Fazbear", [(item_baseball_bat["id"] , 0) , (item_water_bottle["id"] , 15)], item_right_leg, freddy_interaction, text_art["freddy"])
 
-character_freddy = {
-    "name": "Freddy Fazbear",
-    
-    "combat": [(item_baseball_bat["id"] , 0) , (item_water_bottle["id"] , 15)],
-    
-    "defending_body_part": item_right_leg,
-    
-    "dialogue": dialogue_freddy,
+grim = Character("The Grim Reaper", None, item_torso, grim_interaction, text_art["grim"])
 
-    "image": text_art["freddy"]
-}
+slenderman = Character("Slenderman", [(item_eight_pages["id"] , 0) , (item_instruction_book["id"] , 15)], item_head, slenderman_interaction, text_art["slenderman"])
 
-character_grim = {
-    "name": "The Grim Reaper",
-    
-    "combat": None,
-    
-    "defending_body_part": item_torso,
-    
-    "dialogue": dialogue_grim,
-
-    "image": text_art["grim"]
-}
-
-character_slenderman = {
-    "name": "Slenderman",
-    
-    "combat": [(item_eight_pages["id"] , 0) , (item_instruction_book["id"] , 15)],
-    
-    "defending_body_part": item_head,
-    
-    "dialogue": dialogue_slenderman,
-
-    "image": text_art["slenderman"]
-}
-
-character_pennywise = {
-    "name": "Pennywise",
-    
-    "combat": [("shout", 0), (item_spear["id"], 15)],
-    
-    "defending_body_part": item_left_leg,
-    
-    "dialogue": dialogue_pennywise,
-
-    "image": text_art["pennywise"]
-}
+pennywise = Character("Pennywise", [("shout", 0), (item_spear["id"], 15)], item_left_leg, pennywise_interaction, text_art["pennywise"])
