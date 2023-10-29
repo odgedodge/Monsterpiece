@@ -10,7 +10,7 @@ from text_art import *
 import sys
 
 class Game:
-    def __init__(self, characters, player, map, parser):
+    def __init__(self, characters, player, map, parser, text_art):
         self.__game_over = False
         self.__create_allowed = False
         self.__needed_for_victory = [item_left_leg, item_right_leg , item_left_arm , item_right_arm , item_head , item_torso]
@@ -18,6 +18,7 @@ class Game:
         self.__player = player
         self.__map = map
         self.__parser = parser
+        self.__text_art = text_art
     
     def typewriter_effect(self, text):
         character_print_time = random.uniform(0.01, 0.05)
@@ -62,15 +63,30 @@ class Game:
         self.typewriter_effect((room.get_description() + "\n"))
         
         # Prints items in the room
+        print()
         self.print_room_items(self.list_of_item_names(self.__player.get_current_room().get_items()))
       
     #Prints out player inventory and all available actions the player can take in a given room
     def print_commands(self):
+        print()
         self.print_directions()
         print()
-        print("Type INSPECT and the item to view it's description.")
-        print("Type DROP and the item to drop it.")
-        print("Type TAKE and the item to take it.")
+        self.__player.print_weight()
+        self.__player.print_health()
+        print()
+        print("INSPECT to view an item's description.")
+        print("DROP to drop an item.")
+        print("TAKE to take an item.")
+        
+        if self.__create_allowed:
+            print()
+            print("CREATE MONSTER to build your monster.")
+        if self.has_chucky() and self.__player.get_current_room().get_name() == "Living Room":
+            print()
+            print("DROP DOLL to cast Chucky into the fireplace.")
+        if self.has_pizza():
+            print()
+            print("EAT PIZZA to eat some pizza and gain some health.")
         
         print()
         if self.__player.get_current_room().get_character() is not None:
@@ -79,6 +95,12 @@ class Game:
         print("INVENTORY:")
         for item in self.__player.get_inventory():
             print("    " + str(item.get_id().title()))       
+        
+    def has_pizza(self):
+        for item in self.__player.get_inventory():
+            if item.get_id() == "pizza":
+                return True
+        return False
         
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
@@ -147,7 +169,7 @@ class Game:
                 self.typewriter_effect(item.get_description() + "\n")
                 return
 
-    #Function to run combat using the charater and chosen weapon as inputs
+    #Function to run combat using the charater and chosen weapon as inpu
     def execute_combat(self, weapon, foe):
         #tell the compiler to treat health as a global to prevent global errors
         #Loops through the combat list of a characer checking for the selected weapon
@@ -172,14 +194,14 @@ class Game:
                     print("An ok performance.")
                     
                 self.__player.set_health(health)
-                self.__player.health_check()
+                self.__game_over = self.__player.health_check()
                 return
 
         #If the chosen weapon is not found combat is considered poor and greater damage is taken
         health -= 30
         print("A poor performance indeed. You have lost 30 health.")
         self.__player.set_health(health)
-        self.__player.health_check()
+        self.__game_over = self.__player.health_check()
         
     #take the users input and execute a certain command based on the nomalised input
     def execute_command(self, command):
@@ -224,7 +246,7 @@ class Game:
         elif command[0] == "talk":
             if len(command) > 1:
                 #print text art for current character
-                #display_character(self.__player.get_current_room().get_character())
+                self.display_character(self.__player.get_current_room().get_character().get_image())
                 self.execute_dialogue(self.__player.get_current_room().get_character().get_dialogue())
                 return False
             else:
@@ -243,7 +265,7 @@ class Game:
                         print("Congratulations, you win!")
                         self.typewriter_effect("Now get away while you still can...")
                         #display frankenstein image
-                        print(frankenstein)
+                        print(self.__text_art["frankenstein"])
                         self.__game_over = True
                     else:
                         print("Create what?")
@@ -413,11 +435,11 @@ class Game:
         else:
             return False
                 
+        # This is the entry point of our program
     
-    # This is the entry point of our program
     def main(self):
         # Tell them how to skip
-        print(haunted_house)    
+        print(self.__text_art["haunted_house"])    
         print()
         print("Press S to skip.")
         self.typewriter_effect("""Welcome to the haunted house, each room before you holds ancient secrets for you to unlock. Join us on an adventurous 
@@ -431,7 +453,6 @@ house and build the monster. """)
         while not self.__game_over:
             # Display game status (room description, inventory etc.)
             self.print_room(self.__player.get_current_room())
-            print()
             
             #chucky affects health, so game-over has to be checked
             self.check_chucky()
@@ -439,10 +460,10 @@ house and build the monster. """)
                 break
             
             #jumpscare 10% of the time the player moves srooms
-            num = random.randint(0, 100)
+            '''num = random.randint(0, 100)
             if num % 10 == 0:
-                jumpscare()
-                sleep(1)
+                self.jumpscare()
+                sleep(1)'''
 
             character_moved_room = False
             while not character_moved_room:
@@ -487,8 +508,9 @@ house and build the monster. """)
             return
         self.__player.set_health(self.__player.get_health() - 10)
         self.typewriter_effect("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
-    unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
-        self.__player.health_check()
+unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+        print()
+        self.__game_over = self.__player.health_check()
         
     def take_command(self):
         print()
@@ -504,9 +526,17 @@ house and build the monster. """)
         #returns the normalised input
         return normalised_user_input
     
-    
-
-        return self.__health
+    def jumpscare(self):
+        num = random.randint(0,4)
+        array = []
+        for key in text_art:
+            array.append(text_art[key])
+        print(array[num])
+        print()
+        print("BOO!!!")
+            
+    def display_character(self, character):
+        print(character)
     
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.
@@ -514,10 +544,11 @@ house and build the monster. """)
 if __name__ == "__main__":
     characters = []
     inventory = [item_baseball_bat, item_water_bottle]
+    text_art = text_art_other
     game_parser = GameParser()
     map = rooms
     player = Player("Victor Frankenstein", map["Entrance"], 100, 35, inventory)
-    main_game = Game(characters, player, map, game_parser)
+    main_game = Game(characters, player, map, game_parser, text_art)
     main_game.main()
     
 

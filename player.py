@@ -2,10 +2,11 @@ class Player:
     def __init__(self, name, starting_room, health, weight_limit, inventory):
         self.name = name
         self.__weight_limit = weight_limit
-        self.__weight = 0
+        self.__inventory = inventory
+        self.__weight = self.calculate_weight()
         self.__current_room = starting_room
         self.__health = health
-        self.__inventory = inventory
+        
     
     def weight_check(self, item):   
         #checks that the weight won't go over the weight limit
@@ -15,6 +16,12 @@ class Player:
             return False
         else:
             return True
+        
+    def calculate_weight(self):
+        weight = 0
+        for item in self.__inventory:
+            weight += item.get_weight()
+        return weight
     
     def get_weight_limit(self):
         return self.__weight_limit
