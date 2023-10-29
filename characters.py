@@ -25,12 +25,12 @@ class Character:
     def get_image(self):
         return self.__image
         
-dracula = Character("Dracula", [(item_holy_water["id"], 0) , (item_spear["id"] , 15)], item_left_arm, dracula_interaction, text_art["dracula"])
+dracula = Character("Dracula", [(item_holy_water.get_id(), 0) , (item_spear.get_id() , 15)], item_left_arm, dracula_interaction, text_art["dracula"])
 
-freddy = Character("Freddy Fazbear", [(item_baseball_bat["id"] , 0) , (item_water_bottle["id"] , 15)], item_right_leg, freddy_interaction, text_art["freddy"])
+freddy = Character("Freddy Fazbear", [(item_baseball_bat.get_id() , 0) , (item_water_bottle.get_id() , 15)], item_right_leg, freddy_interaction, text_art["freddy"])
 
 grim = Character("The Grim Reaper", None, item_torso, grim_interaction, text_art["grim"])
 
-slenderman = Character("Slenderman", [(item_eight_pages["id"] , 0) , (item_instruction_book["id"] , 15)], item_head, slenderman_interaction, text_art["slenderman"])
+slenderman = Character("Slenderman", [(item_eight_pages.get_id() , 0) , (item_instruction_book.get_id() , 15)], item_head, slenderman_interaction, text_art["slenderman"])
 
-pennywise = Character("Pennywise", [("shout", 0), (item_spear["id"], 15)], item_left_leg, pennywise_interaction, text_art["pennywise"])
+pennywise = Character("Pennywise", [("shout", 0), (item_spear.get_id(), 15)], item_left_leg, pennywise_interaction, text_art["pennywise"])
