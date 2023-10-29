@@ -9,6 +9,14 @@ class Room:
         self.__items = items
         self.__character = character
         
+    def print_room_items(self):
+        """If the string from list isn't blank will print out each item in the room."""
+        if len(self.__items) != 0:
+            item_names = []
+            for item in self.__items:
+                item_names.append(item.get_name())
+            print("There is" , ', '.join(item_names), "here." + "\n")    
+            
     def get_name(self):
         return self.__name
     

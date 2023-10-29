@@ -7,7 +7,6 @@ class Player:
         self.__current_room = starting_room
         self.__health = health
         
-    
     def weight_check(self, item):   
         #checks that the weight won't go over the weight limit
         if self.__weight + item.get_weight() > self.__weight_limit:
@@ -81,3 +80,15 @@ class Player:
         
     def remove_from_inventory(self, removing_item):
         self.__inventory.remove(removing_item)
+        
+    def has_pizza(self):
+        for item in self.__inventory:
+            if item.get_id() == "pizza":
+                return True
+        return False
+    
+    def has_chucky(self):
+        for item in self.__inventory:
+            if item.get_id() == "doll":
+                return True
+        return False

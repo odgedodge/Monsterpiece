@@ -36,7 +36,6 @@ class Game:
         if pressed_s:
             keyboard.press_and_release("backspace")
 
-    #does the same as list of items, but returns it as a list object rather than a list
     def list_of_item_ids(self, items):
         """This function returns a list of item ids, from a list of items given"""
         list_of_items = []
@@ -45,29 +44,24 @@ class Game:
         return list_of_items
     
     def list_of_item_names(self, items):
-        """This function returns a list of item ids, from a list of items given"""
+        """This function returns a list of item names, from a list of items given"""
         list_of_items = []
         for item in items:
             list_of_items.append(item.get_name())
         return list_of_items
-    
-    def print_room_items(self, items):
-        #If the string from list isn't blank will print out each item in the room.
-        if len(items) != 0:
-            print("There is" , ', '.join(items), "here." + "\n")
         
-    #Prints out all information about the room you're currently ins
     def print_room(self, room):
+        """Prints out all information about the room you're currently ins"""
         # Prints out the name of the room in full capitals and description with a blank line after each
         self.typewriter_effect(("\n" + room.get_name().upper() + "\n"))
         self.typewriter_effect((room.get_description() + "\n"))
         
         # Prints items in the room
         print()
-        self.print_room_items(self.list_of_item_names(self.__player.get_current_room().get_items()))
+        self.__player.get_current_room().print_room_items()
       
-    #Prints out player inventory and all available actions the player can take in a given room
     def print_commands(self):
+        """Prints out player inventory and all available actions the player can take in a given room"""
         print()
         self.print_directions()
         print()
@@ -81,10 +75,10 @@ class Game:
         if self.__create_allowed:
             print()
             print("CREATE MONSTER to build your monster.")
-        if self.has_chucky() and self.__player.get_current_room().get_name() == "Living Room":
+        if self.__player.has_chucky() and self.__player.get_current_room().get_name() == "Living Room":
             print()
             print("DROP DOLL to cast Chucky into the fireplace.")
-        if self.has_pizza():
+        if self.__player.has_pizza():
             print()
             print("EAT PIZZA to eat some pizza and gain some health.")
         
@@ -95,36 +89,43 @@ class Game:
         print("INVENTORY:")
         for item in self.__player.get_inventory():
             print("    " + str(item.get_id().title()))       
-        
-    def has_pizza(self):
-        for item in self.__player.get_inventory():
-            if item.get_id() == "pizza":
-                return True
-        return False
-        
+               
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
         for direction in exits:
             print("GO " + direction.upper() + " to " + exits[direction] + ".")
+        
+    def take_command(self):
+        print()
+        print("---------------------------------------------------------------")
+        print()
+
+        self.print_commands()
+        
+        # Read player's input
+        user_input = input("> ")
+        # Normalise the input
+        normalised_user_input = self.__parser.normalise_input(user_input)
+        #returns the normalised input
+        return normalised_user_input
     
     def move(self, exits, direction):
         # Next room to go to
         return self.__map[exits[direction]]
     
-    #Checks if an exit exists in a given direction
     def is_valid_exit(self, exits, chosen_exit):
+        """Checks if an exit exists in a given direction"""
         #returns true if the chosen direction exits a rooms exits if not return false
         return chosen_exit in exits
 
-    #move the player into a new room based on the players input
     def execute_go(self, direction):
+        """Move the player into a new room based on the players input"""
         # Checks if the exit exists using is valid exit, then if true updates current room using the move command, if false prints no exits
         if self.is_valid_exit(self.__player.get_current_room().get_exits(), direction):
             self.__player.set_current_room(self.move(self.__player.get_current_room().get_exits() ,direction))
         else:
             print("No exits" , direction, ".")
 
-    #Command used to take an item, adding it to the players inventory and removing it from the room
     def execute_take(self, item_id):
         """This function takes an item_id as an argument and moves this item from the
         list of items in the current room to the player's inventory. However, if
@@ -142,7 +143,6 @@ class Game:
                     #returns to break search loop to prevent an error
                     return 
             
-    #command to drop item from inventory and add it to the remove
     def execute_drop(self, item_id):
         """This function takes an item_id as an argument and moves this item from the
         player's inventory to list of items in the current room. However, if there is
@@ -162,6 +162,7 @@ class Game:
         print("You cannot drop that.")
 
     def execute_inspect(self, item_id):
+        """Prints the description of an item"""
         #loops through the list for every item in it
         for item in self.__player.get_inventory():
             #if the item entered in the command is in the players inventory add it to the room and remove from inventory
@@ -169,8 +170,8 @@ class Game:
                 self.typewriter_effect(item.get_description() + "\n")
                 return
 
-    #Function to run combat using the charater and chosen weapon as inpu
     def execute_combat(self, weapon, foe):
+        """Function to run combat using the charater and chosen weapon as input"""
         #tell the compiler to treat health as a global to prevent global errors
         #Loops through the combat list of a characer checking for the selected weapon
         health = self.__player.get_health()
@@ -202,8 +203,7 @@ class Game:
         print("A poor performance indeed. You have lost 30 health.")
         self.__player.set_health(health)
         self.__game_over = self.__player.health_check()
-        
-    #take the users input and execute a certain command based on the nomalised input
+
     def execute_command(self, command):
         """This function takes a command (a list of words as returned by
         normalise_input) and, depending on the type of action (the first word of
@@ -215,7 +215,6 @@ class Game:
         if 0 == len(command):
             return
 
-        #if the first word in list is go execute the go command, if only go is entered and no second word prompt user to enter more
         if command[0] == "go":
             if len(command) > 1:
                 self.execute_go(command[1])
@@ -225,7 +224,6 @@ class Game:
                 print("Go where?")
                 return False
 
-        #if the first word in list is take execute the take command, if only take is entered and no second word prompt user to enter more
         elif command[0] == "take":
             if len(command) > 1:
                 self.execute_take(' '.join(command[1:]))
@@ -234,7 +232,6 @@ class Game:
                 print("Take what?")
                 return False
 
-        #if the first word in list is drop execute the drop command, if only drop is entered and no second word prompt user to enter more
         elif command[0] == "drop":
             if len(command) > 1:
                 self.execute_drop(' '.join(command[1:]))
@@ -289,8 +286,8 @@ class Game:
         else:
             print("This makes no sense.")
 
-    #take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character
     def execute_dialogue(self, dialogue):
+        """Take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character"""
         #dialogue dictionary from character
         if self.check_interacted() and (dialogue.get_method() == "talk" or dialogue.get_method() == "deal"):
             self.execute_talk(dialogue.get_speech()["repeat dialogue"])
@@ -331,8 +328,8 @@ class Game:
         elif dialogue.get_method() == "deal":
             self.execute_deal(dialogue)
             
-    #executes a player fighting one of the characters, taking a list of dialogue to print to the player
     def execute_fight(self, fight_dialogue):
+        """Executes a player fighting one of the characters, taking a list of dialogue to print to the player"""
         for sentence in fight_dialogue:
             self.typewriter_effect(sentence)
             #pause between each sentence for better understanding
@@ -356,8 +353,8 @@ class Game:
             return
         self.execute_combat(normalised_input, self.__player.get_current_room().get_character()) 
 
-    #executes a player talking to one of the characters, taking a list of dialogue to print to the player
     def execute_talk(self, talk_dialogue):
+        """Executes a player talking to one of the characters, taking a list of dialogue to print to the player"""
         for sentence in talk_dialogue:
             #provide the talking text if the player chooses talk
             self.typewriter_effect(sentence)
@@ -405,8 +402,8 @@ class Game:
                         sleep(0.5)
                         print()
 
-    #gives the player the limb currently in the room after a successful interaction
     def give_limb(self):
+        """Gives the player the limb currently in the room after a successful interaction"""
         if self.__player.weight_check(self.__player.get_current_room().get_character().get_role()):
             inventory.append(self.__player.get_current_room().get_character().get_role())
             print()
@@ -419,6 +416,7 @@ class Game:
             self.__player.get_current_room().get_character().remove_role()
     
     def victory_check(self):
+        """Checks to see if all the limbs are in the lab and the needle and thread is in the players inventory, which is required for the player to build the monster"""
         # Checks limbs
         victory_count = 0
         for item in self.__map["Lab"].get_items():
@@ -436,7 +434,48 @@ class Game:
             return False
                 
         # This is the entry point of our program
-    
+                
+    def remove_character(self):
+        """Removes the character when it dies"""
+        self.__player.get_current_room().remove_character()
+         
+    def check_interacted(self):
+        """Checks if the player has interacted with the character before"""
+        if self.__player.get_current_room().get_character().get_role() is None:
+            return True
+        else:
+            return False
+
+    def kill_chucky(self):
+        if self.__player.get_current_room().get_name() == "Living Room":
+            self.typewriter_effect("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
+            for item in self.__player.get_inventory():
+                if item.get_id() == "doll":
+                    self.__player.remove_from_inventory(item)
+        else:
+            self.typewriter_effect("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
+
+    def check_chucky(self):
+        if not self.__player.has_chucky():
+            return
+        self.__player.set_health(self.__player.get_health() - 10)
+        self.typewriter_effect("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
+unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
+        print()
+        self.__game_over = self.__player.health_check()
+          
+    def jumpscare(self):
+        num = random.randint(0,4)
+        array = []
+        for key in text_art:
+            array.append(text_art[key])
+        print(array[num])
+        print()
+        print("BOO!!!")
+            
+    def display_character(self, character):
+        print(character)
+            
     def main(self):
         # Tell them how to skip
         print(self.__text_art["haunted_house"])    
@@ -477,67 +516,6 @@ house and build the monster. """)
                 if self.__game_over:
                     break
                 
-    #removes the character when it dies
-    def remove_character(self):
-        self.__player.get_current_room().remove_character()
-    
-    #checks if the player has interacted with the character before     
-    def check_interacted(self):
-        if self.__player.get_current_room().get_character().get_role() is None:
-            return True
-        else:
-            return False
-
-    def has_chucky(self):
-        for item in self.__player.get_inventory():
-            if item.get_id() == "doll":
-                return True
-        return False
-
-    def kill_chucky(self):
-        if self.__player.get_current_room().get_name() == "Living Room":
-            self.typewriter_effect("You drop Chucky into the fireplace, he screams as he melts on the fire, and with it any risk to you is diminished.")
-            for item in self.__player.get_inventory():
-                if item.get_id() == "doll":
-                    self.__player.remove_from_inventory(item)
-        else:
-            self.typewriter_effect("You cannot drop Chucky, the only way to get rid of him is to drop him in the living room fireplace.")
-
-    def check_chucky(self):
-        if not self.has_chucky():
-            return
-        self.__player.set_health(self.__player.get_health() - 10)
-        self.typewriter_effect("""Oh no! It seems that doll is not what it appears, you have Chucky! He is now going to follow you everywhere you go, taking your health (-10)
-unless he is destroyed. Drop him in the fireplace (Living Room) to kill him.""")
-        print()
-        self.__game_over = self.__player.health_check()
-        
-    def take_command(self):
-        print()
-        print("---------------------------------------------------------------")
-        print()
-
-        self.print_commands()
-        
-        # Read player's input
-        user_input = input("> ")
-        # Normalise the input
-        normalised_user_input = self.__parser.normalise_input(user_input)
-        #returns the normalised input
-        return normalised_user_input
-    
-    def jumpscare(self):
-        num = random.randint(0,4)
-        array = []
-        for key in text_art:
-            array.append(text_art[key])
-        print(array[num])
-        print()
-        print("BOO!!!")
-            
-    def display_character(self, character):
-        print(character)
-    
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.
 # See https://docs.python.org/3.4/library/__main__.html for explanation
