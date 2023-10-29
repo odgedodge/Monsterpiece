@@ -36,10 +36,7 @@ dracula = r"""
 @@@@@@@@@@@@@@@@@@@@@@@@~~-\/   |   \/ -~~@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@(=)=;==========;=(=)@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@;    |     ;@@@@@@@@@@@@@@@@@@@@@@@@@@                                         
-                                                               """                   
-                                                                               
-                                                                                                          
-                                                               
+                                                               """                                                            
 
 freddy = r"""     
                 15111111111111123                 
@@ -273,7 +270,6 @@ ghost = r"""
 
 """
 
-
 #DISPLAY HOUSE AT START OF PROGRAM?
 haunted_house = r"""
                                               ,           ^'^  _
@@ -293,7 +289,6 @@ haunted_house = r"""
      _  ^^^ _      | |__| |("| |  ||  |  ||  |,-, ,-,|   /  /
    ,' ',  ,' ',    |           |  ||  |  ||  ||_| |_||   ^^^
 .,,|RIP|,.|RIP|,.,,'==========='==''=='==''=='=======',,....,,,,.,"""
-
 
 #this skeletons just looks cool - could be extra enemy or ornament in the house?
 skeleton1 = r"""
@@ -400,7 +395,6 @@ frankenstein = r"""
                ~~~~~--------,.___     
                                  ```\_
                                  """
-
 
 text_art["dracula"] = dracula
 text_art["freddy"] = freddy
