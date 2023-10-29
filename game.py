@@ -405,12 +405,12 @@ class Game:
     def give_limb(self):
         """Gives the player the limb currently in the room after a successful interaction"""
         if self.__player.weight_check(self.__player.get_current_room().get_character().get_role()):
-            inventory.append(self.__player.get_current_room().get_character().get_role())
+            self.__player.add_to_inventory(self.__player.get_current_room().get_character().get_role())
             print()
             print("You have the", str(self.__player.get_current_room().get_character().get_role().get_id()) + ".")
             self.__player.get_current_room().get_character().remove_role()
         else:
-            self.__player.add_item(self.__player.get_current_room().get_character().get_role())
+            self.__player.get_current_room().add_item(self.__player.get_current_room().get_character().get_role())
             print()
             print("The", str(self.__player.get_current_room().get_character().get_role().get_id()) , "is too heavy to take, so it is now available to pick up from the room.")
             self.__player.get_current_room().get_character().remove_role()
@@ -509,6 +509,7 @@ house and build the monster. """)
                 self.__create_allowed = self.victory_check()
                 # Show the menu with possible actions and ask the player
                 
+                self.__player.set_weight(self.__player.calculate_weight())
                 command = self.take_command()
                 print()
                 # Execute the player's command

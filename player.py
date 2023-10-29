@@ -22,6 +22,9 @@ class Player:
             weight += item.get_weight()
         return weight
     
+    def set_weight(self, value):
+        self.__weight = value
+        
     def get_weight_limit(self):
         return self.__weight_limit
         
