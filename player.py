@@ -1,6 +1,5 @@
 class Player:
     def __init__(self, name, starting_room, health, weight_limit, inventory):
-        super().__init(self)
         self.name = name
         self.__weight_limit = weight_limit
         self.__weight = 0
@@ -59,7 +58,16 @@ class Player:
         return self.__health
     
     def get_current_room(self):
-        return self.__current_room
+        return self.__current_room 
+
+    def set_current_room(self, new_room):
+        self.__current_room = new_room
     
     def get_inventory(self):
         return self.__inventory
+   
+    def add_to_inventory(self, new_item):
+        self.__inventory.append(new_item)
+        
+    def remove_from_inventory(self, removing_item):
+        self.__inventory.remove(removing_item)
