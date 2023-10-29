@@ -93,7 +93,7 @@ class GameParser:
         #Remove punctuation and convert to lower case
         no_punct = self.remove_punct(user_input).lower() 
         #Splits string into a list of words and removes unwanted words
-        normalised = self.filter_words(no_punct.split(), self.__skip_words) 
+        normalised = self.filter_words(no_punct.split()) 
         #returns the normalised input
         return normalised 
 

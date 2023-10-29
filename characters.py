@@ -19,6 +19,9 @@ class Character:
     def get_role(self):
         return self.__role
     
+    def remove_role(self):
+        self.__role = None
+    
     def get_dialogue(self):
         return self.__dialogue
     

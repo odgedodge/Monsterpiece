@@ -29,6 +29,9 @@ class Room:
         
     def add_item(self, new_item):
         self.__items.append(new_item)
+        
+    def remove_character(self):
+        self.__character = None
 
 
 room_lab = Room("Lab", """In the dimly lit laboratory, an eerie green glow emanates from bubbling test tubes and fluorescent lights. The air is thick 

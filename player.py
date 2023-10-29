@@ -57,6 +57,9 @@ class Player:
     def get_health(self):
         return self.__health
     
+    def set_health(self, new_value):
+        self.__health = new_value
+    
     def get_current_room(self):
         return self.__current_room 
 

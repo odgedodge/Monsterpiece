@@ -16,7 +16,7 @@ class Interaction:
     def get_method(self):
         return self.__method
     
-    def get_speech_one(self):
+    def get_speech(self):
         return self.__speech
     
 dracula_speech = { 
