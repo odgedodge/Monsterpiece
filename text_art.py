@@ -408,21 +408,8 @@ text_art["grim"] = grim
 text_art["slenderman"] = slenderman
 text_art["pennywise"] = pennywise
 
-#text_art_other["haunted_house"] = haunted_house
-#text_art_other["frankenstein"] = frankenstein
-
-def jumpscare():
-    num = random.randint(0,4)
-    array = []
-    for key in text_art:
-        array.append(text_art[key])
-    print(array[num])
-    print()
-    print("BOO!!!")
-        
-def display_character(character):
-    print(character["image"])
-    
+text_art_other["haunted_house"] = haunted_house
+text_art_other["frankenstein"] = frankenstein
 
 #extras:
 #text_art["jack"] = jack
