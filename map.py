@@ -23,35 +23,12 @@ class Room:
     
     def get_character(self):
         return self.__character
-        
-    #Prints a list of all items in a room
-    def print_items(self):
-
-        #If the string from list isn't blank will print out each item in the room. if the string is blank returns None
-        if len(self._items) == 0:
-            print("There is" , ', '.join(self._items), "here." + "\n")
-            
-
-    #Prints out all information about the room you're currently ins
-    def print_room(self, room):
-        #prints out the name of the room in full capitals and description with a blank line after each
-        self.typewriter_effect(("\n" + self.__name.upper() + "\n"))
-        self.typewriter_effect((room["description"] + "\n"))
-
-        #checks if the print_room_items returns none. If not prints room items. 
-        if self.print__items(room) != None:
-            print()
-            self.typewriter_effect((self.print_room_items(room) + "\n"))
-      
-    #outputs the name of the exit in a given diretion
-    def exit_leads_to(self, exits, direction):
-        #returns the name of where the exit leads to
-        return rooms[exits[direction]]["name"]
     
-    #prints out a direction and the associated exit
-    def print_exit(self, direction, leads_to):
-        #Prints out a given direction in caps and the exit it leads to
-        print("GO " + direction.upper() + " to " + leads_to + ".")
+    def remove_item(self, removing_item):
+        self.__items.remove(removing_item)
+        
+    def add_item(self, new_item):
+        self.__items.append(new_item)
 
 
 room_lab = Room("Lab", """In the dimly lit laboratory, an eerie green glow emanates from bubbling test tubes and fluorescent lights. The air is thick 
