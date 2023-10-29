@@ -1,14 +1,3 @@
-from items import *
-from map import rooms
-
-victory_check = [item_left_leg, item_right_leg , item_left_arm , item_right_arm , item_head , item_torso]
-game_over = False
-
-create_allowed = False
-
-# Start game at the reception
-current_room = rooms["Entrance"]
-
 class Player:
     def __init__(self, name, starting_room, health, weight_limit, inventory):
         super().__init(self)
@@ -69,3 +58,8 @@ class Player:
     def get_health(self):
         return self.__health
     
+    def get_current_room(self):
+        return self.__current_room
+    
+    def get_inventory(self):
+        return self.__inventory
