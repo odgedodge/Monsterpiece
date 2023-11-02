@@ -88,7 +88,7 @@ class Game:
         
         print("INVENTORY:")
         for item in self.__player.get_inventory():
-            print("    " + str(item.get_id().title()))       
+            print(" ○ " + str(item.get_id().title()))       
                
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
