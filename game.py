@@ -86,9 +86,10 @@ class Game:
         if self.__player.get_current_room().get_character() is not None:
             print("TALK TO", self.__player.get_current_room().get_character().get_name())
         
-        print("INVENTORY:")
-        for item in self.__player.get_inventory():
-            print("    " + str(item.get_id().title()))       
+        if len(self.__player.get_inventory()) > 0:
+            print("INVENTORY:")
+            for item in self.__player.get_inventory():
+                print("    " + str(item.get_id().title()))    
                
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
@@ -299,22 +300,39 @@ class Game:
             for sentence in dialogue.get_speech()["base dialogue"]:
                 self.typewriter_effect(sentence)
                 print()
-            normalised_input = ''
-            while normalised_input != 'talk' and normalised_input != 'fight':
-                self.typewriter_effect("TALK or FIGHT:")
-                print()
-                user_input = input("> ")
-                normalised_input = ''.join(self.__parser.normalise_input(user_input))
-                
-            if normalised_input == 'talk':
-                #print the sentences in character interaction
-                self.execute_talk(dialogue.get_speech()["dialogue one"])
-                #give the player the limb
-                self.give_limb()
+
+            if dialogue.get_method() == "talk":
+                normalised_input = ''
+                while normalised_input != 'talk' and normalised_input != 'fight':
+                    self.typewriter_effect("TALK or FIGHT:")
+                    print()
+                    user_input = input("> ")
+                    normalised_input = ''.join(self.__parser.normalise_input(user_input))
                     
-            elif normalised_input == 'fight':
-                #provide the fighting text if the player chooses to fight
-                self.execute_fight(dialogue.get_speech()["dialogue two"])
+                if normalised_input == 'talk':
+                    #print the sentences in character interaction
+                    self.execute_talk(dialogue.get_speech()["dialogue one"])
+                    #give the player the limb
+                    self.give_limb()
+                        
+                elif normalised_input == 'fight':
+                    #provide the fighting text if the player chooses to fight
+                    self.execute_fight(dialogue.get_speech()["dialogue two"])
+
+            elif dialogue.get_method() == "romance":
+                normalised_input = ''
+                while normalised_input != 'romance' and normalised_input != 'fight':
+                    self.typewriter_effect("LOVE or FIGHT:")
+                    print()
+                    user_input = input("> ")
+                    normalised_input = ''.join(self.__parser.normalise_input(user_input))
+                    
+                if normalised_input == 'love':
+                    self.execute_deal(dialogue)
+                        
+                elif normalised_input == 'fight':
+                    #provide the fighting text if the player chooses to fight
+                    self.execute_fight(dialogue.get_speech()["dialogue two"])
         
         elif dialogue.get_method() == "fight":
             self.execute_fight(dialogue.get_speech()["base dialogue"])
@@ -381,7 +399,7 @@ class Game:
                 if len(self.__player.get_inventory()) != 0:
                     print("You have",", ".join(self.list_of_item_ids(self.__player.get_inventory())), "available.")
                 else:
-                    print("You have no items in your inventory to fight with.")
+                    print("You have no items in your inventory to offer.")
                 normalised_gift = ''
                 while not normalised_gift in self.list_of_item_ids(self.__player.get_inventory()):
                     gift = input('> ')
@@ -401,6 +419,43 @@ class Game:
                         self.typewriter_effect(sentence)
                         sleep(0.5)
                         print()
+
+    def execute_romance(self, dialogue):
+         #print the sentences in character interaction
+            for sentence in dialogue.get_speech()["romance dialogue"]:
+                self.typewriter_effect(sentence)
+                sleep(0.5)
+                print()
+            #allow the player to either choose to give the gift or to leave the interaction
+            print("Gift or Fight")
+            normalised_input = ''
+            while normalised_input != "gift" and normalised_input != "fight":
+                user_input = input('> ')
+                normalised_input = ' '.join(self.__parser.normalise_input(user_input))
+            #if the user gifts, they can choose which item from their inventory to give, otherwise leaving results in ending the interaction
+            if normalised_input == "gift":
+                print("CHOOSE YOUR GIFT")
+                if len(self.__player.get_inventory()) != 0:
+                    print("You have",", ".join(self.list_of_item_ids(self.__player.get_inventory())), "available.")
+                else:
+                    print("You have no items in your inventory to offer.")
+                normalised_gift = ''
+                while not normalised_gift in self.list_of_item_ids(self.__player.get_inventory()):
+                    gift = input('> ')
+                    normalised_gift = ' '.join(self.__parser.normalise_input(gift))
+                #if the gift is correct, give the limb to the player
+                if normalised_gift == dialogue.get_speech()["gift"]:
+                    for sentence in dialogue.get_speech()["successful dialogue"]:
+                        self.typewriter_effect(sentence)
+                        sleep(0.5)
+                        print()
+                    for item in self.__player.get_inventory():
+                        if item.get_id() == normalised_gift:
+                            self.__player.remove_from_inventory(item)
+                    self.give_limb()
+                    self.__player.get_current_room().get_character().fall_in_love()
+                else:
+                    self.execute_fight(dialogue.get_speech()["unsuccessful dialogue"])
 
     def give_limb(self):
         """Gives the player the limb currently in the room after a successful interaction"""

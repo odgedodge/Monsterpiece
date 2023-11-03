@@ -42,7 +42,7 @@ grim_reaper_speech = {
     
     "gift": "soul jar",
     
-    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, this creature you seek to revive is a blasphemy to life itself.", "You: I'll do anything to get this, I need to build this monster again, he is a scientific masterpiece.", "You must may a price, I do not give without cause. I shall only accept something of equivalence to the creation of new life."],
+    "base dialogue": ["Greetings, mortal. I am the one called Death, a harbinger of inevitable demise.","Be warned, this creature you seek to revive is a blasphemy to life itself.", "You: I'll do anything to get this, I need to build this monster again, he is a scientific masterpiece."],
     
     "successful dialogue": ["This is a good offering, it contains the essence of a life I sought to take long ago. A soul should never be separated from its holder. I shall give you the torso you desire."],
     
@@ -54,10 +54,21 @@ grim_reaper_speech = {
 grim_interaction = Interaction("the grim reaper", False, "deal", grim_reaper_speech)
     
 freddy_speech = {
-    "base dialogue": ["Hello Victor...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."]
+    "gift": "pizza",
+    
+    "base dialogue": ["Hello Victor...", "You can't get the leg... I won't let you.", "This theatre room is my domain... If you try taking the leg, you won't leave here alive..."],
+
+    "romance dialouge": ["smut"],
+
+    "successful dialogue": ["Oh my how did you know i love pizza"] ,
+
+    "unsuccessful dialogue": ["har har har har har huar huar huar har har har har har har, har har har har pm um um am um am um am am um am um am u am um am am um am um um um am um um um am am"],
+
+    "repeat dialogue": [""]
+
 }
 
-freddy_interaction = Interaction("freddy fazbear", False, "fight", freddy_speech)
+freddy_interaction = Interaction("freddy fazbear", True, "romance", freddy_speech)
 
 slenderman_speech = {
     "base dialogue": ["Standing against the backdrop of the verdant green foliage, the tall, thin figure of Slenderman stalks the landscape", "His long, lanky frame casts a menacing shadow on the plants below, and his emotionless face stares blankly into the distance", "Behind him lays a severed head.", "You feel terrified to approach, let alone fight him.", "Maybe those pages could help..."]

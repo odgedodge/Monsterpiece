@@ -51,6 +51,8 @@ item_chucky = Item("doll", "a doll", "a doll", 0.6)
 
 item_pizza = Item("pizza", "a slice of pizza", "A slice of freddy fazzbears pizza, it smells amazing", .075)
 
+item_guide = Item("guide", "a guide to robot romance", "a hefty tome containing highly detailed guides on how to romance all kinds of robots, animatronics and automata. It even includes diagrams", 5.0)
+
 item_left_leg = Item("left leg", "the monster's left leg", "The left leg", 18)
 
 item_right_leg = Item("right leg", "the monster's right leg", "The right leg", 18)
