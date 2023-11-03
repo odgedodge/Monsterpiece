@@ -86,10 +86,16 @@ class Game:
         if self.__player.get_current_room().get_character() is not None:
             print("TALK TO", self.__player.get_current_room().get_character().get_name())
         
+<<<<<<< HEAD
         if len(self.__player.get_inventory()) > 0:
             print("INVENTORY:")
             for item in self.__player.get_inventory():
                 print("    " + str(item.get_id().title()))    
+=======
+        print("INVENTORY:")
+        for item in self.__player.get_inventory():
+            print(" ○ " + str(item.get_id().title()))       
+>>>>>>> c887e3535454acd9f899d39aefd4de9592f48813
                
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
