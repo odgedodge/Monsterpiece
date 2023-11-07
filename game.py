@@ -432,15 +432,7 @@ class Game:
                 self.typewriter_effect(sentence)
                 sleep(0.5)
                 print()
-            #allow the player to either choose to give the gift or to leave the interaction
-            print("Gift or Fight")
-            normalised_input = ''
-            while normalised_input != "gift" and normalised_input != "fight":
-                user_input = input('> ')
-                normalised_input = ' '.join(self.__parser.normalise_input(user_input))
-            #if the user gifts, they can choose which item from their inventory to give, otherwise leaving results in ending the interaction
-            if normalised_input == "gift":
-                print("CHOOSE YOUR GIFT")
+                print("Offer a gift to show your love")
                 if len(self.__player.get_inventory()) != 0:
                     print("You have",", ".join(self.list_of_item_ids(self.__player.get_inventory())), "available.")
                 else:
