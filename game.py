@@ -86,16 +86,10 @@ class Game:
         if self.__player.get_current_room().get_character() is not None:
             print("TALK TO", self.__player.get_current_room().get_character().get_name())
         
-<<<<<<< HEAD
         if len(self.__player.get_inventory()) > 0:
             print("INVENTORY:")
             for item in self.__player.get_inventory():
                 print("    " + str(item.get_id().title()))    
-=======
-        print("INVENTORY:")
-        for item in self.__player.get_inventory():
-            print(" ○ " + str(item.get_id().title()))       
->>>>>>> c887e3535454acd9f899d39aefd4de9592f48813
                
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
@@ -195,17 +189,23 @@ class Game:
                     #give the limb and remove the character: they have died
                     self.give_limb()
                     self.remove_character()
+                    for item in self.__player.get_inventory():
+                        if weapon == item.get_id():
+                         self.__player.remove_from_inventory(item)
                 else:
                     #give the limb and remove the character: they have died
                     self.give_limb()
                     self.remove_character()
+                    for item in self.__player.get_inventory():
+                        if weapon == item.get_id():
+                         self.__player.remove_from_inventory(item)
                     print("An ok performance.")
                     
                 self.__player.set_health(health)
                 self.__game_over = self.__player.health_check()
                 return
 
-        #If the chosen weapon is not found combat is considered poor and greater damage is taken
+        #If the chosen weapon is not found combat is considered poor and greater damage is taken and limb is not rewarded
         health -= 30
         print("A poor performance indeed. You have lost 30 health.")
         self.__player.set_health(health)
@@ -338,7 +338,7 @@ class Game:
                         
                 elif normalised_input == 'fight':
                     #provide the fighting text if the player chooses to fight
-                    self.execute_fight(dialogue.get_speech()["dialogue two"])
+                    self.execute_fight(dialogue.get_speech()["unsuccessful dialogue"])
         
         elif dialogue.get_method() == "fight":
             self.execute_fight(dialogue.get_speech()["base dialogue"])
