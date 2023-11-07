@@ -327,14 +327,14 @@ class Game:
 
             elif dialogue.get_method() == "romance":
                 normalised_input = ''
-                while normalised_input != 'romance' and normalised_input != 'fight':
+                while normalised_input != 'love' and normalised_input != 'fight':
                     self.typewriter_effect("LOVE or FIGHT:")
                     print()
                     user_input = input("> ")
                     normalised_input = ''.join(self.__parser.normalise_input(user_input))
                     
                 if normalised_input == 'love':
-                    self.execute_deal(dialogue)
+                    self.execute_romance(dialogue)
                         
                 elif normalised_input == 'fight':
                     #provide the fighting text if the player chooses to fight
@@ -428,7 +428,7 @@ class Game:
 
     def execute_romance(self, dialogue):
          #print the sentences in character interaction
-            for sentence in dialogue.get_speech()["romance dialogue"]:
+            for sentence in dialogue.get_speech()["romance dialouge"]:
                 self.typewriter_effect(sentence)
                 sleep(0.5)
                 print()
