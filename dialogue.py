@@ -64,7 +64,7 @@ freddy_speech = {
 
     "unsuccessful dialogue": ["har har har har har huar huar huar har har har har har har, har har har har pm um um am um am um am am um am um am u am um am am um am um um um am um um um am am"],
 
-    "repeat dialogue": [""]
+    "repeat dialogue": ["huband"]
 
 }
 

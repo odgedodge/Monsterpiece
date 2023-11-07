@@ -296,7 +296,7 @@ class Game:
     def execute_dialogue(self, dialogue):
         """Take the dialogue of the character and print it out in an iterable list, sometimes taking an input from the character"""
         #dialogue dictionary from character
-        if self.check_interacted() and (dialogue.get_method() == "talk" or dialogue.get_method() == "deal"):
+        if self.check_interacted() and (dialogue.get_method() == "talk" or dialogue.get_method() == "deal" or dialogue.get_method() == "romance"):
             self.execute_talk(dialogue.get_speech()["repeat dialogue"])
             return
                 
