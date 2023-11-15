@@ -89,7 +89,7 @@ class Game:
         if len(self.__player.get_inventory()) > 0:
             print("INVENTORY:")
             for item in self.__player.get_inventory():
-                print("    " + str(item.get_id().title()))    
+                print(" ○ " + str(item.get_id().title()))    
                
     def print_directions(self):
         exits = self.__player.get_current_room().get_exits()
@@ -248,14 +248,16 @@ class Game:
                 return False
 
         elif command[0] == "talk":
-            if len(command) > 1:
-                #print text art for current character
-                self.display_character(self.__player.get_current_room().get_character().get_image())
-                self.execute_dialogue(self.__player.get_current_room().get_character().get_dialogue())
-                return False
-            else:
-                print("Talk to who?")
-                return False
+            if self.__player.get_current_room().get_character() is not None:
+                if len(command) > 1:
+                    #print text art for current character
+                    self.display_character(self.__player.get_current_room().get_character().get_image())
+                    self.execute_dialogue(self.__player.get_current_room().get_character().get_dialogue())
+                    return False
+                else:
+                    print("Talk to who?")
+                    return False
+            return False
             
         elif command[0] == "inspect":
             if len(command) > 1:
