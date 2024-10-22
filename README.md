@@ -1,4 +1,4 @@
-# CM1101 Team 23 Group Game Project
+# Group Game Project
 
 
 
